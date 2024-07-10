@@ -1,0 +1,23 @@
+import { memo } from "react";
+import { useSelector } from "react-redux";
+import logoAvatarUser from "../../../assets/img/header/logo_user_default.jpg"
+function AvatarUserHeader(props) {
+    const { handleHeaderUserClick } = props;
+    const { profile, authenticate } = useSelector((state) => state.profile)
+    console.log(profile)
+    return (
+        <div className="header-user-item" onClick={handleHeaderUserClick}>
+            {authenticate === true && (
+                <>
+                    {profile?.avatar === null ? (
+                        <img src={logoAvatarUser} alt="" />
+                    ) : (
+                        <img src={profile?.avatar} alt="" />
+                    )}
+                </>
+            )}
+
+        </div>
+    )
+}
+export default memo(AvatarUserHeader);
