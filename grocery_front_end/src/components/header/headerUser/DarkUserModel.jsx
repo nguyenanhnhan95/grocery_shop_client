@@ -1,9 +1,9 @@
 import { memo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CHANGE_SCREEN_THEME_REQUEST_PARAM, EMPTY_STRING, ICON_CHECK, linkHttp, SCREEN_THEME_MODE, SCREEN_THEME_NAME, SLASH, WHITE_SPACE } from "../../../utils/commonConstants";
-import { createHeader } from "../../../utils/commonUtils";
+import { CHANGE_SCREEN_THEME_REQUEST_PARAM, EMPTY_STRING, ICON_CHECK,  LINK_USER,  SCREEN_THEME_MODE, SCREEN_THEME_NAME, SLASH, WHITE_SPACE } from "../../../utils/commonConstants";
+import { changeScreenTheme, createHeader } from "../../../utils/commonUtils";
 import axios from "axios";
-import { updateProfile } from "../../../slice/person/profile";
+import { updateProfile } from "../../../redux/slice/person/profile";
 
 function DarkUserModel() {
     const [show, setShow] = useState(false)
@@ -18,13 +18,16 @@ function DarkUserModel() {
     }
     const handleChangeScreenMode = async (modeScreen) => {
         try {
+            changeScreenTheme(modeScreen)
             const newProfile = { ...profile, screenTheme: modeScreen }
+            await axios.patch(`${LINK_USER.getProfile}${SLASH}${CHANGE_SCREEN_THEME_REQUEST_PARAM}`, newProfile, createHeader());
             dispatch(updateProfile({ profile: newProfile }));
-            await axios.patch(`${linkHttp.getProfile}${SLASH}${CHANGE_SCREEN_THEME_REQUEST_PARAM}`, newProfile, createHeader());
+            
         } catch (error) {
             console.log(error)
         }
     }
+    console.log(profile )
     return (
         <div className={`header-user-modal-item-dark ${show ? `show` : ``}`}>
             <div className="header-user-modal-item parent" onClick={handleShowMode}>

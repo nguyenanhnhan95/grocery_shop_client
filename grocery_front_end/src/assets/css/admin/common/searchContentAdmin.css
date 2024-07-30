@@ -3,6 +3,9 @@
     margin: 15px;
     border-radius: 5px;
 }
+.dark .search-content-admin{
+    background-color: #242526;
+}
 .search-content-admin .container-content-search{
     height: auto;
 }
@@ -22,6 +25,18 @@
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
     border: 1px solid #0693e3
+}
+.dark .search-content-admin .container-content-search .container-content-search-name input,
+.dark .search-content-admin .container-content-search .container-content-search-name button,
+.dark .search-content-admin .container-content-search .container-content-option-advanced button{
+    background-color: #3A3B3C;
+    color: #f1f1f1;
+}
+.dark .search-content-admin .container-content-search .container-content-search-name input::placeholder{
+    color: #8A8D91;
+}
+.dark .search-content-admin .container-content-search .container-content-search-name button i{
+    color: #f1f1f1;
 }
 .search-content-admin .container-content-search .container-content-search-name input:focus{
     outline: none;

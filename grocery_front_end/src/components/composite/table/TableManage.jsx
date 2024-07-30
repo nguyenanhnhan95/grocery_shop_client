@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import "../../../assets/css/composite/table/tableManage.css"
-import { searchDataAdmin } from "../../../slice/main/actionAdmin";
+import { searchDataAdmin } from "../../../redux/slice/admin/actionAdmin";
 import { memo, useCallback, useEffect } from "react";
 import PageManage from "../paging/PageManage";
 function TableManage() {

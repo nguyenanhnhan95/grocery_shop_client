@@ -23,7 +23,7 @@ function OverSearchAdminMB(props) {
                         <i className="fa-solid fa-arrow-left-long" onClick={() => setOverSearchMB(false)}></i>
                     </li>
                     <li className="nav-item handle-input">
-                        <input placeholder="Tìm kiếm" />
+                        <input placeholder="Tìm kiếm" className="form-control" />
                     </li>
                     <li className="nav-item handle-icon">
                         <i className="fa-solid fa-magnifying-glass"></i>

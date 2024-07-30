@@ -2,7 +2,11 @@
     font-size: 2em;
     padding-left: 1vw;
 }
+.header-item-mob .fa-bars:hover{
+    cursor: pointer;
+}
 .header-item-mob{
+    width: 10vw;
     display: none;
 }
 .header-item-mob .header-drop-items-mob {
@@ -19,9 +23,7 @@
     z-index: 1;
     box-shadow: 5px -1px 5px -5px #78909C, 5px 0 5px -5px #78909C, 0px 0px 5px -5px #78909C;
 }
-.header-search-mob .header-search-input {
-    position: relative;
-}
+
 .header-item-mob .header-item-mob-menu .header-item-mob-item button {
     color: black;
     font-size: 1.9em;

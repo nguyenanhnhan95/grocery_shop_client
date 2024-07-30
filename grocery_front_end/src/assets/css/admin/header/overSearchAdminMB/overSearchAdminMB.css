@@ -3,7 +3,6 @@
     width: 100%;
 }
 .header-search-admin-over-mb input{
-    border: none;
     border-radius: 6px;
     width: 100%;
     padding-left: 5%;
@@ -13,8 +12,11 @@
 .dark .header-search-admin-over-mb input{
     background-color: #3A3B3C;
     color: #f1f1f1;
+    border: none;
 }
-
+.dark .header-search-admin-over-mb input:focus{
+    box-shadow: none;
+}
 .header-search-admin-over-mb .handle-input{
     width: 70%;
 }

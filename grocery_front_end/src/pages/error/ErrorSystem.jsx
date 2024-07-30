@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-function ErrorSystem(x){
+function ErrorSystem(){
     return (
         <>
-        <Link to={'/'}>Quay lai trang chủ</Link>
+        <Link to={'/not-found'}>Quay lai trang chủ</Link>
         </>
     )
 }

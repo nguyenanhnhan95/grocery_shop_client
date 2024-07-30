@@ -5,11 +5,11 @@ import { useSelector } from "react-redux";
 function HeaderMenusMB() {
     const [isSidebarActive, setSidebarActive] = useState(false);
     const [activeSubmenu, setActiveSubmenu] = useState(null);
-    const { productCategories } = useSelector((state) => state.productCategoryMenus)
+    const { list } = useSelector((state) => state.productCategoryMenus)
     const toggleSidebar = () => {
         setSidebarActive(!isSidebarActive);
     };
-
+    console.log(list)
     const closeSidebar = () => {
         setSidebarActive(false);
     };
@@ -30,15 +30,15 @@ function HeaderMenusMB() {
                     <img src={LogoSky} alt="Logo" />
                 </div>
                 <div className="header-item-mob-menu">
-                    {productCategories && productCategories.map((category, index) => (
+                    {list && list.map((parent, index) => (
                         <div className="header-item-mob-item" key={index}>
                             <button className={`header-item-mob-item-subs ${activeSubmenu === index ? 'clicked' : ''}`} onClick={() => toggleSubmenu(index)}>
-                                <i className="fa-brands fa-product-hunt "></i>{category.name}
+                                <i className="fa-brands fa-product-hunt "></i>{parent.name}
                                 <i className={`fa-solid fa-angle-right dropdown ${activeSubmenu === index ? 'rotate' : ''}`}></i>
                             </button>
-                            {category.children.map((children, zIndex) => (
+                            {parent.children.map((child, zIndex) => (
                                 <div className={`header-item-mob-item-sub ${activeSubmenu === index ? 'show ' : ''}`} key={zIndex}>
-                                    <button className="header-item-mob-item-sub-item"><i className="fa-solid fa-caret-right"></i>{children.name}</button>
+                                    <button className="header-item-mob-item-sub-item"><i className="fa-solid fa-caret-right"></i>{child.name}</button>
                                 </div>
                             ))}
 

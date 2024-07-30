@@ -1,7 +1,9 @@
 .header-notification {
-    padding: 2px 5px;
     position: relative;
     height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .header-notification .fa-bell {
@@ -12,8 +14,8 @@
     position: absolute;
     width: auto;
     height: auto;
-    top: -8px;
-    left: 20px;
+    top: -14px;
+    left: 53px;
     font-size: 0.9em;
     font-weight: 500;
     background-color: #EA5455;
@@ -39,7 +41,7 @@
         0 5px 5px -5px #78909C;
     top: 62px;
     background-color: white;
-    right: -2vw;
+    right: 0vw;
     border-radius: 5px;
     z-index: 1;
     cursor: default;
@@ -164,13 +166,8 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .header-notification {
-        display: flex;
-        align-items: center;
-    }
-
     .header-notification .fa-bell {
-        font-size: 1.4em;
+        font-size: 1.3em;
     }
 
     .header-notification .header-notification-modal {
@@ -195,15 +192,11 @@
         top: 30px;
     }
 
-    .header-notification {
-        margin-right: 10px;
-    }
-
     .header-notification .header-notification-numbers {
         font-size: 0.6em;
         padding: 0 2px;
-        top: -4px;
-        left: 18px;
+        top: -5px;
+        left: 5vw;
     }
 }
 
@@ -212,12 +205,17 @@
         top: 52px;
     }
 
+    .header-notification .fa-bell {
+        font-size: 2em;
+    }
+
     .header-notification .header-notification-numbers {
         font-size: 0.9em;
-        left: 19px;
-        top: -10px;
         padding: 0 3px;
+        top: -10px;
+        left: 27px;
     }
+
     .container-header-main .main-content-header-right .header-notification-modal {
         top: 42px;
         right: -46px;
@@ -226,8 +224,46 @@
 
 }
 
-@media only screen and (min-width: 1280px) and (max-width: 1366px) {
-    .header-notification {
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+
+    /* .header-notification {
         margin-right: 10px;
+    } */
+    .header-notification .header-notification-numbers {
+        font-size: 0.9em;
+        padding: 0 3px;
+        top: -9px;
+        left: 37px;
+    }
+}
+
+@media only screen and (min-width: 1280px) and (max-width: 1366px) {
+    .header-notification .header-notification-numbers {
+        position: absolute;
+        top: -12px;
+        left: 39px;
+    }
+}
+
+@media only screen and (min-width: 1366px) and (max-width: 1536px) {
+    .header-notification .header-notification-numbers {
+        position: absolute;
+        top: -12px;
+        left: 39px;
+    }
+}
+@media only screen and (min-width: 1536px) and (max-width: 1720px) {
+    .header-notification .header-notification-numbers {
+        position: absolute;
+        top: -14px;
+        left: 47px;
+    }
+}
+
+@media only screen and (min-width: 1720px) and (max-width: 1920px) {
+    .header-notification .header-notification-numbers {
+        position: absolute;
+        top: -14px;
+        left: 57px;
     }
 }

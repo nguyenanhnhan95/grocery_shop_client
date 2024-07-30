@@ -1,10 +1,10 @@
 import { memo } from "react";
 import { useSelector } from "react-redux";
-import { linkHttp } from "../../utils/commonConstants";
+import { LINK_USER } from "../../utils/commonConstants";
 function RedirectLogin() {
     const { authenticate } = useSelector((state) => state.profile)
     const handleRedirectLogIn = () => {
-        window.location.href = linkHttp.linkLogin;
+        window.location.href = LINK_USER.linkLogin;
     }
     return (
         <>

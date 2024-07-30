@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import {  createDataEdit, editDataAdmin, getDataByIdAdmin, onClickSaveAction, saveDataAdmin } from "../../../slice/main/actionAdmin";
+import {  createDataEdit, editDataAdmin, getDataByIdAdmin, onClickSaveAction, saveDataAdmin } from "../../../redux/slice/admin/actionAdmin";
 import { toastError, toastInformation } from "../../../config/toast";
 import { validation } from "../../../utils/validation";
 

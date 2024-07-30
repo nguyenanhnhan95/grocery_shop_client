@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage, } from "formik";
 import * as yup from "yup";
-import "../../../../assets/css/admin/product/variation/contentForm.css"
+import "../../../../assets/css/admin/productManage/variation/contentForm.css"
 import { memo } from "react";
 
 

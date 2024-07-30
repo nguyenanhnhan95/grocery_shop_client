@@ -1,63 +1,46 @@
-import { forwardRef, memo, useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useRef } from "react";
 import "../../../assets/css/admin/menus/menuAdmin.css"
 import React from 'react';
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { onClickHandleOverPlay } from "../../../slice/main/overPlayMenu";
 import logoBrand from "../../../assets/img/header/logo-sky.png"
-import { transferMenuToContentMain } from "../../../slice/main/menuContentMain";
-import { checkResourceAdmin, commonResource, createHeader } from "../../../utils/commonUtils";
-import { connectAWSParams, linkHttp } from "../../../utils/commonConstants";
-import { getListMainMenu } from "../../../services/admin/mainMenu";
+import ContentAdminMenu from "./ContentAdminMenu";
+import { FETCH_BY_PATH_MENU_ADMIN, FETCH_MENUS_ADMIN } from "../../../utils/commonConstants";
+import { handlePathMenuAdmin, removeSlashURILast, removeURIDomain } from "../../../utils/commonUtils";
+import { getMenuByPathAdmin, getSidebarMenusAdmin } from "../../../redux/slice/admin/menuContentMain";
+import { onClickHandleOverPlay, onClickMenuAdminRef } from "../../../redux/slice/admin/overPlayMenu";
 
-function AdminMenu(props,ref) {
+function AdminMenu() {
   const isOpen = useSelector((state) => state.overPlayMenuMain.open)
-  const [menus, setMenus] = useState([]);
-  const [menuActive, setMenuActive] = useState(null);
-  const location = useLocation();
+  const { statusMenus, statusMenu } = useSelector((state) => state.menuContentMain);
   const dispatch = useDispatch();
-  let pathName = commonResource(location.pathname)
-  const handlePathMenu = useCallback((data) => {
-    let size = data.length;
-    for (let i = 0; i < size; ++i) {
-      if (checkResourceAdmin(data[i].resources, location.pathname)) {
-        setMenuActive(data[i])
-        dispatch(transferMenuToContentMain(data[i]))
-        return;
-      }
-      let sizeSub = data[i].subMenus.length;
-      for (let j = 0; j < sizeSub; ++j) {
-        if (checkResourceAdmin(data[i].subMenus[j].resources, location.pathname)) {
-          setMenuActive(data[i])
-          dispatch(transferMenuToContentMain(data[i]))
-          return;
-        }
-      }
+  const menuAdminRef = useRef(null);
+  const fetchMenus = useCallback(async () => {
+    if (statusMenus === FETCH_MENUS_ADMIN.FETCH_MENUS_ADMIN_INITIAL) {
+      dispatch(getSidebarMenusAdmin())
     }
-    window.location.href = linkHttp.linkNotFound;
-  }, [dispatch, location.pathname])
-  const getListMenu = useCallback(async () => {
-    const header = createHeader()
-    const data = await getListMainMenu(header);
-    handlePathMenu(data);
-    setMenus(data)
-  }, [handlePathMenu])
+  }, [statusMenus])
+  const fetchMenuByPath = useCallback(async (path) => {
+    if (statusMenu === FETCH_BY_PATH_MENU_ADMIN.FETCH_BY_PATH_MENU_ADMIN_INITIAL) {
+      dispatch(getMenuByPathAdmin(path));
+    }
+  }, [statusMenu])
   useEffect(() => {
-    getListMenu()
-  }, [getListMenu])
-  const handleChangeOpenMenu = (menu, flagMenu) => {
-    if (flagMenu) {
-      if (menuActive === null || menuActive !== menu) {
-        setMenuActive(menu)
-      } else {
-        setMenuActive(null)
-      }
-    } else {
-      dispatch(transferMenuToContentMain(menu))
-    }
+    fetchMenus()
+  }, [statusMenus])
+  useEffect(() => {
+    fetchMenuByPath(handlePathMenuAdmin(window.location.href))
+  }, [statusMenu])
+  const handleClickOutsideMenuAdmin = useCallback((target) => {
+    return menuAdminRef.current && menuAdminRef.current.contains(target);
+  },[])
+  useEffect(() => {
+    dispatch(onClickMenuAdminRef(handleClickOutsideMenuAdmin))
+  }, [dispatch,handleClickOutsideMenuAdmin])
+  const completeApi=()=>{
+    return statusMenus == FETCH_MENUS_ADMIN.FETCH_MENUS_ADMIN_SUCCESS && statusMenu === FETCH_BY_PATH_MENU_ADMIN.FETCH_BY_PATH_MENU_ADMIN_SUCCESS;
   }
   return (
-    <div className={`main-menu  menu-fixed menu-light menu-accordion menu-shadow menu-native-scroll expanded ${isOpen ? `open` : ``}`} data-scroll-to-active="true" ref={ref}>
+    <div className={`main-menu  menu-fixed menu-light menu-accordion menu-shadow menu-native-scroll expanded ${isOpen ? `open` : ``}`} ref={menuAdminRef} >
       <div className="row main-menu-logo">
         <div className="col-8">
           <div className="menu-logo">
@@ -68,47 +51,10 @@ function AdminMenu(props,ref) {
           <i className="fa-solid fa-xmark " onClick={() => dispatch(onClickHandleOverPlay(false))}></i>
         </div>
       </div>
-      <div className="main-menu-content ps ps--active-y">
-        <ul id="main-menu-navigation" className="navigation navigation-main" data-menu="menu-navigation">
-          {menus.length !== 0 && (
-            <li className={`nav-item ${menus[0].href === pathName || pathName === '/admin' ? 'active' : ''}`}>
-              <NavLink className="d-flex align-items-center" to={menus[0].href} >
-                <i className="fa-solid fa-house " />
-                <span className="menu-item text-truncate">Tổng quan</span>
-              </NavLink>
-            </li>
-          )}
-          {menus && menus.map((menu, index) => (
-            <React.Fragment key={index}>
-              {!menu.visible && menu.header && (
-                <li className="navigation-header">
-                  <span>{menu.title}</span>
-                </li>
-              )}
-              {!menu.visible && !menu.header && index !== 0 && (
-                <li className={`nav-item   menu-item-animating ${menu === menuActive ? 'open' : ''} ${menu.subMenus.length !== 0 ? 'has-sub ' : ''} `}   >
-                  <div className={`d-flex align-items-center menu-head ${menu === menuActive ? 'active' : ''}`} onClick={() => handleChangeOpenMenu(menu, true)} >
-                    <i className={menu.iconClass} />
-                    <span className="menu-title text-truncate">{menu.title}</span>
-                  </div>
-                  {menu.subMenus && menu.subMenus.map((subMenu, zIndex) => (
-                    <ul className="menu-content" key={zIndex}>
-                      <li >
-                        <NavLink className={`d-flex align-items-center ${subMenu.href === pathName ? 'active' : ''}`} to={`${connectAWSParams.domainClient}${subMenu.href}`} onClick={() => handleChangeOpenMenu(subMenu, false)}>
-                          <i className={subMenu.iconClass} />
-                          <span className="menu-item text-truncate">{subMenu.title}</span>
-                        </NavLink>
-                      </li>
-                    </ul>
-                  ))}
-                </li>
-              )}
-            </React.Fragment>
-          ))}
-        </ul>
-
-      </div>
+      {completeApi() && (
+        <ContentAdminMenu />
+      )}
     </div>
   )
 }
-export default memo(forwardRef(AdminMenu));
+export default memo(AdminMenu);

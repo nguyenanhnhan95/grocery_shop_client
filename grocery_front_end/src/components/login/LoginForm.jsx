@@ -1,22 +1,24 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as yup from "yup";
 import Cookies from 'js-cookie'
 import { useDispatch, useSelector } from "react-redux";
-import { loginFormAuth } from "../../slice/login/login";
 import { handleRedirectAdmin } from "../../utils/commonUtils";
-import { constLogin, linkHttp } from "../../utils/commonConstants";
+import { CONST_LOGIN, EMPTY_STRING, FETCH_LOGIN, KEEP_LOGIN, LINK_DOMAIN, LOGIN, LOGIN_LOADING, SLASH } from "../../utils/commonConstants";
+import { loginFormAuth } from "../../redux/slice/login/login";
 function LoginForm() {
     const [showPassword, setShowPassword] = useState(false)
     const [keepLogin, setKeepLogin] = useState(false)
-    const { loading } = useSelector((state) => state.loginForm)
+    const { status } = useSelector((state) => state.loginForm)
     const dispatch = useDispatch();
+   
     const handleLogin = async (loginRequest, setErrors) => {
         try {
-            const token = await dispatch(loginFormAuth({ ...loginRequest, flagKeep: keepLogin })).unwrap();
-            localStorage.setItem(constLogin.ACCESS_TOKEN, token.accessToken);
-            Cookies.remove(constLogin.keepLogin, { domain: linkHttp.domain, path: '/' });
-            handleRedirectAdmin()
+            if (status === FETCH_LOGIN.FETCH_LOGIN_INITIAL) {              
+                await dispatch(loginFormAuth({ ...loginRequest, flagKeep: keepLogin })).unwrap();
+                Cookies.remove(CONST_LOGIN.keepLogin, { domain: LINK_DOMAIN.domain, path: SLASH });
+                handleRedirectAdmin()
+            }
         } catch (error) {
             setErrors(error.result)
         }
@@ -24,11 +26,11 @@ function LoginForm() {
     const handleKeepLogin = (currentKeepLogin) => {
         if (currentKeepLogin) {
             setKeepLogin(false);
-            Cookies.remove(constLogin.keepLogin, { domain: linkHttp.domain, path: '/' });
-            Cookies.set(constLogin.keepLogin, false, { domain: linkHttp.domain, path: '' })
+            Cookies.remove(CONST_LOGIN.keepLogin, { domain: LINK_DOMAIN.domain, path: SLASH });
+            Cookies.set(CONST_LOGIN.keepLogin, false, { domain: LINK_DOMAIN.domain, path: EMPTY_STRING })
         } else {
-            Cookies.remove(constLogin.keepLogin, { domain: linkHttp.domain, path: '/' });
-            Cookies.set(constLogin.keepLogin, true, { domain: linkHttp.domain, path: '' })
+            Cookies.remove(CONST_LOGIN.keepLogin, { domain: LINK_DOMAIN.domain, path: SLASH });
+            Cookies.set(CONST_LOGIN.keepLogin, true, { domain: LINK_DOMAIN.domain, path: EMPTY_STRING })
             setKeepLogin(true);
         }
     }
@@ -48,12 +50,13 @@ function LoginForm() {
             >
                 <Form>
                     <div className="form-login">
-                        <div className="mb-3">
+                        <ErrorMessage className="form-text form-error" name='notificationFail' component='div' />
+                        <div className="mb-3 form-login-input">
                             <label htmlFor="name" className="form-label">Tên đăng nhập</label>
-                            <Field type="text" name="name" className="form-control" id="name" placeholder="join" />
+                            <Field type="text" name="name" className="form-control" id="name" autoComplete="off" placeholder="join" />
                             <ErrorMessage className="form-text form-error" name='name' component='div' />
                         </div>
-                        <div className="mb-3 form-password">
+                        <div className="mb-3 form-password form-login-input">
                             <label htmlFor="password" className="form-label">Mật khẩu</label>
                             <Field type={showPassword ? 'text' : 'password'} name="password" className="form-control " autoComplete="username password" id="password" placeholder="············" />
                             <ErrorMessage name='password' className="form-text form-error" component='div' />
@@ -66,13 +69,22 @@ function LoginForm() {
                         <div className="mb-3 form-check d-flex align-items-center">
                             <input type="checkbox" className="form-check-input" id="exampleCheck1" defaultChecked={keepLogin}
                                 onChange={() => handleKeepLogin(keepLogin)} />
-                            <label className="form-check-label" htmlFor="exampleCheck1">Duy trì đăng nhập</label>
+                            <label className="form-check-label" htmlFor="exampleCheck1">{KEEP_LOGIN}</label>
                         </div>
-                        <button type="submit" className="form-submit mb-3">{loading ? 'Loading....' : 'Đăng nhập'}</button>
+                        <button type="submit" className="form-submit mb-3" role="status">
+                            {status !== FETCH_LOGIN.FETCH_LOGIN_LOADING ?
+                                LOGIN
+                                : <div className="d-flex justify-content-center ">
+                                    <div className="spinner-border " role="status">
+                                        <span className="visually-hidden"></span>
+                                    </div><span>{LOGIN_LOADING}</span>
+                                </div>}
+
+                        </button>
                     </div>
                 </Form>
             </Formik>
         </>
     )
 }
-export default LoginForm;
+export default memo(LoginForm);

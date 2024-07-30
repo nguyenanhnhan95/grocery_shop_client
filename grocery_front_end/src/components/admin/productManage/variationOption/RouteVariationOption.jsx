@@ -2,18 +2,21 @@ import { Route, Routes } from "react-router-dom";
 import Manage from "./Manage";
 import FormBasic from "./FormBasic";
 import { useDispatch } from "react-redux";
-import { columnVariationOption, dataActions, initialForm, queryParameter, variationOptionAction, variationOptionHttp, variationOptionSearch } from "../../../../constants/admin/productManage/variationOption";
-import { setActionModel } from "../../../../slice/main/actionAdmin";
 import { useEffect, useState } from "react";
-import BackdropLoading from "../../../../utils/BackdropLoading";
+import { setActionModel } from "../../../../redux/slice/admin/actionAdmin";
+import { columnVariationOption, dataActions, initialForm, queryParameter, variationOptionAction, variationOptionHttp, variationOptionSearch } from "./initialConfig";
 import TBodyTable from "./TBodyTable";
-
+import LoadingPage from "../../../loading/LoadingPage";
+import store from "../../../../store/store";
+import { actionReducerStore, reducerSliceKey } from "../../../../utils/commonConstants";
+import { fetchVariationSlice } from "../../../../redux/slice/product/variation";
 function RouteVariationOption() {
     const dispatch = useDispatch();
     const [initialized, setInitialized] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0, 'smooth')
+        store.injectReducer(actionReducerStore.add, reducerSliceKey.productVariation, fetchVariationSlice.reducer)
         const initializeState = async () => {
             try {
                 await dispatch(setActionModel({
@@ -36,9 +39,8 @@ function RouteVariationOption() {
 
         initializeState();
     }, [dispatch]);
-
     if (!initialized) {
-        return <BackdropLoading />; // Hoặc bất kỳ component nào khác bạn muốn hiển thị trong khi khởi tạo
+        return <LoadingPage />; // Hoặc bất kỳ component nào khác bạn muốn hiển thị trong khi khởi tạo
     }
 
     return (

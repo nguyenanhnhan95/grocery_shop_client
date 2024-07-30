@@ -25,6 +25,10 @@
 
 .main-content-search  i{
     font-size:2em;
+    color: var(--font-color-light);
+}
+.dark .main-content-search  i{
+    color: var(--font-color-dark);
 }
 .main-content .main-content-header-left .main-content-search{
     display: flex;

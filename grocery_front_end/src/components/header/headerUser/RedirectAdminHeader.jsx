@@ -1,7 +1,7 @@
 import { memo } from "react"
 import { useSelector } from "react-redux";
-import { roles } from "../../../constants/common/security";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ROLES } from "../../../utils/commonConstants";
 
 function RedirectAdminHeader() {
     const { profile } = useSelector((state) => state.profile)
@@ -11,7 +11,7 @@ function RedirectAdminHeader() {
         try{
             let size = profile.roles.length;
             for (let i = 0; i < size; ++i) {
-                if (profile.roles[i] === roles.ROLE_USER || location.pathname.substring(0, 6) === "/admin") {
+                if (profile.roles[i] === ROLES.ROLE_USER || location.pathname.substring(0, 6) === "/admin") {
                     return false;
                 }
             }

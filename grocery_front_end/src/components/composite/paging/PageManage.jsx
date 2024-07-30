@@ -1,6 +1,6 @@
 import { memo, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { choicePage, selectSize } from "../../../slice/main/actionAdmin";
+import { choicePage, selectSize } from "../../../redux/slice/admin/actionAdmin";
 import "../../../assets/css/composite/paging/pageManage.css"
 function PageManage() {
     const { queryParameter, list } = useSelector((state) => state.actionAdmin);

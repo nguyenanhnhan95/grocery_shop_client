@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import Manage from "./Manage";
 import FormBasic from "./FormBasic";
-import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setActionModel } from "../../../../slice/main/actionAdmin";
-import { columnVariation, dataActions, initialForm, queryParameter, variationAction, variationHttp, variationSearch } from "../../../../constants/admin/productManage/variation";
+import { useEffect, useState } from "react";
+import { setActionModel } from "../../../../redux/slice/admin/actionAdmin";
+import { columnVariation, dataActions, initialForm, queryParameter, variationAction, variationHttp, variationSearch } from "./initialConfig";
 import TBodyTable from "./TBodyTable";
 
 function RouteVariation() {

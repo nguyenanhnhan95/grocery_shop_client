@@ -1,6 +1,8 @@
 
-export const CONFIRM_2 = "Bạn có chắc chắn muốn xóa dữ liệu này không?";
+export const NOTIFY_DELETE = "Bạn có chắc chắn muốn xóa dữ liệu này không?";
 export const CONFIRM_DELETE = "Hành động này không thể hoàn tác.";
+export const CONFIRM = "Xác nhận";
+export const NOTIFICATION = "Thông Báo"
 export const REDIRECT = "redirect:";
 export const USERNAME = "username";
 export const EMAIL = "email";
@@ -9,9 +11,47 @@ export const SAVE = "Lưu";
 export const ORDER = "Thứ tự";
 export const SEND_TO_MESSAGE = "Gửi";
 export const CHROME = "Chrome";
+export const NOT_PERMISSION_PAGE = "Bạn Không Có Quyền Truy Cập Trang Này !";
+export const GO_BACK = "Go Back";
+export const GO_BACK_HOME = "Go Home";
+export const AGREE = "Đồng ý";
+export const CLOSE = "close"
+export const VARIANT_OUTLINE_WANING = "outline-warning"
+export const NOT_NAME = "NOT_NAME";
+export const NOT_EXIST = "NOT_EXIST";
+export const NOT_KEY = "NOT_KEY"
+export const EXISTING = "EXISTING";
+export const SHOW = "show";
+export const TYPE_STRING = "string";
+export const LOGIN_SESSION_EXPIRE_DATE = "Phiên đăng nhập của bạn đã hêt hạn ."
+export const LOADING_CONTENT_FORM = "loading-content-form"
+/**
+ * ERROR MESSAGE
+ */
+export const DELETED = "Đã xóa";
+export const PLEASE_COMPLETE_STEP = "Vui lòng hoàn thành bước ";
+export const DUPLICATE_FILE = "File dữ liệu bị trùng";
+export const FOLLOW_FORMAT_XLSX_XLS = "Chỉ chấp nhận các tệp nằm trong các định dạng sau : xls, xlsx";
+export const PROCESS_IS_CHANGE = "Hệ thống nhận thấy dữ liệu đã thay đổi. Vui lòng xác nhận thay đổi dữ liệu, kiểm tra cấu hình dịch vụ và đợi quản trị viên xét duyệt lại!";
+export const THANKS_CONFIRM = "Cám ơn bạn đã gửi yêu cầu. Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất";
+export const TITLE_PROCESS_IS_STEP_CHANGE = "Dữ liệu đã thay đổi.";
+export const PROCESS_IS_STEP_CHANGE = "Vui lòng lưu dữ liệu trước khi qua bước khác!";
+export const DATE_GREATER_THAN_FROM = "Đến ngày phải lớn hơn từ ngày";
+export const THIS_FIELD_CANNOT_EMPTY = "Không được để trống trường này.";
+export const THIS_FIELD_CANNOT_EMPTY_2 = "Trường này là bắt buộc.";
+export const PHONENUMBER_ISNOT_THE_CORRECT_FORMAT = "Số điện thoại không đúng định dạng.";
+export const THIS_COMBOBOX_ITEM_CANNOT_EMPTY = "Vui lòng lựa chọn thông tin.";
+export const THIS_UPLOAD_FILE_ITEM_CANNOT_EMPTY = "Vui lòng tải dữ liệu ."
+export const THIS_FILE_SIZE_TOO_LARGE = "File quá lớn ."
+export const THIS_FILE_EXISTING ="File này đã tồn tại ."
 /**
  * CSS
  */
+
+export const VISIBILITY = {
+	HIDDEN: "hidden",
+	VISIBLE: "visible"
+};
 export const SHOW_OR_AND_GROUP = "showOrAndGroup";
 export const STEP_THREE_TICK_CSS = "stepThreeTickCss";
 export const MO_TA_TIN_NHAN = "moTaTinNhan";
@@ -72,7 +112,7 @@ export const DASH = "-";
 /**
  * UNDERSTROKE.
  */
-export const UNDERSTROKE = "_";
+export const UNDER_STROKE = "_";
 /**
  * DATE_FORMAT_SPLASH.
  */
@@ -134,10 +174,17 @@ export const SLASH = "/";
  * SPACE_HTML.
  */
 export const SPACE_HTML = "&nbsp;";
-
 /**
- * The Constant NUM_0.
+ * REQUEST_PARAM
  */
+export const REQUEST_PARAM_ID = "/?id=";
+
+export const REQUEST_PARAM_QUERY = "?query=";
+
+export const REQUEST_PARAM_PATH = "?path=";
+
+export const REQUEST_PARAM_PATH_CHILDREN = "?pathChildren=";
+
 export const NUM_0 = 0;
 
 /** The Constant NUM_0DBL. */
@@ -221,29 +268,14 @@ export const ERROR = "error";
 export const STRING_DATETIME_DB_FM = "E MMM dd HH:mm:ss Z yyyy";
 export const STRING_DATETIME = "dd/MM/yyyy";
 
-/**
- * ERROR MESSAGE
- */
-export const DELETED = "Đã xóa";
-export const PLEASE_COMPLETE_STEP = "Vui lòng hoàn thành bước ";
-export const DUPLICATE_FILE = "File dữ liệu bị trùng";
-export const FOLLOW_FORMAT_XLSX_XLS = "Chỉ chấp nhận các tệp nằm trong các định dạng sau : xls, xlsx";
-export const PROCESS_IS_CHANGE = "Hệ thống nhận thấy dữ liệu đã thay đổi. Vui lòng xác nhận thay đổi dữ liệu, kiểm tra cấu hình dịch vụ và đợi quản trị viên xét duyệt lại!";
-export const THANKS_CONFIRM = "Cám ơn bạn đã gửi yêu cầu. Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất";
-export const TITLE_PROCESS_IS_STEP_CHANGE = "Dữ liệu đã thay đổi.";
-export const PROCESS_IS_STEP_CHANGE = "Vui lòng lưu dữ liệu trước khi qua bước khác!";
-export const CONFIRM = "Xác nhận";
-export const DATE_GREATER_THAN_FROM = "Đến ngày phải lớn hơn từ ngày";
-export const THIS_FIELD_CANNOT_EMPTY = "Không được để trống trường này.";
-export const THIS_FIELD_CANNOT_EMPTY_2 = "Trường này là bắt buộc.";
-export const PHONENUMBER_ISNOT_THE_CORRECT_FORMAT = "Số điện thoại không đúng định dạng.";
-export const THIS_COMBOBOX_ITEM_CANNOT_EMPTY = "Vui lòng lựa chọn thông tin.";
+
 
 /**
- * Path 
+ * PATH 
  */
 export const DOMAIN_SERVER = process.env.REACT_APP_DOMAIN_SERVER
 export const DOMAIN_CLIENT = process.env.REACT_APP_DOMAIN_CLIENT
+export const PATH_DASHBOARD_ADMIN = ["/admin/dash-board", "/admin"]
 /**
  * Css color
  */
@@ -252,7 +284,7 @@ export const CSSCCD81B = "color:#CCD81B";
 export const CSSD8321B = "color:#D8321B";
 export const CSS43C02A = "color:#43C02A";
 export const CSS379DD3 = "color:#379DD3";
-
+export const CSS0693e3 = "#0693e3"
 /**
  * SEO meta tag
  */
@@ -268,29 +300,10 @@ export const DATA_MODEL_TEP_TIN_KHONG_HOP_LE = "Tệp tin không hợp lệ";
 /**
  * allowedTypes 
  */
-export const ALLOW_IMAGES_File = [
-	'image/jpeg',
-	'image/png',
-	'application/pdf',
-	// Add more supported types as needed
-];
-export const ALLOW_VIDEOS_FILE = [
-	'video/mp4',
-	'video/quicktime',
-]
-export const ALLOW_AUDIOS_FILE = [
-	'audio/mpeg',
-	'audio/wav',
-]
-export const ALLOW_ALL_FILE = [
-	'audio/mpeg',
-	'audio/wav',
-	'image/jpeg',
-	'image/png',
-	'application/pdf',
-	'video/mp4',
-	'video/quicktime',
-]
+export const ALLOW_IMAGES_File = "image/png, image/gif, image/jpeg";
+export const ALLOW_VIDEOS_FILE = "video/mp4,video/x-m4v,video/*"
+export const ALLOW_AUDIOS_FILE = "audio/*"
+export const ALLOW_ALL_FILE = "video/*"
 /**
 * AWS  
 */
@@ -302,6 +315,10 @@ export const connectAWSParams = {
 	secretAccessKey: process.env.REACT_APP_AWS_S3_SECRETE_KEY,
 	s3Url: process.env.REACT_APP_AWS_S3_DOMAIN,
 	domainClient: process.env.REACT_APP_DOMAIN_CLIENT
+}
+export const FILE_STORE_AWS = {
+	IMAGE: "filestore/files/image",
+	FILE: "filestore/files/file"
 }
 /**
 * AWS PATH 
@@ -318,9 +335,12 @@ export const FILE_VIDEO = "FILE_VIDEO";
 /**
 * SCREEN DARK 
 */
-export const CHANGE_SCREEN_THEME_REQUEST_PARAM="change-dark";
-export const SCREEN_THEME_PARAM="screenTheme";
-export const SCREEN_THEME_NAME="Chế độ"
+export const CHANGE_SCREEN_THEME_REQUEST_PARAM = "change-dark";
+export const SCREEN_THEME_PARAM = "screenTheme";
+export const SCREEN_THEME_NAME = "Chế độ"
+export const SCREEN_THEME = "SCREEN_THEME";
+export const SCREEN_DARK = "dark";
+export const SCREEN_LIGHT = "light"
 export const SCREEN_THEME_MODE = {
 	SCREEN_LIGHT: {
 		alias: "LIGHT",
@@ -334,41 +354,166 @@ export const SCREEN_THEME_MODE = {
 /**
 * ICON 
 */
-export const ICON_MOON="fa-solid fa-moon";
-export const ICON_CHECK="fa-solid fa-check";
+export const ICON_MOON = "fa-solid fa-moon";
+export const ICON_CHECK = "fa-solid fa-check";
 /**
 * AUTHENCATION 
 */
+export const LOGIN = "Đang nhập"
+export const KEEP_LOGIN = "Duy trì đăng nhập"
+export const LOGIN_LOADING = "Loading...";
 export const API_BASE_URL = process.env.REACT_APP_DOMAIN_SERVER;
 export const USER_LOGIN = "userLogin"
 export const PROVIDER_SOCIAL = "provider_social";
 export const PROVIDER_LOCAL = "provider_local";
 export const PROVIDER_ID = "provider_id";
 export const OAUTH2_REDIRECT_URI = `${process.env.REACT_APP_DOMAIN_CLIENT}/oauth2/redirect`
-export const keepLogin="keepLogin"
-export const constLogin={
-    API_BASE_URL:DOMAIN_SERVER,
-    ACCESS_TOKEN:'accessToken',
-    USER_LOGIN:"userLogin",
-    PROVIDER_SOCIAL:"provider_social",
-    PROVIDER_LOCAL:"provider_local",
-    PROVIDER_ID:"provider_id",
-    OAUTH2_REDIRECT_URI:`${process.env.REACT_APP_DOMAIN_CLIENT}/oauth2/redirect`,
-    keepLogin:"keepLogin",  
+export const keepLogin = "keepLogin"
+export const CONST_LOGIN = {
+	API_BASE_URL: DOMAIN_SERVER,
+	ACCESS_TOKEN: 'accessToken',
+	USER_LOGIN: "userLogin",
+	PROVIDER_SOCIAL: "provider_social",
+	PROVIDER_LOCAL: "provider_local",
+	PROVIDER_ID: "provider_id",
+	OAUTH2_REDIRECT_URI: `${process.env.REACT_APP_DOMAIN_CLIENT}/oauth2/redirect`,
+	keepLogin: "keepLogin",
 }
-export const GOOGLE_AUTH_URL = constLogin.API_BASE_URL + '/oauth2/authorize/google?redirect_uri=' + constLogin.OAUTH2_REDIRECT_URI;
-export const FACEBOOK_AUTH_URL = constLogin.API_BASE_URL + '/oauth2/authorize/facebook?redirect_uri=' + constLogin.OAUTH2_REDIRECT_URI;
+export const GOOGLE_AUTH_URL = CONST_LOGIN.API_BASE_URL + '/oauth2/authorize/google?redirect_uri=' + CONST_LOGIN.OAUTH2_REDIRECT_URI;
+export const FACEBOOK_AUTH_URL = CONST_LOGIN.API_BASE_URL + '/oauth2/authorize/facebook?redirect_uri=' + CONST_LOGIN.OAUTH2_REDIRECT_URI;
+export const ROLES = {
+	ROLE_ADMIN: "ROLE_ADMIN",
+	ROLE_USER: "ROLE_USER",
+	ROLE_MANAGER: "ROLE_MANAGER",
+	ROLE_EMPLOYEE: "ROLE_EMPLOYEE"
+}
+export const REFRESH_TOKEN_API = `${DOMAIN_SERVER}/auth/refresh-token?token=`
+export const PERMISSION_RESOURCE = {
+	ADMIN: [ROLES.ROLE_ADMIN, ROLES.ROLE_EMPLOYEE, ROLES.ROLE_MANAGER]
+}
 /**
 * LINK URL 
 */
-export const linkHttp={
-    domain:"localhost",
-    getProfile:"http://localhost:8080/profile",
-    authLogin:"http://localhost:8080/auth/login",
-    linkLogin:`${connectAWSParams.domainClient}/login`,
-    linkLogOut:"http://localhost:8080/logout",
-    linkNotFound:`${connectAWSParams.domainClient}/not-found`,
-    linkAdmin:`${connectAWSParams.domainClient}/admin`,
-    linkMenuAdminSide:"http://localhost:8080/menu/admin-side",
-	linkHome:connectAWSParams.domainClient
+export const LINK_MENU = {
+	adminSide: `${DOMAIN_SERVER}/menu/admin-side`,
+	adminSidePath: `${DOMAIN_SERVER}/menu/admin-side/path`
 }
+export const LINK_DOMAIN = {
+	domain: "localhost",
+	domainClient: connectAWSParams.domainClient,
+	domainAdmin: `${connectAWSParams.domainClient}/admin`,
+}
+export const LINK_ERROR = {
+	linkNotFound: `${connectAWSParams.domainClient}/not-found`,
+}
+export const LINK_USER = {
+	getProfile: `${DOMAIN_SERVER}/profile`,
+	authLogin: `${DOMAIN_SERVER}/auth/login`,
+	linkLogin: `${connectAWSParams.domainClient}/login`,
+	linkLogOut: `${DOMAIN_SERVER}/logout`,
+}
+export const LINK_PRODUCT_CATEGORY = {
+	getMenus: `${DOMAIN_SERVER}/product-category`,
+	getChildren: `${DOMAIN_SERVER}/product-category/children`
+}
+export const PAGE_NAVIGATE = {
+	ADMIN: "/admin",
+	HOME: "/"
+}
+/**
+* REDUX STORE STATUS 
+*/
+export const FETCH_MENUS_ADMIN = {
+	FETCH_MENUS_ADMIN_INITIAL: "FETCH_MENUS_ADMIN_INITIAL",
+	FETCH_MENUS_ADMIN_FAIL: "FETCH_MENUS_ADMIN_FAIL",
+	FETCH_MENUS_ADMIN_LOADING: "FETCH_MENUS_ADMIN_LOADING",
+	FETCH_MENUS_ADMIN_SUCCESS: "FETCH_MENUS_ADMIN_SUCCESS"
+}
+
+export const FETCH_LOGIN = {
+	FETCH_LOGIN_INITIAL: "FETCH_LOGIN_INITIAL",
+	FETCH_LOGIN_FAIL: "FETCH_LOGIN_FAIL",
+	FETCH_LOGIN_LOADING: "FETCH_LOGIN_LOADING",
+	FETCH_LOGIN_SUCCESS: "FETCH_LOGIN_SUCCESS"
+}
+export const FETCH_BY_PATH_MENU_ADMIN = {
+	FETCH_BY_PATH_MENU_ADMIN_INITIAL: "FETCH_BY_PATH_MENU_ADMIN_INITIAL",
+	FETCH_BY_PATH_MENU_ADMIN_FAIL: "FETCH_BY_PATH_MENU_ADMIN_FAIL",
+	FETCH_BY_PATH_MENU_ADMIN_LOADING: "FETCH_BY_PATH_MENU_ADMIN_LOADING",
+	FETCH_BY_PATH_MENU_ADMIN_SUCCESS: "FETCH_BY_PATH_MENU_ADMIN_SUCCESS"
+}
+export const FETCH_LIST_ACTION_ADMIN = {
+	FETCH_LIST_ACTION_ADMIN_INITIAL: "FETCH_LIST_ACTION_ADMIN_INITIAL",
+	FETCH_LIST_ACTION_ADMIN_FAIL: "FETCH_LIST_ACTION_ADMIN_FAIL",
+	FETCH_LIST_ACTION_ADMIN_LOADING: "FETCH_LIST_ACTION_ADMIN_LOADING",
+	FETCH_LIST_ACTION_ADMIN_SUCCESS: "FETCH_LIST_ACTION_ADMIN_SUCCESS"
+}
+export const FETCH_SAVE_ACTION_ADMIN = {
+	FETCH_SAVE_ACTION_ADMIN_INITIAL: "FETCH_SAVE_ACTION_ADMIN_INITIAL",
+	FETCH_SAVE_ACTION_ADMIN_FAIL: "FETCH_SAVE_ACTION_ADMIN_FAIL",
+	FETCH_SAVE_ACTION_ADMIN_LOADING: "FETCH_SAVE_ACTION_ADMIN_LOADING",
+	FETCH_SAVE_ACTION_ADMIN_SUCCESS: "FETCH_SAVE_ACTION_ADMIN_SUCCESS"
+}
+export const FETCH_EDIT_ACTION_ADMIN = {
+	FETCH_EDIT_ACTION_ADMIN_INITIAL: "FETCH_EDIT_ACTION_ADMIN_INITIAL",
+	FETCH_EDIT_ACTION_ADMIN_FAIL: "FETCH_EDIT_ACTION_ADMIN_FAIL",
+	FETCH_EDIT_ACTION_ADMIN_LOADING: "FETCH_EDIT_ACTION_ADMIN_LOADING",
+	FETCH_EDIT_ACTION_ADMIN_SUCCESS: "FETCH_EDIT_ACTION_ADMIN_SUCCESS"
+}
+export const FETCH_BY_ID_ACTION_ADMIN = {
+	FETCH_BY_ID_ACTION_ADMIN_INITIAL: "FETCH_BY_ID_ACTION_ADMIN_INITIAL",
+	FETCH_BY_ID_ACTION_ADMIN_FAIL: "FETCH_BY_ID_ACTION_ADMIN_FAIL",
+	FETCH_BY_ID_ACTION_ADMIN_LOADING: "FETCH_BY_ID_ACTION_ADMIN_LOADING",
+	FETCH_BY_ID_ACTION_ADMIN_SUCCESS: "FETCH_BY_ID_ACTION_ADMIN_SUCCESS"
+}
+export const FETCH_DELETE_ID_ACTION_ADMIN = {
+	FETCH_DELETE_ID_ACTION_ADMIN_INITIAL: "FETCH_DELETE_ID_ACTION_ADMIN_INITIAL",
+	FETCH_DELETE_ID_ACTION_ADMIN_FAIL: "FETCH_DELETE_ID_ACTION_ADMIN_FAIL",
+	FETCH_DELETE_ID_ACTION_ADMIN_LOADING: "FETCH_DELETE_ID_ACTION_ADMIN_LOADING",
+	FETCH_DELETE_ID_ACTION_ADMIN_SUCCESS: "FETCH_DELETE_ID_ACTION_ADMIN_SUCCESS"
+}
+export const FETCH_PRODUCT_CATEGORIES = {
+	FETCH_PRODUCT_CATEGORIES_INITIAL: "FETCH_PRODUCT_CATEGORIES_INITIAL",
+	FETCH_PRODUCT_CATEGORIES_FAIL: "FETCH_PRODUCT_CATEGORIES_FAIL",
+	FETCH_PRODUCT_CATEGORIES_LOADING: "FETCH_PRODUCT_CATEGORIES_LOADING",
+	FETCH_PRODUCT_CATEGORIES_SUCCESS: "FETCH_PRODUCT_CATEGORIES_SUCCESS"
+}
+export const FETCH_PRODUCT_CATEGORY_CHILDREN = {
+	FETCH_PRODUCT_CATEGORY_CHILDREN_INITIAL: "FETCH_PRODUCT_CATEGORY_CHILDREN_INITIAL",
+	FETCH_PRODUCT_CATEGORY_CHILDREN_FAIL: "FETCH_PRODUCT_CATEGORY_CHILDREN_FAIL",
+	FETCH_PRODUCT_CATEGORY_CHILDREN_LOADING: "FETCH_PRODUCT_CATEGORY_CHILDREN_LOADING",
+	FETCH_PRODUCT_CATEGORY_CHILDREN_SUCCESS: "FETCH_PRODUCT_CATEGORY_CHILDREN_SUCCESS"
+}
+/**
+* REDUX STORE
+*/
+export const reducerSliceKey = {
+	loginForm: "loginForm",
+	profile: "profile",
+	productCategoryMenus: "productCategoryMenus",
+	overPlayMenuMain: "overPlayMenuMain",
+	menuContentMain: "menuContentMain",
+	actionAdmin: "actionAdmin",
+	adminStateManage: "adminStateManage",
+	homeStateManage: "homeStateManage",
+	productVariation: "productVariation",
+	shopPromotion: "shopPromotion"
+}
+export const actionReducerStore = {
+	add: "add",
+	remove: "remove",
+	clear: "clear"
+}
+
+/**
+* Config type search advanced
+*/
+export const typeSearchAdvanced = {
+	DateItemSearch: "DateItemSearch",
+	SelectItemSearch: "SelectItemSearch",
+	InputDataSearch: "InputDataSearch"
+}
+/**
+* ACTION REDUX
+*/
+export const INITIAL_QUERY_PARAMETER = "INITIAL_QUERY_PARAMETER";

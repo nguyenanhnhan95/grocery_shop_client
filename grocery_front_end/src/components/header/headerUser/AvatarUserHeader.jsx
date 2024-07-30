@@ -6,18 +6,19 @@ function AvatarUserHeader(props) {
     const { profile, authenticate } = useSelector((state) => state.profile)
     console.log(profile)
     return (
-        <div className="header-user-item" onClick={handleHeaderUserClick}>
+        <>
             {authenticate === true && (
-                <>
+                <div className="header-user-item" onClick={handleHeaderUserClick}>
                     {profile?.avatar === null ? (
                         <img src={logoAvatarUser} alt="" />
                     ) : (
                         <img src={profile?.avatar} alt="" />
                     )}
-                </>
-            )}
+                </div>
 
-        </div>
+            )
+            }
+        </>
     )
 }
 export default memo(AvatarUserHeader);

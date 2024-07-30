@@ -45,3 +45,7 @@
 .search-content-admin .container-content-search-advanced .container-content-search-advanced-item select:hover{
     cursor: pointer;
 }
+.dark .search-content-admin .container-content-search-advanced .css-hfutr2-MuiSvgIcon-root-MuiSelect-icon,
+.dark .search-content-admin .container-content-search-advanced .css-bpeome-MuiSvgIcon-root-MuiSelect-icon{
+    color: var(--font-color-dark);
+}

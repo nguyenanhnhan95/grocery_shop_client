@@ -6,7 +6,7 @@ function BackdropLoading(){
           sx={{ color: '#78909C', zIndex: (theme) => theme.zIndex.drawer + 1 ,backgroundColor: 'rgba(0, 0, 0, 0.1)'}}
           open={true}
         >
-          <CircularProgress color="inherit" />
+          <CircularProgress color="primary" />
         </Backdrop>
     )
 }

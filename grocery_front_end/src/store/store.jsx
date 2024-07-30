@@ -1,11 +1,15 @@
 import { Tuple, combineReducers, configureStore } from "@reduxjs/toolkit";
-import { productSlice } from "../slice/product/product";
 import { thunk } from "redux-thunk";
-import { profileSlice } from "../slice/person/profile";
-import { actionReducerStore } from "../constants/store/reducerSlice";
+import { actionReducerStore } from "../utils/commonConstants";
+import { productSlice } from "../redux/slice/product/product";
+import { profileSlice } from "../redux/slice/person/profile";
+import { refreshTokenSlice } from "../redux/slice/auth/authentication";
+import { notificationModalSlice } from "../redux/slice/modal/notificationModal";
 export const staticReducers = {
     product: productSlice.reducer,
     profile: profileSlice.reducer,
+    refreshToken:refreshTokenSlice.reducer,
+    notificationModal:notificationModalSlice.reducer
 }
 export function createReducerManager() {
     // Create an object which maps keys to reducers
@@ -68,7 +72,8 @@ export function createReducerManager() {
 const reducerManager = createReducerManager()
 export const store = configureStore({
     reducer: reducerManager.reduce,
-    middleware: () => new Tuple(...[thunk])
+    middleware: () => new Tuple(...[thunk]),
+    
 })
 
 store.asyncReducers = {};
@@ -84,6 +89,7 @@ store.injectReducer = (action, key, asyncReducer) => {
             reducerManager.remove(key, asyncReducer);
             break;
         case actionReducerStore.clear:
+            console.log("áda")
             reducerManager.clear()
             break;
         default:

@@ -1,12 +1,14 @@
+
 import { useEffect, useState } from "react";
 import FormBasic from "./FormBasic";
 import Manage from "./Manage";
 import { useDispatch } from "react-redux";
-import { setActionModel } from "../../../../slice/main/actionAdmin";
 import { Route, Routes } from "react-router-dom";
-import { columnShopPromotion, dataActions, initialForm, queryParameter, shopPromotionAction, shopPromotionHttp, shopPromotionSearch } from "../../../../constants/admin/shop/shopPromotion";
+import { setActionModel } from "../../../../redux/slice/admin/actionAdmin";
+import { columnShopPromotion, dataActions, initialForm, queryParameter, shopPromotionAction, shopPromotionHttp, shopPromotionSearch } from "./initialConfig";
 import TBodyTable from "./TBodyTable";
-import BackdropLoading from "../../../../utils/BackdropLoading";
+import LoadingPage from "../../../loading/LoadingPage";
+
 
 function RouteShopPromotion() {
     const dispatch = useDispatch();
@@ -38,7 +40,7 @@ function RouteShopPromotion() {
     }, [dispatch]);
 
     if (!initialized) {
-        return <BackdropLoading />;; // Hoặc bất kỳ component nào khác bạn muốn hiển thị trong khi khởi tạo
+        return <LoadingPage />;; // Hoặc bất kỳ component nào khác bạn muốn hiển thị trong khi khởi tạo
     }
 
     return (

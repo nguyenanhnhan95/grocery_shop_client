@@ -3,18 +3,26 @@ import Manage from "./Manage";
 import FormBasic from "./FormBasic";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { setActionModel } from "../../../../slice/main/actionAdmin";
-import { columnProducts, dataActions, initialForm, productsAction, productsHttp, productsSearch, queryParameter } from "../../../../constants/admin/productManage/products";
+import { setActionModel } from "../../../../redux/slice/admin/actionAdmin";
+import { columnProducts, dataActions, initialForm, productsAction, productsHttp, productsSearch, queryParameter } from "./initialConfig";
 import TBodyTable from "./TBodyTable";
+import store from "../../../../store/store";
+import { actionReducerStore, reducerSliceKey } from "../../../../utils/commonConstants";
+import { fetchVariationSlice } from "../../../../redux/slice/product/variation";
+import LoadingPage from "../../../loading/LoadingPage";
+import { fetchPromotionSlice } from "../../../../redux/slice/shop/promotion";
 function RouteProduct(){
     const dispatch = useDispatch();
     const [initialized, setInitialized] = useState(false);
     useEffect(() => {
         window.scrollTo(0, 0, 'smooth')
+        store.injectReducer(actionReducerStore.add, reducerSliceKey.productVariation, fetchVariationSlice.reducer)
+        store.injectReducer(actionReducerStore.add, reducerSliceKey.shopPromotion, fetchPromotionSlice.reducer)
         const initializeState = async () => {
             try {
+                
                 await dispatch(setActionModel({
-                    httpNavigate: productsHttp.productsNavigate,
+                    httpNavigate: productsHttp.productionNavigate,
                     httpApi: productsHttp.actionURL.instant(),
                     itemAction: productsAction,
                     itemSearch: productsSearch,
@@ -35,7 +43,7 @@ function RouteProduct(){
     }, [dispatch]);
 
     if (!initialized) {
-        return <div>Loading...</div>; // Hoặc bất kỳ component nào khác bạn muốn hiển thị trong khi khởi tạo
+        return <LoadingPage/>; // Hoặc bất kỳ component nào khác bạn muốn hiển thị trong khi khởi tạo
     }
 
     return (

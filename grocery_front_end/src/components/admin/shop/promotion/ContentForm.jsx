@@ -3,11 +3,11 @@ import "../../../../assets/css/admin/shop/promotion/contentForm.css"
 import { memo } from "react";
 import * as yup from "yup";
 import { DatePickerField } from "../../../composite/formik/DatePickerField";
+import { InputPercentField } from "../../../composite/formik/InputPercentField";
 function ContentForm(props) {
     const { handleSave, buttonRef, initialForm } = props;
-    console.log(initialForm)
     return (
-        <div className="main-content-form-promotion" >
+        <div className="main-content-form-promotion main-content-form" >
             <div className="card card-form-promotion">
                 <Formik
                     enableReinitialize={true}
@@ -56,7 +56,7 @@ function ContentForm(props) {
                                 </div>
                                 <div className="col-12 col-md-4">
                                     <label htmlFor="discountRate">Phần trăm giảm giá</label>
-                                    <Field name="discountRate" className="form-control" type="number" />
+                                    <Field name="discountRate"  component={InputPercentField} class={'form-control'} type="text" />
                                     <ErrorMessage className="form-text form-error" name='discountRate' component='div' />
                                 </div>
                                 <div className="col-12 col-md-4  mt-2">

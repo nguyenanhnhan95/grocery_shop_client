@@ -2,9 +2,9 @@ import { useNavigate } from "react-router-dom";
 import "../../../assets/css/composite/table/actionDropdown.css"
 import { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteDataAdmin } from "../../../slice/main/actionAdmin";
-import ComponentModal from "../modal/ComponentModal";
-import { informationModalDelete } from "../../../constants/common/modal";
+import { deleteDataAdmin } from "../../../redux/slice/admin/actionAdmin";
+import ConfirmModal from "../modal/ConfirmModal";
+import { CONFIRM, NOTIFY_DELETE } from "../../../utils/commonConstants";
 
 function ActionDropdown(props) {
     const { dataActions, httpApi, httpNavigate } = useSelector((state) => state.actionAdmin);
@@ -27,12 +27,11 @@ function ActionDropdown(props) {
             default:
                 return;
         }
-    }, [httpNavigate, id,handleShowModal,navigate])
-    
+    }, [httpNavigate, id, handleShowModal, navigate])
     const handleDelete = useCallback(() => {
-           dispatch(deleteDataAdmin({ http: httpApi, data: id }))
-            handleShowModal(false);
-    }, [httpApi, id,handleShowModal,dispatch])
+        dispatch(deleteDataAdmin({ http: httpApi, data: id }))
+        handleShowModal(false);
+    }, [httpApi, id, handleShowModal, dispatch])
     return (
         <div className="dropdown">
             <i className="fa-solid fa-ellipsis-vertical" data-bs-toggle="dropdown" aria-expanded="false" />
@@ -42,7 +41,7 @@ function ActionDropdown(props) {
                 ))}
 
             </ul>
-            <ComponentModal handleAction={handleDelete} show={showModal} informationModal={informationModalDelete} handleShow={handleShowModal} />
+            <ConfirmModal handleAction={handleDelete} show={showModal} informationTitle={CONFIRM} informationModal={NOTIFY_DELETE} handleShow={handleShowModal} />
         </div>
 
     )

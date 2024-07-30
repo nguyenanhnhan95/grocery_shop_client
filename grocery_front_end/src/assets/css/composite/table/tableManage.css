@@ -3,7 +3,9 @@
     margin: 15px;
     /*border-radius: 0 5px;*/
 }
-
+.dark .main-content-data{
+    background-color: var(--bg-box-dark);
+}
 .main-content-data .container-content-data{
     padding-bottom: 70px !important;
 }
@@ -19,6 +21,16 @@
 }
 .main-content-data .container-content-data .table tbody tr td:last-child{
     text-align: center;
+}
+.dark .main-content-data .container-content-data .table tbody{
+    color: var(--font-color-dark);
+}
+.dark .main-content-data .container-content-data .table>:not(caption)>*>*{
+    border-bottom-width: 0;
+    
+}
+.dark .table-hover>tbody>tr:hover{
+    color:var(--bg-trade);
 }
 @media only screen and (max-width: 1024px){
     .main-content-data .container-content-data .table{

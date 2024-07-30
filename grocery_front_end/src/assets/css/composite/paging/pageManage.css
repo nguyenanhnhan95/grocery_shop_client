@@ -1,5 +1,9 @@
 .main-content-data .container-content-data-page {
+    margin: 0;
     color: #7b7883;
+}
+.main-content-data .container-content-data-page .d-flex{
+    padding: 0;
 }
 .main-content-data .container-content-data-page-item {
     margin-right: 10px;
@@ -7,7 +11,6 @@
 .main-content-data .container-content-data-page-item select{
     width: auto;
     height: 26px;
-    margin-top: 7px;
     border-color: #0693e3;
     outline: none;
     border-radius: 5px;
@@ -38,4 +41,7 @@
 .main-content-data .table-items-page ul>li{
     padding: 1px 11px;
     color: black;
+}
+.dark .main-content-data .container-content-data-page {
+    background-color: var(--bg-box-dark);
 }

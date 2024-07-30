@@ -1,5 +1,4 @@
 .header-user {
-    width: 45px;
     position: relative;
     color: #6E6B7B;
 }
@@ -22,8 +21,8 @@
 }
 
 .header-user .header-user-login {
-    width: 80px;
-    font-size: 1em !important;
+    width: 100%;
+    font-size: 1em ;
     font-weight: 500;
 }
 
@@ -127,7 +126,7 @@
         0 5px 5px -5px #78909C;
     top: 67px;
     background-color: white;
-    right: -15px;
+    right: 40px;
     border-radius: 5px;
     padding: 10px 20px;
     z-index: 1;
@@ -186,8 +185,9 @@
     }
 } */
 @media only screen and (max-width: 768px) {
-
-
+    .header-user .header-user-login {
+        font-size: 0.6em;
+    }
     .header-user .header-user-item img {
         width: 30px;
         height: 30px;
@@ -202,7 +202,7 @@
         width: 200px;
         font-size: 0.6em;
         top: 45px;
-        right: -1vw;
+        right: 0;
         padding: 5px;
     }
 
@@ -241,7 +241,9 @@
         width: 40px;
         height: 40px;
     }
-
+    .header-user .header-user-login {
+        font-size: 0.9em;
+    }
     .header-user .header-user-item {
         width: 40px;
         height: 40px;
@@ -257,5 +259,12 @@
 
     .header-user .header-user-modal {
         top: 55px
+    }
+   
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+    .header-user .header-user-modal {
+        top: 55px;
+        right: 10px;
     }
 }

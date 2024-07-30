@@ -1,9 +1,4 @@
-.main-content-title {
-    margin: 0;
-    padding-left: 10px;
-    font-size: 1.5em;
-    font-weight: 600;
-}
+
 
 .main-content-action {
     background-color: white;
@@ -11,8 +6,9 @@
     margin: 0 15px;
     border-radius: 5px;
 }
-
-
+.dark .main-content-action{
+    background-color: #242526;
+}
 .main-content-action .container-content-action .row {
     align-items: center;
     margin: 0;

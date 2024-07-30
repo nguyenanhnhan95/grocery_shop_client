@@ -2,7 +2,7 @@ import { memo } from "react";
 import "../../../assets/css/admin/dashBoard/dashBoard.css"
 function DashBoard(){
     return(
-        <div className="container-fluid container-dashboard">
+        <div className="container-fluid container-body-admin container-dashboard">
         <div className="row dashboard-section">
           <div className="col-12 col-sm-6 col-md-3 ">
             <div className="card">

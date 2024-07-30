@@ -1,52 +1,65 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import OAuth2RedirectHandle from "./components/oauth2/OAuth2RedirectHandler";
 import { Suspense, lazy } from "react";
-import BackdropLoading from "./utils/BackdropLoading";
 import store from "./store/store";
-import { getAllCategoryMenus } from "./slice/product/productCategoty";
-import { loginForm } from "./slice/login/login";
-import menuContentMainSlice from "./slice/main/menuContentMain";
-import overPlayMenuMainSlice from "./slice/main/overPlayMenu";
-import { actionAdminSlice } from "./slice/main/actionAdmin";
-import LoadingWrapper from "./components/wrapper/InitialLoadingWrapper";
+import LoadingPage from "./components/loading/LoadingPage";
+import { actionReducerStore, reducerSliceKey } from "./utils/commonConstants";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorSystem from "./pages/error/ErrorSystem";
-import { actionReducerStore, reducerSliceKey } from "./constants/store/reducerSlice";
-import InitialLoadingWrapper from "./components/wrapper/InitialLoadingWrapper";
-const Home = lazy(() => import('./pages/home/Home').then((module) => {
-  store.injectReducer(actionReducerStore.clear, '', '')
-  store.injectReducer(actionReducerStore.add, reducerSliceKey.productCategoryMenus, getAllCategoryMenus.reducer)
-  return module;
-}))
+import "./assets/css/composite/modal/commonModal.css"
+import "./../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import "./../node_modules/bootstrap/dist/js/bootstrap.bundle.js"
+import NotFound from "./components/error/NotFound";
+import { loginFormSlice } from "./redux/slice/login/login.jsx";
+import menuContentMainSlice from "./redux/slice/admin/menuContentMain.jsx";
+import overPlayMenuMainSlice from "./redux/slice/admin/overPlayMenu.jsx";
+import { actionAdminSlice } from "./redux/slice/admin/actionAdmin.jsx";
+import { getAllCategoryMenus } from "./redux/slice/product/productCategory.jsx";
+import InitialAdmin from "./components/wrapper/InitialAdmin.jsx";
+import Home from "./pages/home/Home.jsx";
+import { useSelector } from "react-redux";
+import { getScreenThem } from "./utils/commonUtils.jsx";
+import OAuth2RedirectHandler from "./components/oauth2/OAuth2RedirectHandler.jsx";
+import NotificationModal from "./components/composite/modal/NotificationModal.jsx";
+import { useScreenMode } from "./hook/auth/useScreenMode.jsx";
+import 'ckeditor5/ckeditor5.css';
+import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 const Login = lazy(() => import('./pages/login/Login').then((module) => {
-  store.injectReducer(actionReducerStore.clear, '', '')
-  store.injectReducer(actionReducerStore.add, reducerSliceKey.loginForm, loginForm.reducer)
-  return module;
+    store.injectReducer(actionReducerStore.clear, '', '')
+    store.injectReducer(actionReducerStore.add, reducerSliceKey.loginForm, loginFormSlice.reducer)
+    return module;
 }))
 const Admin = lazy(() => import('./pages/admin/Admin').then((module) => {
-  store.injectReducer(actionReducerStore.clear, '')
-  store.injectReducer(actionReducerStore.add, reducerSliceKey.menuContentMain, menuContentMainSlice.reducer)
-  store.injectReducer(actionReducerStore.add, reducerSliceKey.overPlayMenuMain, overPlayMenuMainSlice.reducer)
-  store.injectReducer(actionReducerStore.add, reducerSliceKey.actionAdmin, actionAdminSlice.reducer)
-  return module;
+    store.injectReducer(actionReducerStore.clear, '')
+    store.injectReducer(actionReducerStore.add, reducerSliceKey.menuContentMain, menuContentMainSlice.reducer)
+    store.injectReducer(actionReducerStore.add, reducerSliceKey.overPlayMenuMain, overPlayMenuMainSlice.reducer)
+    store.injectReducer(actionReducerStore.add, reducerSliceKey.actionAdmin, actionAdminSlice.reducer)
+    store.injectReducer(actionReducerStore.add, reducerSliceKey.productCategoryMenus, getAllCategoryMenus.reducer)
+    return module;
 }))
+const InitialHome = lazy(() => import('./components/wrapper/InitialHome').then((module) => {
+    return module;
+}))
+
 function App() {
-  return (
-    <ErrorBoundary FallbackComponent={ErrorSystem}>
-      <InitialLoadingWrapper>
-        <BrowserRouter>
-          <Suspense fallback={<BackdropLoading />} >
-            <Routes>
-              <Route path={`/`} element={<Home />} />
-              <Route path={`/login`} element={<Login />} />
-              <Route path={'/oauth2/redirect'} element={<OAuth2RedirectHandle />} />
-              <Route path={'/admin/*'} element={<Admin />} />
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-      </InitialLoadingWrapper>
-    </ErrorBoundary>
-  );
+    const { screenMode } = useScreenMode()
+    return (
+        <Suspense fallback={<LoadingPage />}>
+            <ErrorBoundary fallback={<ErrorSystem />} >
+                <div className={`${getScreenThem(screenMode)}`}>
+                    <BrowserRouter>
+                        <Routes>
+                            <Route path="/" element={<InitialHome><Home /></InitialHome>} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/admin/*" element={<InitialAdmin><Admin /></InitialAdmin>} />
+                            <Route path={'/oauth2/redirect'} element={<OAuth2RedirectHandler />} />
+                            <Route path="*" element={<NotFound />} />
+                        </Routes>
+                    </BrowserRouter>
+                    <NotificationModal/>
+                </div>
+            </ErrorBoundary>
+        </Suspense>
+    );
 }
 
 export default App;

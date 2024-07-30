@@ -1,7 +1,7 @@
 import { memo, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createQueryParameter } from "../../../slice/main/actionAdmin";
-import { debounce } from "../../../constants/common/methodCommon";
+import { createQueryParameter } from "../../../redux/slice/admin/actionAdmin";
+import { debounce } from "../../../utils/commonUtils";
 function SearchNameAdmin(props) {
     const {  handleShowAdvanced,handleSetQuery,query } = props;
     const { itemSearch } = useSelector((state) => state.actionAdmin)

@@ -1,7 +1,7 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { memo, useEffect } from "react";
 import Cookies from 'js-cookie'
-import { constLogin } from "../../utils/commonConstants";
+import { CONST_LOGIN } from "../../utils/commonConstants";
 function OAuth2RedirectHandle() {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
@@ -10,7 +10,7 @@ function OAuth2RedirectHandle() {
         const token = searchParams.get('token');
         const error = searchParams.get('error');
         if (token) {
-            localStorage.setItem(constLogin.ACCESS_TOKEN, token);
+            localStorage.setItem(CONST_LOGIN.ACCESS_TOKEN, token);
             Cookies.remove('keepLogin', { domain: 'localhost', path: '/' });
             navigate("/")
         } else {

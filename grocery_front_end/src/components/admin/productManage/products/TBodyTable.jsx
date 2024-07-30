@@ -2,6 +2,7 @@ import { memo } from "react"
 import ActionDropdown from "../../../composite/table/ActionDropdown"
 
 function TBodyTable({ list, queryParameter }) {
+    console.log(list)
     return (
         <tbody>
             {list && list.result.map((each, index) => (
