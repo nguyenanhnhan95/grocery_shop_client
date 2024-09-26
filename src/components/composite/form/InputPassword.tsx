@@ -1,5 +1,5 @@
 'use client';
-import { InputProps } from "@/types/inputProps";
+import { InputProps } from "@/types/input";
 import { PLACE_HOLDER_PASSWORD } from "@/utils/commonConstants";
 import { debounce } from "@/utils/commonUtils";
 import { FormControl, IconButton, InputAdornment, OutlinedInput } from "@mui/material";

@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 
 function useClickOutsideModal(initialVisibility = false) {
   const [isModalVisible, setIsModalVisible] = useState(initialVisibility);
-  const modalRef = useRef<HTMLDivElement | null>(null);
+  const modalRef = useRef<HTMLLIElement | null>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

@@ -1,5 +1,4 @@
 'use client'
-import { ApiResponse } from "@/types/apiResponse";
 import axios, { AxiosError } from "axios";
 import { useCallback, useState } from "react";
 

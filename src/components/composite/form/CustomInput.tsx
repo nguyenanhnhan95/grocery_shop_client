@@ -19,7 +19,7 @@ const CustomInput: React.FC<InputProps> = (props) => {
   }, [debouncedValue, field.name, setFieldValue]);
   return (
     <div>
-      <input  autoComplete={props.autoComplete} className={props.className} placeholder={props.placeholder} onChange={handleChange} type={props.type} />
+      <input autoFocus={props.autofocus || false}  autoComplete={props.autoComplete} className={props.className} placeholder={props.placeholder} onChange={handleChange} type={props.type} />
     </div>
   );
 };

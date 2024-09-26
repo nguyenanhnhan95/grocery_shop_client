@@ -29,7 +29,14 @@ export const queryParameterSlice = createSlice({
         createQueryParameter: (state, action: PayloadAction<QueryParameter>) => {
             state.initialQueryParameter = action.payload;
             state.queryParameter = action.payload;
-        }
+        },
+        updateQueryCriterias: (state, action: PayloadAction<Partial<Record<string, any>>>) => {
+            state.queryParameter = {
+                ...state.queryParameter,
+                ...action.payload, // Only updates the fields provided in payload
+                criterias: action.payload
+            };
+        },
     },
 })
-export const { updateQueryParameter, createQueryParameter } = queryParameterSlice.actions
+export const { updateQueryParameter, createQueryParameter,updateQueryCriterias } = queryParameterSlice.actions

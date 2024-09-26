@@ -1,11 +1,10 @@
 'use client'
-import { useScreenMode } from "@/hooks/common/useScreenMode";
 import { handleNotificationModal } from "@/redux/slice/common/notificationModal";
 import { Modal, Button } from 'react-bootstrap';
 import { actionCloseNotificationModal } from "@/redux/action/actionShowNotificationModal";
 import { RootState } from "@/setting/store";
-import "./customModal.module.css"
-import styles from "./notificationModal.module.css"
+import "./styles/customModal.css"
+import "./styles/notificationModal.css"
 import { AGREE, NOTIFICATION, VARIANT_OUTLINE_WANING } from "@/utils/commonConstants";
 import { useAppDispatch, useAppSelector } from "@/lib/redux";
 
@@ -13,7 +12,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/redux";
 const NotificationModal: React.FC = () => {
     const dispatch = useAppDispatch();
     const { show, message, handleServiceConfirm } = useAppSelector((state: RootState) => state.notificationModal)
-    const { screenMode } = useScreenMode()
+
     const handleService = () => {
         dispatch(handleNotificationModal(actionCloseNotificationModal()))
         if (handleServiceConfirm) {
@@ -22,7 +21,7 @@ const NotificationModal: React.FC = () => {
     }
 
     return (
-        <Modal show={show} className={`${screenMode} ${styles.notificationModal}`}  >
+        <Modal show={show} className="notification-modal"  >
             <Modal.Header closeButton={false}  >
                 <Modal.Title >{NOTIFICATION}</Modal.Title>
             </Modal.Header>

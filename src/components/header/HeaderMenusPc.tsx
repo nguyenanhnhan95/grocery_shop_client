@@ -3,9 +3,11 @@
 import { useAppSelector } from "@/lib/redux";
 import { RootState } from "@/setting/store";
 import LogoSky from "./../../../public/image/logo-sky.png"
+import "./styles/headerMenuPC.css"
 import Image from "next/image";
 function HeaderMenusPc() {
     const {  list } = useAppSelector((state:RootState) => state.productCategoryMenus)
+
     return (
         <div className="header-menu-pc">
             <div className="header-logo header-item">

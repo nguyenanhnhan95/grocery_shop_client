@@ -1,13 +1,14 @@
 'use client'
 import { memo, useCallback, useEffect, useState } from "react";
-import { ErrorMessage,  Form, Formik } from "formik";
+import { ErrorMessage, Form, Formik } from "formik";
 import * as yup from "yup";
 import { useFetchPost } from "@/hooks/fetch-authencation/useFetchPost";
 import { DOMAIN, EMPTY_STRING, PLACE_HOLDER_PASSWORD } from "@/utils/commonConstants";
 import { useCookies } from "@/hooks/common/useCookie";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import CustomInput from "../composite/form/CustomInput";
 import { createActionURL } from "@/utils/commonUtils";
+import { Button } from "react-bootstrap";
 
 
 
@@ -24,12 +25,13 @@ const KEEP_LOGIN = "keepLogin";
 function LoginForm() {
     const [showPassword, setShowPassword] = useState<boolean>(false)
     const [keepLogin, setKeepLogin] = useState<boolean>(false)
+    const searchParams = useSearchParams();
+    const errorParam = searchParams.get('error');
+    const [notificationError, setNotificationError] = useState<string>(errorParam||'')
     const router = useRouter();
-
-    const { fetchPost, isPending, code } = useFetchPost();
-
+    const { fetchPost, isPending, code, error } = useFetchPost();
+    console.log(errorParam)
     const handleLogin = useCallback(async (loginRequest: LoginRequest, setErrors: (errors: any) => void) => {
-        console.log(loginRequest)
         fetchPost(createActionURL("auth/login").instant(), { ...loginRequest, flagKeep: keepLogin }, setErrors)
 
     }, [fetchPost, isPending])
@@ -38,6 +40,11 @@ function LoginForm() {
             router.push("/")
         }
     }, [code, router])
+    useEffect(() => {
+        if (error && (error.code === 4111 || error.code === 4124)) {
+            setNotificationError(error.message)
+        }
+    }, [error])
     const handleKeepLogin = (currentKeepLogin: boolean) => {
         const [data, setCookie, removeCookie] = useCookies(KEEP_LOGIN)
         if (currentKeepLogin) {
@@ -51,7 +58,7 @@ function LoginForm() {
     useEffect(() => {
         const elements = document.querySelectorAll('[cz-shortcut-listen]');
         elements.forEach(el => el.removeAttribute('cz-shortcut-listen'));
-    }, []); 
+    }, []);
     return (
         <>
             <Formik
@@ -59,7 +66,8 @@ function LoginForm() {
                 initialValues={initialValue}
                 validationSchema={yup.object({
                     nameLogin: yup.string().trim().required("Chưa nhập email :"),
-                    password: yup.string().required("Chưa nhập mật khẩu")
+                    password: yup.string().required("Chưa nhập mật khẩu"),
+
                 })}
                 onSubmit={(value, { setErrors }) =>
                     handleLogin(value, setErrors)
@@ -67,10 +75,12 @@ function LoginForm() {
             >
                 <Form>
                     <div className="form-login">
-                        <ErrorMessage className="form-text form-error" name='notificationFail' component='div' />
+                        {notificationError && (
+                            <div className="alert alert-danger"> {notificationError}</div>
+                        )}
                         <div className="mb-3 form-login-input">
                             <label htmlFor="nameLogin" className="form-label">Tên đăng nhập</label>
-                            <CustomInput type="text" name="nameLogin" className="form-control" id="nameLogin" autoComplete="off" placeholder="join" />
+                            <CustomInput type="text" name="nameLogin" className="form-control" id="nameLogin" autofocus={true} autoComplete="off" placeholder="join" />
                             <ErrorMessage className="form-text form-error" name='nameLogin' component='div' />
                         </div>
                         <div className="mb-3 form-password form-login-input">
@@ -88,9 +98,9 @@ function LoginForm() {
                                 onChange={() => handleKeepLogin(keepLogin)} />
                             <label className="form-check-label" htmlFor="exampleCheck1">Duy trì đăng nhập</label>
                         </div>
-                        <button disabled={isPending} type="submit" className="form-submit mb-3" role="status">
+                        <Button disabled={isPending} type="submit" className="form-submit mb-3" >
                             Đang nhập
-                        </button>
+                        </Button>
                     </div>
                 </Form>
             </Formik>

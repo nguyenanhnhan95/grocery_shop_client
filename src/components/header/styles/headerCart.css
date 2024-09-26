@@ -88,8 +88,10 @@
     background-color: rgba(0, 0, 0, .03);
     cursor: pointer;
 }
-
-.dark .header-cart .card-cart .card-cart-item:hover {
+html[dark-theme='dark'] .header-cart .card-cart .card-cart-item{
+    color: var(--font-color-dark);
+}
+html[dark-theme='dark'] .header-cart .card-cart .card-cart-item:hover {
     background-color: #3E3E3E;
     cursor: pointer;
 }
@@ -116,8 +118,8 @@
     font-weight: 400;
 }
 
-.dark .header-cart .header-cart-modal,
-.dark .header-cart .header-cart-modal .card {
+html[dark-theme='dark'] .header-cart .header-cart-modal,
+html[dark-theme='dark'] .header-cart .header-cart-modal .card {
     background-color: #282828;
 }
 

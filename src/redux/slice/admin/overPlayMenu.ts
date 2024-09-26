@@ -1,10 +1,10 @@
 'use client'
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-
+type ClickOutsideHandler = (target: EventTarget | null) => boolean;
 interface OverPlayMenuMainState {
   open: boolean;
-  clickMenuAdminRef: any; 
+  clickMenuAdminRef: ClickOutsideHandler | null; 
 }
 
 const initialState: OverPlayMenuMainState = {
@@ -19,7 +19,7 @@ export const overPlayMenuMainSlice = createSlice({
     onClickHandleOverPlay: (state, action: PayloadAction<boolean>) => {
       state.open = action.payload;
     },
-    onClickMenuAdminRef: (state, action: PayloadAction<any>) => { 
+    onClickMenuAdminRef: (state, action: PayloadAction<ClickOutsideHandler >) => { 
       state.clickMenuAdminRef = action.payload;
     },
   },

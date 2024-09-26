@@ -1,7 +1,6 @@
 'use client'
 import { toastTopRight } from "@/config/toast";
-import { ApiResponse } from "@/types/apiResponse";
-import { ConstraintErrors } from "@/types/constraintErros";
+
 import axios, { AxiosError } from "axios";
 import { useCallback, useState } from "react";
 
@@ -10,10 +9,10 @@ export const useFetchPatch = () => {
     const [code, setCode] = useState<number | null>(null);
     const [message, setMessage] = useState<string | null>(null);
 
-    const fetchPatch = useCallback(async (url:string, data:any, setErrors:(errors: any) => void) => {
+    const fetchPatch = useCallback(async (url: string, data: Record<string, any>, setErrors?: (errors: any) => void) => {
         setIsPending(true);
         try {
-            const response = await axios.patch<ApiResponse<unknown>>(url, data, { withCredentials: true });
+            const response = await axios.patch<ApiResponseNoResult>(url, data, { withCredentials: true });
             if (response.data?.code === 200) {
                 setMessage(response.data.message);
             }
@@ -21,13 +20,22 @@ export const useFetchPatch = () => {
             setIsPending(false);
         } catch (error) {
             const axiosError = error as AxiosError;
+            console.log(axiosError)
             const responseData = axiosError.response?.data as ConstraintErrors | undefined;
+            const responseErrors = axiosError.response?.data as ResponseErrors | undefined;
+
             if (responseData) {
-                if (responseData.result.notification &&"notification" in responseData.result  ) {
+                if (responseData.result?.notification && "notification" in responseData.result) {
                     toastTopRight.toastError(responseData.result?.notification);
                 } else {
-                    setErrors(responseData.result ||null);
+                    if (setErrors) {
+                        setErrors(responseData.result || null);
+                        return;
+                    }
                 }
+            }
+            if(responseErrors){
+                toastTopRight.toastWarning(responseErrors.message)
             }
             
         } finally {

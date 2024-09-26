@@ -1,0 +1,86 @@
+.main-menu .main-menu-content-loading .ps__rail-y {
+    z-index: 3
+}
+.main-menu .main-menu-content-loading ul.navigation-main {
+    padding-bottom: 42px;
+}
+
+.main-menu .main-menu-content-loading ul.navigation-main {
+    overflow-x: hidden;
+    padding-bottom: .75rem;
+}
+.main-menu .main-menu-content-loading ul.navigation-main>li:first-child {
+    margin-top: .5rem;
+}
+.main-menu .main-menu-content-loading ul.navigation-main>li:first-child {
+    margin-top: .5rem
+}
+.main-menu.menu-light .main-menu-content-loading .navigation .nav-item .menu-active-parent{
+    outline: 0;
+    padding: 10px 15px 10px 20px;
+}
+.main-menu.menu-light .main-menu-content-loading .navigation>li{
+    margin: 0 15px;
+}
+.main-menu.menu-light .main-menu-content-loading .navigation .navigation-header {
+    margin: calc(2rem + .286rem) 0 .8rem 2.2rem;
+    padding: 0;
+    line-height: 1.5;
+    letter-spacing: .01rem;
+}
+.main-menu.menu-light .main-menu-content-loading .navigation .navigation-header {
+    margin: calc(2rem + .286rem) 0 .8rem 2.2rem;
+    padding: 0;
+    line-height: 1.5;
+    letter-spacing: .01rem
+}
+.main-menu.menu-dark .main-menu-content-loading .navigation .navigation-header {
+    color: #fff;
+    margin: calc(2rem + .286rem) 0 .8rem 2.2rem;
+    padding: 0;
+    line-height: 1.5;
+    letter-spacing: .01rem
+}
+.main-menu-content-loading .navigation .navigation-header {
+    font-weight: 500;
+    line-height: 1.2;
+    padding: 12px 22px;
+    font-size: .9rem;
+    text-transform: uppercase
+}
+.main-menu .main-menu-content-loading ul.navigation-main>li:first-child{
+    position: relative;
+    border-radius: 5px;
+    width: 80%;
+    height: 25px;
+}
+.main-menu.menu-light .main-menu-content-loading .navigation .navigation-header{
+    position: relative;
+    width: 60%;
+    height: 30px;
+}
+.main-menu.menu-light .main-menu-content-loading .navigation>li{
+    position: relative;
+    width: 80%;
+    height: 20px;
+    margin: calc(2rem + .286rem) 0 .8rem 2.2rem;
+    padding: 0;
+    line-height: 1.5;
+    letter-spacing: .01rem;
+}
+.main-menu .main-menu-content-loading ul.navigation-main>li:first-child::before,
+.main-menu.menu-light .main-menu-content-loading .navigation .navigation-header::before,
+.main-menu.menu-light .main-menu-content-loading .navigation>li::before{
+    background-color: var(--font-icon-dark);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 5px;
+    content: '';
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    animation: skeletonLoading 2s linear infinite alternate;
+
+}

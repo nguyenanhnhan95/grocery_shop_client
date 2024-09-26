@@ -129,7 +129,9 @@
     font-weight: 500;
     
 }
-
+.login .form-login .alert-danger{
+    padding: 10px 16px;
+}
 .login .login-form .card-login .card-body .separator {
     display: flex;
     align-items: center;
@@ -154,11 +156,15 @@
 .login .login-form .card-login .card-body .submit-social img {
     height: 50px;
     width: 50px;
+    transition: transform 0.3s ease; 
 }
-
+.login .login-form .card-login .card-body .submit-social img:focus-visible,.login .login-form .card-login .card-body .submit-social a:focus-visible{
+    outline: none;
+    transform: scale(1.1);
+}
 .login .login-form .card-login .card-body .submit-social img:hover {
     cursor: pointer;
-}zz
+}
 .login .login-content .form-login .form-login-input{
     height: 75px;
     margin-bottom: 0; 

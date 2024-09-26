@@ -1,5 +1,8 @@
-export interface ApiResponse<T> {
+interface ApiResponseNoResult {
     code: number;
     message: string;
-    result?: T | null; // result có thể không tồn tại
 }
+
+type ApiResponse<T> = ApiResponseNoResult & {
+    result: T | null; 
+};

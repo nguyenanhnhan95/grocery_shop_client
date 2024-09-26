@@ -11,7 +11,6 @@ export const loadingBarTopSlice = createSlice({
     initialState,
     reducers: {
         chaneProgressTop: (state, action: PayloadAction<number>) => {
-            // Assign only the progress value (which is a number)
             state.progress = action.payload;
         },
     },

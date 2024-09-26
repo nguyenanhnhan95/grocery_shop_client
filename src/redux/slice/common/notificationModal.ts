@@ -42,4 +42,3 @@ export const notificationModalSlice = createSlice({
 });
 
 export const { handleNotificationModal } = notificationModalSlice.actions;
-export default notificationModalSlice.reducer;

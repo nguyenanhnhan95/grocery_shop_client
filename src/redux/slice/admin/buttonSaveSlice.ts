@@ -1,18 +1,24 @@
 'use client'
 import {createSlice } from "@reduxjs/toolkit";
+
+interface InitialState{
+    onClickAction:HTMLButtonElement|null,
+    close:boolean
+}
+const initialState:InitialState={
+    onClickAction:null,
+    close:false
+}
 export const actionAdminSlice = createSlice({
     name: "actionAdmin",
-    initialState: {
-        onClickAction: null,
-        close: false,
-    },
+    initialState,
     reducers: {
 
-        actionSave: (state, action) => {
-            state.close = action.payload.close;
+        actionSave: (state, {payload}) => {
+            state.close = payload.close;
         },
-        onClickSaveAction: (state, action) => {
-            state.onClickAction = action.payload;
+        onClickSaveAction: (state, {payload}) => {
+            state.onClickAction = payload;
         },
     }
 })

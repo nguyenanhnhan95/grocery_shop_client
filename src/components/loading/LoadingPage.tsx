@@ -1,3 +1,4 @@
+'use client';
 import "./loadingPage.css"
 const LoadingPage: React.FC = () => {
     return (

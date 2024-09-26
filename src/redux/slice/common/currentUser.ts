@@ -1,25 +1,21 @@
 'use client'
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios, { AxiosResponse } from "axios";
-import { LINK_USER } from "../../../utils/commonConstants";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { ACCESS_SYSTEM_FAIL, LINK_USER, SCREEN_MODE } from "../../../utils/commonConstants";
 
 export const LOCAL_STORAGE_USER = "STORE_USER";
 export const SCREEN_THEME = "SCREEN_THEME";
 
-export const SCREEN_MODE = {
-    dark: "dark",
-    light: "light"
-};
 
-interface CurrentUser {
+export interface CurrentUser {
     id: number;
     name: string;
     avatar: string;
-    idProvider: string;
     roles: string[];
     permission: string;
     screenTheme: string;
 }
+
 
 interface InitialState {
     authenticate: boolean;
@@ -44,17 +40,15 @@ const initialState: InitialState = {
 };
 
 // Async thunk to fetch current user
-export const fetchCurrentUser = createAsyncThunk<CurrentUser, void>(
+export const fetchCurrentUser = createAsyncThunk<ApiResponse<CurrentUser>, void>(
     'fetchUser',
     async (_, { rejectWithValue }) => {
         try {
-            console.log(LINK_USER.getInformationUser)
-            const response: AxiosResponse<CurrentUser> = await axios.get(LINK_USER.getInformationUser, { withCredentials: true });
-            console.log(response)
+            const response: AxiosResponse<ApiResponse<CurrentUser>> = await axios.get(LINK_USER.getInformationUser, { withCredentials: true });
             if (response.status === 200) {
                 return response.data;
             }
-            return rejectWithValue(new Error('Unexpected response code'));
+            return rejectWithValue(new AxiosError(ACCESS_SYSTEM_FAIL));
         } catch (error) {
             return rejectWithValue(error);
         }
@@ -66,9 +60,17 @@ export const CurrentUserSlice = createSlice({
     name: 'informationUser',
     initialState,
     reducers: {
-        updateUser: (state, { payload }: PayloadAction<{ user: CurrentUser }>) => {
-            state.user = payload.user;
-            state.screenMode = payload.user.screenTheme.toLowerCase();
+        updateCurrentUser: (state, { payload }: PayloadAction<{ user: CurrentUser | null }>) => {
+            if (payload.user) {
+                state.screenMode = payload.user.screenTheme?.toLowerCase() || SCREEN_MODE.light;
+                state.user = payload.user;
+                state.authenticate=true;
+                
+            } else {
+                state.user = null;
+                state.authenticate=false;
+                console.log(state.screenMode) // Reset về giá trị mặc định khi không có người dùng
+            }
         },
         updateSrcAvatar: (state, { payload }: PayloadAction<{ srcAvatar: string | null; error: object | null }>) => {
             if (!payload.error) {
@@ -96,20 +98,19 @@ export const CurrentUserSlice = createSlice({
                 state.user = null;
                 state.loading = false;
                 state.error = payload || null;
-                console.log(payload)
                 state.roles = [];
             })
             .addCase(fetchCurrentUser.fulfilled, (state, { payload }) => {
                 state.authenticate = true;
-                state.user = payload;
-                state.roles = payload.roles;
+                state.user = payload.result || null;
+                state.roles = payload.result?.roles || [];
                 state.loading = false;
                 state.error = null;
-                state.screenMode = payload.screenTheme;
+                state.screenMode = payload.result?.screenTheme || SCREEN_MODE.light;
             });
     }
 });
 
-export const { updateUser, updateSrcAvatar, logoutUser } = CurrentUserSlice.actions;
+export const { updateCurrentUser, updateSrcAvatar, logoutUser } = CurrentUserSlice.actions;
 
 export default CurrentUserSlice.reducer;

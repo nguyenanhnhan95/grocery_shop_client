@@ -1,3 +1,4 @@
+'use client';
 import { connectAWSParams } from "@/utils/commonConstants";
 import {
     S3Client, PutObjectCommand, GetObjectCommand, GetObjectCommandOutput,
@@ -8,10 +9,10 @@ import {
 
 
 const s3Client = new S3Client({
-    region: connectAWSParams.region,
+    region: connectAWSParams.region as string,
     credentials: {
-        accessKeyId: connectAWSParams.accessKeyId,
-        secretAccessKey: connectAWSParams.secretAccessKey,
+        accessKeyId: connectAWSParams.accessKeyId as string,
+        secretAccessKey: connectAWSParams.secretAccessKey as string,
     },
 });
 

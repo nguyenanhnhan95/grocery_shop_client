@@ -2,16 +2,14 @@
 import { useAppDispatch, useAppSelector } from "@/lib/redux";
 import { chaneProgressTop } from "@/redux/slice/common/loadingBarTop";
 import { RootState } from "@/setting/store";
-import { ApiResponse } from "@/types/apiResponse";
-import { QueryParameter } from "@/types/queryParameter";
 import { createActionURL } from "@/utils/commonUtils";
 import axios, { AxiosError } from "axios";
 import {  useEffect, useState } from "react";
 
-export const useFetchSearch = <T = unknown>(url:string,initial:T) => {
+export const useFetchSearch = <T >(url:string,initial:T) => {
     const [isPending, setIsPending] = useState<boolean>(false);
     const [error, setError] = useState<AxiosError | null>(null);
-    const [data, setData] = useState<T | null>(null);
+    const [data, setData] = useState<T>(initial);
     const [code, setCode] = useState<number | null>(null);
     const {queryParameter} = useAppSelector((state:RootState)=>state.queryParameter)
     const dispatch = useAppDispatch();
@@ -20,8 +18,9 @@ export const useFetchSearch = <T = unknown>(url:string,initial:T) => {
             setIsPending(true);
             dispatch(chaneProgressTop(20))
             try {
+                console.log()
                 const encodedQuery = encodeURIComponent(JSON.stringify(queryParameter));
-                const response = await axios.get<ApiResponse<T>>(`${createActionURL(url).requestParam([{key:'search',value:encodedQuery}])}`, { withCredentials: true });
+                const response = await axios.get<ApiResponse<T>>(`${createActionURL(url).requestParam([{key:'query',value:encodedQuery}])}`, { withCredentials: true });
                 dispatch(chaneProgressTop(50))
                 if (response.data.result !== undefined && response.data.result !== null) {
                     setData(response.data.result);

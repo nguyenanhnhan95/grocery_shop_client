@@ -1,6 +1,4 @@
 import { toastTopRight } from "@/config/toast";
-import { ApiResponse } from "@/types/apiResponse";
-import { ConstraintErrors } from "@/types/constraintErros";
 import axios, { AxiosError } from "axios";
 import { useCallback, useState } from "react";
 
@@ -12,7 +10,7 @@ export const useFetchPut = () => {
     const fetchPut = useCallback(async (url:string, data:any, setErrors:(errors: any) => void) => {
         setIsPending(true);
         try {
-            const response = await axios.put<ApiResponse<unknown>>(url, data, { withCredentials: true });
+            const response = await axios.put<ApiResponseNoResult>(url, data, { withCredentials: true });
             if (response.data?.code === 200) {
                 setMessage(response.data.message);
             }

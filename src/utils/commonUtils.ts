@@ -6,19 +6,20 @@ import { ParamActionUrl } from "./types";
  * @returns url restfulapi.
  */
 export const createActionURL = (sub: string) => {
-    const createUrl = (action?: string) => `${DOMAIN_SERVER}/${sub}${action ? `/${action}` : ''}`;
+
+    const createUrl = (action?: string) => `${DOMAIN_SERVER}/${sub}${action ? `${action}` : ''}`;
 
     return {
         instant: () => createUrl(),
         add: () => createUrl('add'),
         edit: () => createUrl('edit'),
         search: () => createUrl('search'),
-        pathVariable: (value: string) => createUrl(value),
+        pathVariable: (value: string) => createUrl(`/${value}`),
         requestParam: (attributes: ParamActionUrl[]) => {
             if (!Array.isArray(attributes) || attributes.length === 0) return createUrl();
 
             if (attributes.length === 1) {
-                return createUrl(`?${attributes[0].key}=${attributes[0].value}`);
+                return `${createUrl()}?${attributes[0].key}=${attributes[0].value}`;
             }
 
             const queryParams = attributes.map(attr => `${encodeURIComponent(attr.key)}=${encodeURIComponent(attr.value)}`).join('&');
@@ -56,18 +57,15 @@ export const getURICurrent = () => {
 /**
 * DEBOUNCE
 */
-export function debounce<Args extends any[]>(
-    func: (...args: Args) => void,
-    delay: number
-): (...args: Args) => void {
-    let timeoutId: ReturnType<typeof setTimeout>;
-
-    return (...args: Args) => {
-        if (timeoutId) {
-            clearTimeout(timeoutId);
-        }
-        timeoutId = setTimeout(() => {
-            func(...args);
-        }, delay);
-    };
+export  function debounce<Params extends any[]>(
+    func: (...args: Params) => any,
+    timeout: number,
+): (...args: Params) => void {
+    let timer: NodeJS.Timeout
+    return (...args: Params) => {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+            func(...args)
+        }, timeout)
+    }
 }

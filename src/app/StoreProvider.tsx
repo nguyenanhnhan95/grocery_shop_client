@@ -2,22 +2,26 @@
 
 import { Provider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
-import ScreenTheme from './ScreenTheme'
 import { makeStore } from '@/setting/store'
-import { PersistGate } from 'redux-persist/integration/react'
-import persistStore from 'redux-persist/lib/persistStore'
+import NotificationModal from '@/components/composite/modal/NotificationModal'
+import { Suspense } from 'react'
+import LoadingPage from '@/components/loading/LoadingPage'
+import LoadingBarTop from '@/components/layout/LoadingBarTop'
+import ThemeScreen from './ThemeScreen'
 
 
 export default function StoreProvider({ children }: { children: React.ReactNode }) {
-  const persistor = persistStore(makeStore())
+  
   return (
     <Provider store={makeStore()}>
-      <PersistGate loading={null} persistor={persistor}>
-        <ScreenTheme>
+      <ThemeScreen>
+        <LoadingBarTop />
+        <Suspense fallback={<LoadingPage />} >
           {children}
-        </ScreenTheme>
-      </PersistGate>
-      <ToastContainer />
+        </Suspense>
+        <NotificationModal />
+        <ToastContainer />
+      </ThemeScreen>
     </Provider>
   )
 }

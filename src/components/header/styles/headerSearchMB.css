@@ -11,13 +11,13 @@
 .header-search-mob .header-search-input {
     position: relative;
 }
-.dark .header-search-mob .header-search-input .header-search-input-enter {
+html[dark-theme='dark'] .header-search-mob .header-search-input .header-search-input-enter {
     border: none;
 }
-.dark .header-search-mob .header-search-input .header-search-input-enter:focus{
+html[dark-theme='dark'] .header-search-mob .header-search-input .header-search-input-enter:focus{
     box-shadow:none;
 }
-.dark .header-search-mob .header-search-input .header-search-input-press {
+html[dark-theme='dark'] .header-search-mob .header-search-input .header-search-input-press {
     color: #0F0F0F;
 }
 

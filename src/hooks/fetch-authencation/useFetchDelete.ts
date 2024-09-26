@@ -8,8 +8,8 @@ export const useFetchDelete = ( url:string, handleReload:()=>void ) => {
     const fetchDelete = useCallback(async () => {
         setIsPending(true);
         try {
-            const response = await axios.delete(url, { withCredentials: true });
-            if (response.data?.code === 200) {
+            const response = await axios.delete<ApiResponseNoResult>(url, { withCredentials: true });
+            if (response.data.code === 200) {
                 handleReload()
                 toastTopRight.toastSuccess(response.data?.message)
             }
