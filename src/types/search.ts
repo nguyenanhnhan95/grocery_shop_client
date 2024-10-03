@@ -5,13 +5,13 @@ import SelectSearch from "@/components/admin/common/SelectSearch";
 import { Dayjs } from "dayjs";
 import { Dispatch, SetStateAction } from "react";
 
-export interface SearchAdminProps<T=unknown,ID = string | number|Dayjs |Date    >{
+export interface SearchAdminProps<T =unknown ,ID = string | number|Dayjs |Date    >{
     searchItem:Record<string,ID>
     setSearchFiled:Dispatch<SetStateAction<Record<string, ID>>>,
     title?:string,
     url?:string,
     data:T[],
-    attribute:string,
+    attribute:keyof T,
     take:keyof T,
     show:keyof T  
 }

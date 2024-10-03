@@ -18,18 +18,18 @@ interface LoginRequest {
     flagKeep?: boolean
 }
 const initialValue: LoginRequest = {
-    nameLogin: null,
-    password: null,
+    nameLogin: '',
+    password: '',
 }
 const KEEP_LOGIN = "keepLogin";
 function LoginForm() {
     const [showPassword, setShowPassword] = useState<boolean>(false)
     const [keepLogin, setKeepLogin] = useState<boolean>(false)
     const searchParams = useSearchParams();
-    const errorParam = searchParams.get('error');
+    const errorParam = searchParams?.get('error');
     const [notificationError, setNotificationError] = useState<string>(errorParam||'')
     const router = useRouter();
-    const { fetchPost, isPending, code, error } = useFetchPost();
+    const { fetchPost, isPending, code, error } = useFetchPost<LoginRequest>();
     console.log(errorParam)
     const handleLogin = useCallback(async (loginRequest: LoginRequest, setErrors: (errors: any) => void) => {
         fetchPost(createActionURL("auth/login").instant(), { ...loginRequest, flagKeep: keepLogin }, setErrors)
@@ -80,7 +80,7 @@ function LoginForm() {
                         )}
                         <div className="mb-3 form-login-input">
                             <label htmlFor="nameLogin" className="form-label">Tên đăng nhập</label>
-                            <CustomInput type="text" name="nameLogin" className="form-control" id="nameLogin" autofocus={true} autoComplete="off" placeholder="join" />
+                            <CustomInput type="text" name="nameLogin" className="form-control" id="nameLogin" autoFocus={true} autoComplete="off" placeholder="join" />
                             <ErrorMessage className="form-text form-error" name='nameLogin' component='div' />
                         </div>
                         <div className="mb-3 form-password form-login-input">

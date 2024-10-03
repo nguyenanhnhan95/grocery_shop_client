@@ -1,5 +1,6 @@
 'use client';
-import { InputProps } from "@/types/input";
+
+import { InputProps } from "@/types/inputProps";
 import CustomDate from "./CustomDate";
 import dayjs from "dayjs";
 import { useField, useFormikContext } from "formik";
@@ -9,6 +10,7 @@ const InputDate: React.FC<InputProps> = (props) => {
     const { setFieldValue } = useFormikContext();
     return (
         <CustomDate
+            {...field}
             value={field.value ? dayjs(new Date(field.value)) : null}
             onChange={val => {
                 setFieldValue(field.name, val);

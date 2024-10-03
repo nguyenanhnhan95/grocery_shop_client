@@ -3,8 +3,8 @@
 import SearchContent from "@/components/admin/common/SearchContent";
 import SectionAction from "@/components/admin/common/SectionAction";
 import TitleAdmin from "@/components/admin/common/TitleAdmin";
-import { ColumnEmployee, optionSearch, queryParameterInitial, sectionActions } from "@/components/admin/employee/initialConfig";
-import TBodyTable from "@/components/admin/employee/TBodyTable";
+import { ColumnEmployee, optionSearch, queryParameterInitial, sectionActions } from "@/components/admin/system/employee/initialConfig";
+import TBodyTable from "@/components/admin/system/employee/TBodyTable";
 import TableManage from "@/components/composite/table/TableManage";
 import { useAppDispatch } from "@/lib/redux";
 import { createQueryParameter } from "@/redux/slice/common/queryParameter";
@@ -22,7 +22,7 @@ function ManageEmloyee() {
             <TitleAdmin />
             <SectionAction itemAction={sectionActions} />
             <SearchContent itemSearch={optionSearch} />
-            <TableManage<EmployeeProjection>
+            <TableManage<Employee>
                 url={'employee'}
                 TBodyTable={TBodyTable}
                 nameColumn={ColumnEmployee}

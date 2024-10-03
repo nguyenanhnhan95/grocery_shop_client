@@ -72,7 +72,7 @@ export const sectionActions: OptionAction = {
         }
     }
 }
-export const optionSearch: OptionSearch<EmployeeProjection> = {
+export const optionSearch: OptionSearch<Employee> = {
     modeShow: {
         style: {
             display: "block"
@@ -98,9 +98,11 @@ export const optionSearch: OptionSearch<EmployeeProjection> = {
         }
     ]
 }
-export interface initialForm {
-    avatar: null | File,
+export interface InitialForm {
+    id? : number | null,
+    avatar: null | File[]  ,
     name: string | null,
+    email: string | null,
     nameLogin: string | null,
     password: string | null,
     confirmPassword: string | null,
@@ -108,28 +110,47 @@ export interface initialForm {
     districts: string | null,
     wards: string | null,
     accountStatus: string | null,
-    phone: number | null,
+    phone: string | null,
     roles: string[] | null,
     address: string | null,
     birthOfDate: string | null,
-    idCard: number | null
+    idCard: string | null
 }
-export const initialForm: initialForm =
+export interface InitialEdit {
+    id?:number | null,
+    avatar: null | string  ,
+    name: string | null,
+    email: string | null,
+    nameLogin: string | null,
+    password: string | null,
+    confirmPassword: string | null,
+    provinces: string | null,
+    districts: string | null,
+    wards: string | null,
+    accountStatus: string | null,
+    phone: string | null,
+    roles: string[] | null,
+    address: string | null,
+    birthOfDate: string | null,
+    idCard: string | null
+}
+export const initialForm: InitialForm =
 {
     avatar: null,
-    name: null,
-    nameLogin: null,
-    password: null,
-    confirmPassword: null,
+    name: '',
+    nameLogin: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
     provinces: '48',
-    districts: null,
-    wards: null,
-    accountStatus: null,
-    phone: null,
+    districts: '',
+    wards: '',
+    accountStatus: '',
+    phone: '',
     roles: [],
-    address: null,
-    birthOfDate: null,
-    idCard: null
+    address: '',
+    birthOfDate: '',
+    idCard: ''
 }
 export const optionActions: ActionTable[] = [
     {
@@ -158,7 +179,14 @@ export const statusAccount = {
     "INACTIVE": "badge rounded-pill badge-light-warning",
     "LOCK": "badge rounded-pill  badge-light-danger"
 }
-
+const accountStatus = {
+    ACTIVATED: "Đã kích hoạt",
+    INACTIVE: "Chưa kích hoạt",
+    LOCK: "Đã khóa"
+}
 export const getStatusClassName = (status: keyof typeof statusAccount) => {
     return statusAccount[status];
+};
+export const getStatusName = (status: keyof typeof accountStatus) => {
+    return accountStatus[status];
 };

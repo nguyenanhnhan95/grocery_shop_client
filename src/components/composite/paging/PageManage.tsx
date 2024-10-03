@@ -14,14 +14,14 @@ function PageManage<T>(props: PageManageProps<T>) {
     const dispatch = useAppDispatch();
     const handleSelectSize =useCallback( (size:number) => {
         if ( size >= 0 && size !== queryParameter.size && !isPendingList) {
-            dispatch(updateQueryParameter({...queryParameter,size:size}))
+            dispatch(updateQueryParameter({...queryParameter,size:size,page:0}))
         }
-    },[dispatch,queryParameter])
+    },[dispatch,queryParameter.size])
     const handleChoicePage = useCallback((page:number) => {
         if (page >= 0 && page !== queryParameter.page && !isPendingList) {
             dispatch(updateQueryParameter({...queryParameter,page:page}))
         }
-    }, [queryParameter])
+    }, [dispatch,queryParameter.page])
     const listPage = useMemo(() => {
         const listPage = [];
         for (let i = 0; i < list.total / queryParameter.size; ++i) {

@@ -1,5 +1,5 @@
 import { ProductCategory } from "@/redux/slice/common/productCategory";
-import { ApiResponse } from "@/types/apiResponse";
+
 import { cookies } from "next/headers";
 import { COOKIE_AUTH_TOKEN, DOMAIN_SERVER, SCREEN_MODE, SCREEN_THEME_MODE } from "./commonConstants";
 import { CurrentUser } from "@/redux/slice/common/currentUser";

@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
 
 export const useFetchData = <T>() => {
     const [isPending, setIsPending] = useState<boolean>(false);
-    const [error, setError] = useState<AxiosError | null |ApiResponseNoResult>(null);
+    const [error, setError] = useState<AxiosError | null | ApiResponseNoResult>(null);
     const [data, setData] = useState<T | null>(null);
     const [code, setCode] = useState<number | null>(null);
     const [message, setMessage] = useState<string | null>(null);
@@ -13,9 +13,7 @@ export const useFetchData = <T>() => {
         setIsPending(true);
         try {
             const response = await axios.get<ApiResponse<T>>(url, { withCredentials: true });
-            if (response.data.result) {
-                setData(response.data.result);
-            }
+            setData(response.data.result);
             setCode(response.data.code);
             setMessage(response.data.message);
             setError(null);
@@ -23,13 +21,14 @@ export const useFetchData = <T>() => {
             console.log(err)
             const axiosError = err as AxiosError;
             const responseError = axiosError?.response?.data as ApiResponseNoResult | undefined;
-            if(responseError){
+            if (responseError) {
                 setError(responseError)
                 setCode(responseError.code)
                 setMessage(responseError.message)
-            }else{
+            } else {
                 setError(axiosError)
             }
+            setData(null)
         } finally {
             setIsPending(false);
         }

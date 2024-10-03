@@ -18,7 +18,7 @@ html[dark-theme='dark'] .main-content{
     z-index: 9;
 }
 .main-content .main-content-form{
-    margin-bottom: 5%;
+    margin: 15px;
 }
 .main-content .main-content-form hr{
     margin: 1rem 0 !important;
@@ -55,13 +55,16 @@ html[dark-theme='dark'] .header-navbar-shadow{
 .main-content .main-content-form .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root{
     border-radius: var(--bs-border-radius) !important;
 }
+.main-content .main-content-form .MuiInputBase-root{
+    height: 38px;
+}
 .main-content .main-content-form .card .card-body .row .row{
     padding-right: 0;
 }
 .main-content .main-content-form .card .card-body .row .css-10o2lyd-MuiStack-root{
     padding-top: 0;
 }
-.dark .main-content,.dark .main-content .main-content-form{
+html[dark-theme='dark'] .main-content,.dark .main-content .main-content-form{
     background-color: #0F0F0F;
 }
 html[dark-theme='dark'] .main-content-form .card,.dark .main-content-form .card-header{
@@ -126,6 +129,62 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none; 
   margin: 0; 
 }
+.main-content .loading-content-form .card-header {
+    width: 100%;
+}
+
+.main-content .loading-content-form .card-header .card-header-title,
+.main-content .loading-content-form .card-body-label {
+    position: relative;
+    overflow: hidden;
+    width: 15%;
+    margin: 0.2rem 0;
+    height: 24px;
+}
+
+.main-content .loading-content-form .card-body-button-upload {
+    width: 20%;
+    position: relative;
+    margin: 0.2rem 0;
+    overflow: hidden;
+}
+
+.main-content .loading-content-form .card-body-input {
+    width: 100%;
+    position: relative;
+    margin: 0.2rem 0;
+    overflow: hidden;
+
+}
+
+.main-content .loading-content-form .content-action-save-button {
+    width: 8%;
+    position: relative;
+    /* margin: 0.2rem 1rem; */
+    margin-right: 20px;
+    overflow: hidden;
+}
+
+.main-content .loading-content-form .card-header .card-header-title::before,
+.main-content .loading-content-form .card-body-label::before,
+.main-content .loading-content-form .card-body-input::before,
+.main-content .loading-content-form .card-body-button-upload::before,
+.main-content .loading-content-form .content-action-save-button::before
+    {
+    background-color: var(--font-icon-dark);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    bottom: 0;
+    border-radius: 5px;
+    z-index: 1;
+    animation: skeletonLoading 2s linear infinite alternate;
+
+}
+
 @media only screen and (max-width: 768px) {
     .main-content {
         width: 100% ;
@@ -139,6 +198,12 @@ input[type=number]::-webkit-outer-spin-button {
     }
     .main-content-form .card-body .form-control{
         height: 35px;
+    }
+    .main-content .main-content-form .MuiInputBase-root{
+        height: 35px;
+    }
+    .main-content .main-content-form .card .card-body .row .row>* {
+        padding-right: 0;
     }
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px){

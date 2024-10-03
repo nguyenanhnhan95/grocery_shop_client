@@ -1,23 +1,30 @@
 'use client'
 import "./styles/saveAction.css"
 import { useAppDispatch, useAppSelector } from "@/lib/redux";
-import { actionSave } from "@/redux/slice/admin/buttonSaveSlice";
+import { actionSave, setFuncClose } from "@/redux/slice/admin/buttonSaveSlice";
 import { useRouter } from "next/navigation";
-import { memo, useCallback } from "react";
+import { memo, useCallback, useEffect } from "react";
 
-function SaveAction(url: { url: string }) {
-    const { onClickAction } = useAppSelector((state) => state.actionAdmin)
+function SaveAction(props: { url: string }) {
+    const { onClickActionId, close } = useAppSelector((state) => state.actionAdmin)
     const dispatch = useAppDispatch();
-    const router = useRouter()
-    const handleSaveClose =useCallback( (close: boolean) => {
-        if (onClickAction) {
-            onClickAction.click()
-            dispatch(actionSave({ close: close }))
+    const router = useRouter();
+    const handleClose = useCallback(() => {
+        router.push(`/admin/${props.url}`)
+    }, [props.url])
+    useEffect(() => {
+        dispatch(setFuncClose(handleClose))
+    }, [dispatch, handleClose])
+    const handleSaveClose = useCallback((close: boolean) => {
+        if (onClickActionId) {
+            const button = document.getElementById(onClickActionId) as HTMLButtonElement;
+            if (button) {
+                button.click();
+            }
+            dispatch(actionSave(close));
         }
-    },[onClickAction,dispatch])
-    const handleClose =useCallback( () => {
-        router.push(`/admin/${url}`)
-    },[url])
+    }, [onClickActionId, dispatch])
+
     return (
         <>
             <div className="main-content-action-save">

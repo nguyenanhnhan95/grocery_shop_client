@@ -1,4 +1,4 @@
-interface ApiResponseNoResult {
+type ApiResponseNoResult ={
     code: number;
     message: string;
 }

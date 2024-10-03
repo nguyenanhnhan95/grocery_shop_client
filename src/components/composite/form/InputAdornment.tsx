@@ -1,25 +1,32 @@
 'use client';
-import { InputProps } from "@/types/input";
-import { debounce } from "@/utils/commonUtils";
+import { useDebounce } from "@/hooks/common/useDebounce";
+import { InputProps } from "@/types/inputProps";
 import { FormControl, InputAdornment, OutlinedInput } from "@mui/material";
 import { useField, useFormikContext } from "formik";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useState } from "react";
 interface AdornmentInputProps extends InputProps {
     adornment: string
 }
 const InputCustomAdornment: React.FC<AdornmentInputProps> = (props) => {
     const { setFieldValue } = useFormikContext();
     const [field] = useField(props.name);
-    const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-        setFieldValue(field.name, event.target.value)
-    }, [field.name, setFieldValue]);
-    const debouncedHandleChange = useMemo(() => debounce(handleChange, 500), [handleChange]);
+    const [localValue, setLocalValue] = useState<string>(field.value)
+    const debouncedValue = useDebounce(localValue, 500)
+    const handleChange = useCallback(
+        (event: React.ChangeEvent<HTMLInputElement>) => {
+            setLocalValue(event.target.value); // Update local value immediately on input change
+        }, []);
+    useEffect(() => {
+        setFieldValue(field.name, debouncedValue);
+    }, [debouncedValue, field.name, setFieldValue]);
     return (
         <FormControl variant="outlined">
             <OutlinedInput
+                {...field}
+                value={localValue}
                 className={props.className}
                 type={props.type}
-                onChange={debouncedHandleChange}
+                onChange={handleChange}
                 endAdornment={<InputAdornment position="end">{props.adornment}</InputAdornment>}
             />
         </FormControl>

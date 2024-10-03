@@ -18,7 +18,7 @@ function ContentSideBarMenu() {
     const [menuActive, setMenuActive] = useState<MainMenu|null>(null);
     const {fetchData,data,code} = useFetchData<MainMenu>()
     useEffect(()=>{
-        if(loadingMenus===false){
+        if(pathname && loadingMenus===false){
             fetchData(`${createActionURL("menu/admin-side/path-children").requestParam([{key:'children',value:pathname}])}`)
         }
     },[fetchData,pathname,loadingMenus])
@@ -36,7 +36,7 @@ function ContentSideBarMenu() {
     useEffect(() => {
         setMenuActive(data)
     }, [data])
-    console.log(menus)
+
     if(code!==200){
       return  <LoadingSideBarMenu/>
     }
@@ -78,7 +78,7 @@ function ContentSideBarMenu() {
                                 {parent.subMenus && parent.subMenus.map((children, zIndex) => (
                                     <ul className="menu-content" key={zIndex}>
                                         <li >
-                                            <Link className={`d-flex align-items-center ${pathname.startsWith(children.href)?'active':''}`} href={`${children.href}`}
+                                            <Link className={`d-flex align-items-center ${pathname?.startsWith(children.href)?'active':''}`} href={`${children.href}`}
                                                 onClick={() => handleChangeOpenMenu(children, false)}>
                                                 <i className={children.iconClass} />
                                                 <span className="menu-item text-truncate">{children.title}</span>

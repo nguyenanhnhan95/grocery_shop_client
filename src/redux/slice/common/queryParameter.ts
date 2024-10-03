@@ -1,5 +1,5 @@
 'use client'
-import { QueryParameter } from "@/types/queryParameter";
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface QueryParameterState {
@@ -18,12 +18,8 @@ export const queryParameterSlice = createSlice({
     name: 'queryParameterSlice',
     initialState,
     reducers: {
-        updateQueryParameter: (state, action: PayloadAction<Partial<QueryParameter>>) => {
-            state.queryParameter = {
-                ...state.queryParameter,
-                ...action.payload, // Only updates the fields provided in payload
-                page: action.payload.size !== undefined ? state.initialQueryParameter?.page ?? 0 : state.queryParameter.page // Reset page if size changes
-            };
+        updateQueryParameter: (state, action: PayloadAction<QueryParameter>) => {
+            state.queryParameter = action.payload
         },
         // Initializes query parameters
         createQueryParameter: (state, action: PayloadAction<QueryParameter>) => {

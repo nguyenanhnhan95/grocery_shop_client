@@ -40,7 +40,7 @@
     border-top-right-radius: 5px;
 }
 .main-content-data .table-items-page ul .selected{
-    background-color: #0693e3;
+    background-color: #0693e3 !important;
     color: white;
 }
 .main-content-data .table-items-page ul>li{

@@ -212,20 +212,20 @@ export const CSSD8321B = "color:#D8321B";
 export const CSS43C02A = "color:#43C02A";
 export const CSS379DD3 = "color:#379DD3";
 export const CSS0693e3 = "#0693e3"
-export const BG_BOX_DARK= "#242526";
-export const BG_SCREEN_DARK= "#0F0F0F";
-export const BG_INPUT_DARK= "#3A3B3C";
-export const BG_INPUT_LIGHT="#FFFFFF"
-export const BG_TRADE= "#0693e3";
-export const FONT_COLOR_DARK= "#f1f1f1";
-export const FONT_COLOR_LIGHT= "#6E6B7B";
-export const FONT_ICON_DARK= "#B1B4B7";
-export const FONT_COLOR_DANGER= "#EA5455";
-export const BOX_COLOR_DANGER= "#FBDDDD";
-export const  BG_LIGHT_SOFT="#fff5";
-export const  BG_LIGHT= "#F5F5F5";
-export const  PL_INPUT="#B9B9C3";
-export const  RQ_INPUT="#D22627";
+export const BG_BOX_DARK = "#242526";
+export const BG_SCREEN_DARK = "#0F0F0F";
+export const BG_INPUT_DARK = "#3A3B3C";
+export const BG_INPUT_LIGHT = "#FFFFFF"
+export const BG_TRADE = "#0693e3";
+export const FONT_COLOR_DARK = "#f1f1f1";
+export const FONT_COLOR_LIGHT = "#6E6B7B";
+export const FONT_ICON_DARK = "#B1B4B7";
+export const FONT_COLOR_DANGER = "#EA5455";
+export const BOX_COLOR_DANGER = "#FBDDDD";
+export const BG_LIGHT_SOFT = "#fff5";
+export const BG_LIGHT = "#F5F5F5";
+export const PL_INPUT = "#B9B9C3";
+export const RQ_INPUT = "#D22627";
 /**
  * CSV_EXTENSION The extension of file.
  */
@@ -299,7 +299,8 @@ export const ROLES = {
 	ROLE_ADMIN: "ROLE_ADMIN",
 	ROLE_USER: "ROLE_USER",
 	ROLE_MANAGER: "ROLE_MANAGER",
-	ROLE_EMPLOYEE: "ROLE_EMPLOYEE"
+	ROLE_EMPLOYEE: "ROLE_EMPLOYEE",
+	LIST_ALIAS:["ROLE_ADMIN","ROLE_USER","ROLE_MANAGER","ROLE_EMPLOYEE"]
 }
 export const PROTECTED_ROUTE_ADMIN = [ROLES.ROLE_ADMIN, ROLES.ROLE_EMPLOYEE, ROLES.ROLE_MANAGER];
 export const COOKIE_AUTH_TOKEN = "auth-token";
@@ -321,3 +322,67 @@ export const componentsAdvanced = {
 	// InputDataSearch,
 	// SelectCustomSearch
 };
+/**
+ * STATUS LOADING
+ */
+export const LOADING_CONTENT_FORM = "loading-content-form";
+export const LOADING_LIST_TABLE = "loading-list-table";
+/**
+ * ERROR MESSAGE
+ */
+export const DELETED = "Đã xóa";
+export const PLEASE_COMPLETE_STEP = "Vui lòng hoàn thành bước ";
+export const DUPLICATE_FILE = "File dữ liệu bị trùng";
+export const FOLLOW_FORMAT_XLSX_XLS = "Chỉ chấp nhận các tệp nằm trong các định dạng sau : xls, xlsx";
+export const PROCESS_IS_CHANGE = "Hệ thống nhận thấy dữ liệu đã thay đổi. Vui lòng xác nhận thay đổi dữ liệu, kiểm tra cấu hình dịch vụ và đợi quản trị viên xét duyệt lại!";
+export const THANKS_CONFIRM = "Cám ơn bạn đã gửi yêu cầu. Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất";
+export const TITLE_PROCESS_IS_STEP_CHANGE = "Dữ liệu đã thay đổi.";
+export const PROCESS_IS_STEP_CHANGE = "Vui lòng lưu dữ liệu trước khi qua bước khác!";
+export const DATE_GREATER_THAN_FROM = "Đến ngày phải lớn hơn từ ngày";
+export const THIS_FIELD_CANNOT_EMPTY = "Không được để trống trường này.";
+export const THIS_FIELD_CANNOT_EMPTY_2 = "Trường này là bắt buộc.";
+export const PHONENUMBER_ISNOT_THE_CORRECT_FORMAT = "Số điện thoại không đúng định dạng.";
+export const THIS_FILED_SELECT_ITEM_CANNOT_EMPTY = "Vui lòng lựa chọn thông tin.";
+export const THIS_UPLOAD_FILE_ITEM_CANNOT_EMPTY = "Vui lòng tải dữ liệu ."
+export const THIS_FILE_SIZE_TOO_LARGE = "File quá lớn ."
+export const THIS_FILE_EXISTING = "File này đã tồn tại ."
+export const THIS_FIELD_VALUE_NOT_FORMAT = "Trường này nhập giá trị không phù hợp ."
+export const THIS_FILED_ENTER_LARGE = "Bạn nhập trường này quá dài ."
+export const THIS_FILED_ENTER_SMALL = "Bạn nhập trường này quá ngắn ."
+export const THIS_FILE_NOT_FORMAT = "File không đúng định dạng ."
+export const THIS_FILED_MUST_POSITIVE = "Bạn nhập trường này số dương ."
+export const THIS_FILED_GREATER_THAN_THOUSAND = "Bạn nhập trường này trên 1000 ₫ ."
+export const THIS_FILED_MONEY_TOO_LARGE = "Bạn nhập số tiền quá lớn ."
+export const THIS_ERROR_TECHNICAL = "Đã xảy ra lỗi. Việc này có thể là do lỗi kỹ thuật và chúng tôi đang khắc phục rồi"
+export const THIS_FIELD_DATE_GREATER_EQUAL_DATE_CURRENT = "Phải lớn hơn hoặc bằng ngày hiện tại .";
+export const THIS_FIELD_CODE_NUMBER_NOT_FORMAT = "Nhập mã code không phù hợp: ex :012345678";
+export const THIS_FILE_ENTER_FAIL = "Trường này nhập dữ liệu bị lỗi . "
+export const THIS_FIELD_CONFIRM_NOT_MATCH = "Mật khẩu xác nhận không đúng."
+export const THIS_FIELD_BIRTH_OF_DATE_GREATER_THAN_18 = "Ngày sinh phải lớn hơn 18 tuổi .";
+/**
+ * Regex
+ */
+export const regex = {
+	string: /^[A-Za-zÀÁÂÃÈÊÌÒÓÔÙĂẰẲẴẸÊỄÌỌÔÙƯỨỲÝđĐâàầặêệễôươ\s]+$/,
+	number: /^\d+\.?\d*$/,
+	email: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
+	phone: /^[0-9\-\+]{9,11}$/,
+	cccd: /^[0-9]{12}$/,
+	wordVi: /[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơưĂĐĨŨƠƯẠỹ ]+/,
+	fullName: /^([\p{Lu}][\p{Ll}]{1,8})(\s([\p{Lu}]|[\p{Lu}][\p{Ll}]{1,10})){0,5}$/u,
+	characterNormal: /[a-z0-9A-Z]+$/,
+	address: /[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơưĂĐĨŨƠƯẠỹ -,/]/,
+	password:/^[^\s]+$/
+}
+/**
+ * allowedTypes 
+ */
+export const ALLOW_IMAGES_File = "image/png, image/gif, image/jpeg";
+export const ALLOW_VIDEOS_FILE = "video/mp4,video/x-m4v,video/*"
+export const ALLOW_AUDIOS_FILE = "audio/*"
+export const ALLOW_ALL_FILE = "video/*"
+export const ALLOW_ARRAY_IMAGES = ["image/png", "image/gif", "image/jpeg"];
+/**
+ * câpcityFile
+ */
+export const SIZE_MAX_FILE=10 * 1024 * 1024   

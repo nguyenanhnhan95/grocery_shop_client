@@ -1,15 +1,15 @@
 'use client';
-import { InputProps } from "@/types/input";
 import { PLACE_HOLDER_PASSWORD } from "@/utils/commonConstants";
 import { debounce } from "@/utils/commonUtils";
-import { FormControl, IconButton, InputAdornment, OutlinedInput } from "@mui/material";
+import { FormControl, IconButton, InputAdornment,  OutlinedInput } from "@mui/material";
 import { useField, useFormikContext } from "formik";
 import { MouseEvent, useCallback, useMemo, useState } from "react";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-export const InputPassword: React.FC<InputProps> = (props) => {
+import { InputProps } from "@/types/inputProps";
+export const InputPassword: React.FC<InputProps> = ({name,className}) => {
     const { setFieldValue } = useFormikContext();
-    const [field] = useField(props.name);
+    const [field] = useField(name);
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -21,7 +21,7 @@ export const InputPassword: React.FC<InputProps> = (props) => {
     }, [field.name, setFieldValue]);
     const debouncedHandleEnterData = useMemo(() => debounce(handleChange, 500), [handleChange]);
     return (
-        <FormControl className={props.className} variant="outlined">
+        <FormControl className={className} variant="outlined">
             <OutlinedInput
                 autoComplete="current-password"
                 placeholder={PLACE_HOLDER_PASSWORD}

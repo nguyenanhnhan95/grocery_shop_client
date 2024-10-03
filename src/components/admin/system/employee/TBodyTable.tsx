@@ -3,10 +3,10 @@ import TDImageTable from "@/components/composite/table/TDImageTable"
 import { convertDate } from "@/lib/date"
 import { useAppSelector } from "@/lib/redux"
 import { RootState } from "@/setting/store"
-import { getStatusClassName, optionActions } from "./initialConfig"
+import { getStatusClassName, getStatusName, optionActions } from "./initialConfig"
 import { memo } from "react"
 interface PropsTBody {
-    list: QueryListResult<EmployeeProjection>,
+    list: QueryListResult<Employee>,
     url: string
 }
 function TBodyTable({ list, url }: PropsTBody) {
@@ -24,7 +24,7 @@ function TBodyTable({ list, url }: PropsTBody) {
                     <td>{each.email}</td>
                     <td>
                         <div className={`${getStatusClassName(each.accountStatus)}`}>
-                            {each.accountStatus}
+                            {getStatusName(each.accountStatus)}
                         </div>
                     </td>
                     <td>{convertDate(each.createDate)}</td>

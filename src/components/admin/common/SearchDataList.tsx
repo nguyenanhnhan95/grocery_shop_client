@@ -1,19 +1,18 @@
 'use client'
 import { useFetchData } from "@/hooks/fetch-authencation/useFetchData";
 import { SearchAdminProps } from "@/types/search";
-import { debounce } from "@/utils/commonUtils";
+import { createActionURL, debounce } from "@/utils/commonUtils";
 import { Autocomplete, Box, TextField } from "@mui/material";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
 
 
-function SearchDataList<T, ID>(props: SearchAdminProps<T, ID>) {
-    const { setSearchFiled, searchItem,  url, take,show, title,data,attribute } = props;
+function SearchDataList<T , ID>(props: SearchAdminProps<T, ID>) {
+    const { setSearchFiled, searchItem,  url, title,data,attribute } = props;
     const { fetchData, data:dataFetch,code } = useFetchData<T[]>();
     const [options,setOptions]=useState<T[]|[]>(data)
-    // Fetch data when URL is provided
     useEffect(() => {
         if (url) {
-            fetchData(url);
+            fetchData(createActionURL(url).instant());
         }
     }, [fetchData, url]);
     useEffect(()=>{
@@ -21,7 +20,6 @@ function SearchDataList<T, ID>(props: SearchAdminProps<T, ID>) {
             setOptions(dataFetch||data)
         }
     },[code])
-    // Handle input change, set searchField with the updated value
     const handleInputChange = useCallback((newInputValue: ID) => {
         const newQueryParameter: Record<string, ID> = {
             ...searchItem.search,
@@ -31,25 +29,24 @@ function SearchDataList<T, ID>(props: SearchAdminProps<T, ID>) {
         setSearchFiled(newQueryParameter);
     }, [setSearchFiled, searchItem]);
 
-    // Debounced input handler to reduce API calls
+
     const debouncedHandleInputChange = useMemo(() => debounce(handleInputChange, 500), [handleInputChange]);
 
-    // Custom Paper Component
-    // const CustomPaper = useCallback((props) => <Paper elevation={8} {...props} />, []);
 
     return (
         <div className="col-12 col-md-6 col-xl-3 container-content-search-advanced-item">
             <Autocomplete
-                getOptionLabel={(option) => option}
+                getOptionLabel={(option) => (option as T)[attribute as keyof T] as string}
                 freeSolo
                 selectOnFocus
                 clearOnBlur={false}
+               
                 autoHighlight
                 options={options as []}
                 onInputChange={(event, newInputValue) => debouncedHandleInputChange(newInputValue as ID)}
                 renderOption={(props, option) => (
-                    <Box component="li" {...props} key={option[take]}>
-                        {option[take]} {/* Display the value based on the attribute */}
+                    <Box component="li" {...props} key={option[attribute]}>
+                        {option[attribute]} {/* Display the value based on the attribute */}
                     </Box>
                 )}
                 // PaperComponent={CustomPaper}

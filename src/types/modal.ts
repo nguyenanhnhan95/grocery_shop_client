@@ -1,7 +1,7 @@
 interface ModalProps {
     handleShow: (show: boolean) => void,
     show: boolean,
-    informationModal: string,
+    informationModal?: string,
     handleAction?: () => void,
     informationTitle?: string,
     urlImage?:string

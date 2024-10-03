@@ -5,18 +5,17 @@ import { Dayjs } from "dayjs";
 import { memo, useCallback } from "react";
 
 function SearchDate(props:SearchAdminProps<unknown,Date>){
-    const {  searchItem, setSearchFiled, title,take } = props;
+    const {  searchItem, setSearchFiled, attribute,title } = props;
     const handleEnterDate = useCallback(
         (value: Dayjs | null) => {
-            const date = value ? value.toDate() : null;
-
-
-            const newQueryParameter: Record<string, Date> = {
-                ...searchItem,
-                [take]: date,
-            };
-
-            setSearchFiled(newQueryParameter);
+            if(value){
+                const date = value.toDate() ;
+                const newQueryParameter: Record<string, Date> = {
+                    ...searchItem,
+                    [attribute]: date,
+                };  
+                setSearchFiled(newQueryParameter);
+            }
         },
         [setSearchFiled, searchItem]
     );

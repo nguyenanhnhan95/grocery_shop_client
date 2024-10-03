@@ -41,7 +41,7 @@ export interface SearchItem<T> {
     data?: T[];
     url?: string;
     attribute:string
-    take: string;
+    take?: string;
     show?:string;
     component: React.ComponentType<any>;
 }

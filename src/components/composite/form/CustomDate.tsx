@@ -6,7 +6,9 @@ import 'dayjs/locale/vi';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { CustomDatePickerProps } from "@/types/input";
+import { CustomDatePickerProps } from "@/types/inputProps";
+import { BG_INPUT_DARK, BG_TRADE, FONT_COLOR_DARK } from "@/utils/commonConstants";
+
 const CustomDate: React.FC<CustomDatePickerProps> = (props) => {
     const paperRef = useRef<HTMLDivElement | null>(null);
     const { width } = useSizeAndPosition(paperRef)
@@ -15,9 +17,16 @@ const CustomDate: React.FC<CustomDatePickerProps> = (props) => {
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="vi">
             <DemoContainer components={['DatePicker']}  >
                 <DatePicker
+
                     {...props}
                     slots={{
-                        popper: (props) => <Popper {...props} style={{ width: width }} />
+                        popper: (props) => <Popper {...props} sx={{
+                            'html[dark-theme="dark"] & .MuiDayCalendar-header .MuiTypography-root': {
+                                color: FONT_COLOR_DARK,
+                            },
+
+                        }}
+                            style={{ width: width }} />
                     }}
                     localeText={{
                         toolbarTitle: props.title,
@@ -29,6 +38,33 @@ const CustomDate: React.FC<CustomDatePickerProps> = (props) => {
                         end: 'Kết thúc',
                         previousMonth: 'Tháng trước',
                         nextMonth: 'Tháng sau',
+                    }}
+                    slotProps={{
+                        day: {
+                            sx: {
+                                'html[dark-theme="dark"] &': {
+                                    color: FONT_COLOR_DARK
+                                },
+                                'html[dark-theme="dark"] &.MuiPickersDay-root:not(.Mui-selected)': {
+                                    border: 'none',
+                                },
+                                ' &.MuiPickersDay-root:focus':{
+                                    border:`1px solid ${BG_TRADE}`
+                                }
+                            },
+                        },
+                        textField: {
+                            sx: {
+                                'html[dark-theme="dark"] &': {
+                                    color: FONT_COLOR_DARK
+                                }
+                            },
+                        }
+                    }}
+                    sx={{
+                        'html[dark-theme="dark"] & .MuiDayCalendar-header': {
+                            color: FONT_COLOR_DARK,
+                        },
                     }}
                     ref={paperRef}
                     dayOfWeekFormatter={(date) => date.format("dd")}

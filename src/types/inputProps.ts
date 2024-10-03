@@ -3,7 +3,7 @@ import { Dayjs } from "dayjs";
 
 
  export interface InputProps {
-    id: string,
+    id?: string,
     name: string,
     type?: string,
     placeholder?: string,
@@ -11,12 +11,13 @@ import { Dayjs } from "dayjs";
     title?: string,
     autoComplete?: string,
     className: string,
-    autofocus?:boolean
+    autoFocus?:boolean,
+    onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void; 
 }
 // interface InputProps extends FormikProps<InputProps> {
 
 // }
-interface CustomDatePickerProps extends DatePickerProps<Dayjs, false> {
+export interface CustomDatePickerProps extends DatePickerProps<Dayjs, false> {
     id?: string,
     name?: string,
     type?: string ,

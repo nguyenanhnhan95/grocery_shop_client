@@ -1,4 +1,4 @@
-import { BG_INPUT_DARK, BG_INPUT_LIGHT, BG_TRADE, FONT_COLOR_DARK, FONT_COLOR_LIGHT } from "@/utils/commonConstants";
+import { BG_INPUT_DARK, BG_INPUT_LIGHT, BG_TRADE, FONT_COLOR_DARK, FONT_COLOR_LIGHT, PL_INPUT } from "@/utils/commonConstants";
 import { createTheme } from "@mui/material";
 
 export const themeDark = createTheme({
@@ -8,38 +8,82 @@ export const themeDark = createTheme({
                 root: {
                     backgroundColor: BG_INPUT_DARK, // Set the background color
                     color: FONT_COLOR_DARK,
-                    borderColor: '1px solid #0693e3'
+                    borderColor: `1px solid ${BG_TRADE}`,
                 },
             }
+        },
+        MuiInputAdornment:{
+            styleOverrides:{
+                root:{
+                    '& .MuiTypography-root':{
+                        color:FONT_COLOR_DARK
+                    }
+                }
+
+            }
+        },
+        MuiStack: {
+            styleOverrides: {
+                root: {
+                    overflow: 'hidden !important',
+                    paddingTop: '0 !important'
+                },
+            },
         },
         MuiFormControl: {
             styleOverrides: {
                 root: {
+
                     width: '100%',
-                    borderColor: '1px solid #0693e3'
-                },
-            },
+                }
+            }
         },
         MuiOutlinedInput: {
             styleOverrides: {
                 root: {
                     '& .MuiOutlinedInput-notchedOutline': {
-                        border: '1px solid #0693e3', // Set default border color
+                        border: 'var(--bs-border-width) solid var(--bs-border-color);',
                     },
+
                     '&:hover .MuiOutlinedInput-notchedOutline': {
-                        border: '1px solid #0693e3', // Keep the same color on hover
+                        border: 'var(--bs-border-width) solid var(--bs-border-color);', // Giữ nguyên màu viền
                     },
+
                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        border: '1px solid #0693e3', // Border color when focused
+                        border: `1px solid ${BG_TRADE}`, // Màu viền khi focus
+                    },
+
+                    '&:hover.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        border: `1px solid ${BG_TRADE}`, // Giữ nguyên màu viền focus khi hover
                     },
                 },
+                input: {
+                    color: FONT_COLOR_DARK,
+
+                }
             },
         },
+        MuiPaper: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: BG_INPUT_DARK,
+                    color: FONT_COLOR_DARK,
+                    '&:MuiDayCalendar-root': {
+                        backgroundColor: BG_INPUT_DARK,
+                        color: FONT_COLOR_DARK,
+                    },
+
+                }
+
+            }
+        },
+
         MuiPopover: {
             styleOverrides: {
                 paper: {
                     backgroundColor: BG_INPUT_DARK,
-                    color: FONT_COLOR_DARK
+                    color: FONT_COLOR_DARK,
+
                 },
 
             },
@@ -47,14 +91,14 @@ export const themeDark = createTheme({
         MuiSelect: {
             styleOverrides: {
                 icon: {
-                    color: BG_TRADE
+                    color: FONT_COLOR_DARK,
                 }
             }
         },
         MuiInputLabel: {
             styleOverrides: {
                 root: {
-                    color: FONT_COLOR_DARK,
+                    color: PL_INPUT,
                     '&.Mui-focused': {
                         color: BG_TRADE,
                         top: '6px',
@@ -63,18 +107,32 @@ export const themeDark = createTheme({
                         color: BG_TRADE,
                         top: '6px',
                     },
-                    top:'-3px'
+                    top: '-3px'
                 }
             }
         },
-
+        MuiSvgIcon: {
+            styleOverrides: {
+                root: {
+                    color: FONT_COLOR_DARK
+                }
+            }
+        },
         MuiMenu: {
             styleOverrides: {
                 paper: {
-                    backgroundColor: BG_INPUT_DARK, // Change the background color for MuiMenu
+                    backgroundColor: BG_INPUT_DARK, 
                 },
             },
         },
+        MuiPopper: {
+            styleOverrides: {
+                root: {
+                    zIndex: 10,  
+                },
+            },
+        },
+        
     },
 
 })
@@ -84,8 +142,8 @@ export const themeLight = createTheme({
             styleOverrides: {
                 root: {
                     backgroundColor: BG_INPUT_LIGHT, // Set the background color
-                    color: FONT_COLOR_DARK,
-                    borderColor: '1px solid #0693e3'
+                    color: FONT_COLOR_LIGHT,
+                    borderColor: `1px solid ${BG_TRADE}`
                 },
             }
         },
@@ -93,7 +151,7 @@ export const themeLight = createTheme({
             styleOverrides: {
                 root: {
                     width: '100%',
-                    borderColor: '1px solid #0693e3'
+                    borderColor: `1px solid ${BG_TRADE}`
                 },
             },
         },
@@ -101,17 +159,24 @@ export const themeLight = createTheme({
             styleOverrides: {
                 root: {
                     '& .MuiOutlinedInput-notchedOutline': {
-                        border: '1px solid #0693e3', // Set default border color
+                        border: 'var(--bs-border-width) solid var(--bs-border-color);',
                     },
+
                     '&:hover .MuiOutlinedInput-notchedOutline': {
-                        border: '1px solid #0693e3', // Keep the same color on hover
+                        border: 'var(--bs-border-width) solid var(--bs-border-color);', // Giữ nguyên màu viền
                     },
+
                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        border: '1px solid #0693e3', // Border color when focused
+                        border: `1px solid ${BG_TRADE}`, // Màu viền khi focus
+                    },
+
+                    '&:hover.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        border: `1px solid ${BG_TRADE}`, // Giữ nguyên màu viền focus khi hover
                     },
                 },
             },
         },
+
         MuiPopover: {
             styleOverrides: {
                 paper: {
@@ -124,7 +189,7 @@ export const themeLight = createTheme({
         MuiSelect: {
             styleOverrides: {
                 icon: {
-                    color: BG_TRADE
+                    color: FONT_COLOR_LIGHT
                 }
             }
         },
@@ -135,5 +200,21 @@ export const themeLight = createTheme({
                 },
             },
         },
+        MuiStack: {
+            styleOverrides: {
+                root: {
+                    overflow: 'hidden !important',
+                    paddingTop: '0 !important'
+                },
+            },
+        },
+        MuiSvgIcon: {
+            styleOverrides: {
+                root: {
+                    color: FONT_COLOR_LIGHT
+                }
+            }
+        },
+
     },
 })

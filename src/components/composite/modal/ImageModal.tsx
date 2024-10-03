@@ -1,7 +1,7 @@
 'use client'
 import { Modal } from "react-bootstrap";
 
-function ImageModel(props:ModalProps){
+function ImageModal(props:ModalProps){
     const { handleShow, show ,urlImage  } = props;
     return(
         <Modal show={show} className="modal-fullscreen" onHide={() => handleShow(false)} >
@@ -11,4 +11,4 @@ function ImageModel(props:ModalProps){
         </Modal>
     )
 }
-export default ImageModel
+export default ImageModal

@@ -26,7 +26,6 @@ function SelectCustomSearch<T extends { [key: string]: any }, ID>(props: SearchA
             ...searchItem,
             [attribute]: value,
         };
-        console.log(newQueryParameter)
         setSearchFiled(newQueryParameter);
     }
 

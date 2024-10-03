@@ -1,5 +1,4 @@
 'use client'
-import { ApiResponse } from "@/types/apiResponse";
 import { createActionURL } from "@/utils/commonUtils";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";

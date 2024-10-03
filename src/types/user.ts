@@ -3,7 +3,11 @@ enum EAccountStatus {
     INACTIVE = "Chưa kích hoạt",
     LOCK = "Đã khóa"
 }
-type EmployeeProjection = {
+type StatusAccount={
+    id:number,
+    name:string
+}
+type Employee = {
     id: number;  // Long in Java is a number in TypeScript
     avatar: string;
     name: string;
@@ -11,7 +15,7 @@ type EmployeeProjection = {
     createDate: Date
     phone: string;
     email: string;
-    accountStatus:  keyof typeof EAccountStatus; 
+    accountStatus: keyof typeof EAccountStatus;
     idIdentification?: string;
     birthOfDate?: Date;
     address?: string;

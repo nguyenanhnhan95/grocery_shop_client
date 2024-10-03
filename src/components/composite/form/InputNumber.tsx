@@ -8,15 +8,18 @@ interface NumberInputProps extends Omit<NumericFormatProps<number>, 'onValueChan
     title?: string;
     autoComplete?: string;
     className?: string;
+    name:string
 }
-export const NumberFormatField: React.FC<NumberInputProps> = (props) => {
+export const InputNumber: React.FC<NumberInputProps> = ({name,...props}) => {
     const { setFieldValue } = useFormikContext();
-    const [field] = useField(props.field);
-    const handleSetField = (value:number) => {
+    const [field] = useField(name);
+    const handleSetField = (value: number) => {
         setFieldValue(field.name, value * 1);
     }
+    
     return (
         <NumericFormat
+            {...field}
             // {...props}
             customInput={TextField}
             onValueChange={(values) => handleSetField(values.floatValue ?? 0)}
