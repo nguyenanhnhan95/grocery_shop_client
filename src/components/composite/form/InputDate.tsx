@@ -4,6 +4,7 @@ import { InputProps } from "@/types/inputProps";
 import CustomDate from "./CustomDate";
 import dayjs from "dayjs";
 import { useField, useFormikContext } from "formik";
+import React from "react";
 
 const InputDate: React.FC<InputProps> = (props) => {
     const [field] = useField(props.name);

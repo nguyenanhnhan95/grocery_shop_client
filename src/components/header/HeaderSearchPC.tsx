@@ -4,7 +4,7 @@ import "./styles/headerSearchPc.css"
 import useClickOutsideModal from "@/hooks/common/useClickOutsideModel";
 function HeaderSearchPC() {
     const { isModalVisible, modalRef,setIsModalVisible } = useClickOutsideModal(false);
-    const searchHeaderRef = useRef<HTMLLIElement | null>(null);
+    const searchHeaderRef = useRef<HTMLDivElement | null>(null);
     const handleSearchHeaderClick = () => {
         if(searchHeaderRef.current){
             if (isModalVisible) {
@@ -18,9 +18,9 @@ function HeaderSearchPC() {
        
     };
   return (
-      <li className="header-search nav-item " ref={searchHeaderRef}>
+      <li className="header-search nav-item " ref={modalRef}>
         <i className="header-search-show fa-solid fa-magnifying-glass  " onClick={handleSearchHeaderClick} />
-        <div className="header-search-input   align-items-center" style={{ display: isModalVisible ? 'block' : 'none' }} ref={modalRef}>
+        <div className="header-search-input   align-items-center" style={{ display: isModalVisible ? 'block' : 'none' }} ref={searchHeaderRef}>
           {/* <div className="d-flex align-items-center">
             <input className="header-search-input-enter form-control " />
             <div className="header-search-input-press ">

@@ -1,4 +1,4 @@
-import { THIS_FIELD_BIRTH_OF_DATE_GREATER_THAN_18, THIS_FIELD_CANNOT_EMPTY, THIS_FIELD_CONFIRM_NOT_MATCH, THIS_FIELD_VALUE_NOT_FORMAT, THIS_FILE_NOT_FORMAT, THIS_FILE_SIZE_TOO_LARGE, THIS_FILED_ENTER_LARGE, THIS_FILED_ENTER_SMALL, THIS_FILED_MONEY_TOO_LARGE, THIS_FILED_MUST_POSITIVE, THIS_FILED_SELECT_ITEM_CANNOT_EMPTY, THIS_UPLOAD_FILE_ITEM_CANNOT_EMPTY } from '@/utils/commonConstants';
+import { THIS_FIELD_BIRTH_OF_DATE_GREATER_THAN_18, THIS_FIELD_CANNOT_EMPTY, THIS_FIELD_CONFIRM_NOT_MATCH, THIS_FIELD_VALUE_NOT_FORMAT, THIS_FILE_NOT_FORMAT, THIS_FILE_SIZE_TOO_LARGE, THIS_FILED_ENTER_LARGE, THIS_FILED_ENTER_SMALL, THIS_FILED_MONEY_TOO_LARGE,  THIS_FILED_NUMBER_LARGE_THEN, THIS_FILED_SELECT_ITEM_CANNOT_EMPTY, THIS_UPLOAD_FILE_ITEM_CANNOT_EMPTY } from '@/utils/commonConstants';
 import * as Yup from 'yup';
 import differenceInYears from "date-fns/differenceInYears";
 export const fileValidation = (maxSize: number, allowedTypes: string[], isNullable: boolean = true): Yup.MixedSchema<File[] | undefined | null, Yup.AnyObject> => {
@@ -7,16 +7,22 @@ export const fileValidation = (maxSize: number, allowedTypes: string[], isNullab
         schema = schema.nullable()
     } else {
         schema = schema.required(THIS_UPLOAD_FILE_ITEM_CANNOT_EMPTY)
+        schema = schema.test('fileNotEmpty', THIS_UPLOAD_FILE_ITEM_CANNOT_EMPTY, (values: File[] | undefined | null) => {
+            if (!values || values?.length===0) {
+                return false;
+            }
+            return true;
+        });
     }
     schema = schema.test('fileSize', THIS_FILE_SIZE_TOO_LARGE, (values: File[] | undefined | null) => {
-        if (values) {
+        if (values && values.length>0) {
             return !values.some(value => value.size > maxSize);
         }
         return true;
     });
     schema = schema.test('fileType', THIS_FILE_NOT_FORMAT, (values: File[] | undefined | null) => {
 
-        if (values) {
+        if (values && values.length>0) {
             return values.some(value => allowedTypes.includes(value.type));
         }
         return true;
@@ -59,7 +65,7 @@ export const numberValidation = (min: number, max: number, isNullable: boolean =
 
     }
     schema = schema
-        .min(min, THIS_FILED_MUST_POSITIVE)
+        .min(min, THIS_FILED_NUMBER_LARGE_THEN+min)
         .max(max, THIS_FILED_MONEY_TOO_LARGE)
     return schema;
 }
@@ -99,19 +105,20 @@ export const selectValidation = <T>(options: T[] | null, attribute: keyof T, isA
     if (isArrayEmpty) {
         schema = schema.nullable();
     } else {
-        schema = schema.test('trim-if-needed', THIS_FIELD_VALUE_NOT_FORMAT, (value) => {
-            if (value && typeof value === 'string' && value.length > 0) {
-                value = value.trim();
-            }
-            return true;  // Luôn trả về true để không ảnh hưởng đến giá trị khác
-        });
         schema = schema.required(THIS_FILED_SELECT_ITEM_CANNOT_EMPTY)
-        schema = schema.test('is-in-options', THIS_FIELD_VALUE_NOT_FORMAT, (value) => {
-            if (value && options) {
-                return options.some(option => option[attribute] === value)
-            }
-        })
     }
+    schema = schema.test('trim-if-needed', THIS_FIELD_VALUE_NOT_FORMAT, (value) => {
+        if (value && typeof value === 'string' && value.length > 0) {
+            value = value.trim();
+        }
+        return true;  // Luôn trả về true để không ảnh hưởng đến giá trị khác
+    });
+    schema = schema.test('is-in-options', THIS_FIELD_VALUE_NOT_FORMAT, (value) => {
+        
+        if (value && options) {
+            return options.some(option => option[attribute] == value)
+        }
+    })
     return schema;
 }
 export const selectMultiValidation = <T, E>(options: T[] | null, attribute: keyof T, isArrayEmpty: boolean = true): Yup.ArraySchema<E[] | undefined | null, Yup.AnyObject> => {
@@ -140,7 +147,7 @@ export const dateValidation = (startDate: Date, endDate: Date | number | null, i
 
     }
 
-    schema = schema.min(startDate , THIS_FIELD_VALUE_NOT_FORMAT)
+    schema = schema.min(startDate, THIS_FIELD_VALUE_NOT_FORMAT)
     if (endDate) {
         if (endDate instanceof Date) {
             schema = schema.max(endDate, THIS_FIELD_VALUE_NOT_FORMAT);

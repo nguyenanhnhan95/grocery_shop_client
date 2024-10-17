@@ -1,4 +1,5 @@
 import CheckBox from "@/components/composite/form/CheckBox";
+import { Permission } from "@/types/role";
 import { memo, useState } from "react";
 
 interface CheckBoxPermisson{

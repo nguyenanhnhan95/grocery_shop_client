@@ -1,11 +1,11 @@
 'use client'
-import { memo } from "react";
+import { memo, RefObject } from "react";
 import DarkUserModel from "./DarkUserModel";
 import InformationUserModal from "./InformationUserModal";
 import LogoutUser from "./LogoutUser";
 import RedirectAdmin from "./RedirectAdmin";
 interface HeaderUserModelProps{
-    headerUserModalRef: React.RefObject<HTMLDivElement>,
+    headerUserModalRef: RefObject<HTMLDivElement>,
     isModalUserVisible:boolean
 }
 function HeaderUserModel({ headerUserModalRef, isModalUserVisible }: HeaderUserModelProps) {

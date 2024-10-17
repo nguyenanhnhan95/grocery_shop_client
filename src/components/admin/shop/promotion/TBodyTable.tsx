@@ -4,6 +4,8 @@ import { useAppSelector } from "@/lib/redux"
 import { RootState } from "@/setting/store"
 import { memo } from "react"
 import { optionActions } from "./initialConfig"
+import { Promotion } from "@/types/promotion"
+import { QueryListResult } from "@/types/queryListResult"
 
 interface PropsTBody {
     list: QueryListResult<Promotion>

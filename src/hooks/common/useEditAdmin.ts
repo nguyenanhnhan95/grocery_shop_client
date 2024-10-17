@@ -1,20 +1,30 @@
 'use client'
 import { toastTopRight } from "@/config/toast";
-import { useAppSelector } from "@/lib/redux";
+import { useAppDispatch, useAppSelector } from "@/lib/redux";
+import { actionSave } from "@/redux/slice/admin/buttonSaveSlice";
 import { RootState } from "@/setting/store";
 import { useCallback, useEffect } from "react";
 
-export const useEditAdmin = (props: { code: number | null, message: string | null }) => {
-    const { funcClose } = useAppSelector((state: RootState) => state.actionAdmin)
-    const hanldeSave = useCallback(() => {
-        if (props.code == 200 && props.message) {          
-            if (funcClose) {
-                funcClose();
+export const useEditAdmin = ({ code, message }: { code: number | null; message: string | null }) => {
+    const { funcClose, close } = useAppSelector((state: RootState) => state.actionAdmin)
+    const dispatch = useAppDispatch();
+    const handleEdit = useCallback(() => {
+        if (code === 200) {
+            if (close) {
+                funcClose?.();
+                dispatch(actionSave(false));
             }
-            toastTopRight.toastSuccess(props.message)
+            if (message) {
+                toastTopRight.toastSuccess(message)
+            }
+        } else {
+            if (message) {
+                toastTopRight.toastWarning(message)
+            }
         }
-    }, [props.code, props.message])
+
+    }, [code, message, funcClose, close, dispatch]);
     useEffect(() => {
-        hanldeSave()
-    }, [hanldeSave])
+        handleEdit()
+    }, [handleEdit])
 }

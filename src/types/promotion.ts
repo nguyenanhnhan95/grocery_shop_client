@@ -1,9 +1,17 @@
-type Promotion={
+export type Promotion={
     id:number,
-    name:string,
-    code:string,
-    description:string,
-    discountRate:Date,
-    startDate:Date,
-    endDate:Date,
+    name:string|null,
+    code:string|null,
+    description:string|null,
+    discountRate:number|null,
+    startDate:Date|null,
+    endDate:Date|null,
+}
+export type PromotionDto={
+    name:string|null,
+    code:string|null,
+    description:string|null,
+    discountRate:number|null,
+    startDate:Date|null,
+    endDate:Date|null,
 }

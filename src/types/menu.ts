@@ -1,4 +1,4 @@
-type MainMenu={
+export type MainMenu={
     title:string;
     isActive:boolean;
     href:string;
@@ -7,4 +7,8 @@ type MainMenu={
     iconClass:string;
     header:boolean;
     requiredPermissions:string[]
+}
+export type MenuParentChildren={
+    parent:MainMenu,
+    children:MainMenu
 }

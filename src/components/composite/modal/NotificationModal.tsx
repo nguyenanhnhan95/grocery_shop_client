@@ -7,6 +7,7 @@ import "./styles/customModal.css"
 import "./styles/notificationModal.css"
 import { AGREE, NOTIFICATION, VARIANT_OUTLINE_WANING } from "@/utils/commonConstants";
 import { useAppDispatch, useAppSelector } from "@/lib/redux";
+import React from "react";
 
 
 const NotificationModal: React.FC = () => {

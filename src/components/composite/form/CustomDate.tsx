@@ -1,13 +1,13 @@
 'use client';
 import useSizeAndPosition from "@/components/ui/useSizeAndPosition";
 import { Popper } from "@mui/material";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import 'dayjs/locale/vi';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { CustomDatePickerProps } from "@/types/inputProps";
-import { BG_INPUT_DARK, BG_TRADE, FONT_COLOR_DARK } from "@/utils/commonConstants";
+import {  BG_TRADE, FONT_COLOR_DARK } from "@/utils/commonConstants";
 
 const CustomDate: React.FC<CustomDatePickerProps> = (props) => {
     const paperRef = useRef<HTMLDivElement | null>(null);

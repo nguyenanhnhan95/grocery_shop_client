@@ -7,6 +7,7 @@ import TBodyTable from "@/components/admin/system/role/TBodyTable";
 import TableManage from "@/components/composite/table/TableManage";
 import { useAppDispatch } from "@/lib/redux";
 import { createQueryParameter } from "@/redux/slice/common/queryParameter";
+import { Role } from "@/types/role";
 import { useEffect } from "react";
 
 function ManageRole() {

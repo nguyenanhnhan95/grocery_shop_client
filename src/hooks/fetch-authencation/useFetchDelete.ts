@@ -1,4 +1,5 @@
 import { toastTopRight } from "@/config/toast";
+import { ApiResponseNoResult } from "@/types/apiResponse";
 import axios, { AxiosError } from "axios";
 import { useCallback, useState } from "react";
 

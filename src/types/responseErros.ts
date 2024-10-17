@@ -1,8 +1,8 @@
-interface ConstraintErrors {
+export interface ConstraintErrors {
     code: number;
     result: Record<string, string>; 
 }
-interface ResponseErrors {
+export interface ResponseErrors {
     code: number;
     message: string; 
 }

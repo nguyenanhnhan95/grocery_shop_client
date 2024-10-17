@@ -1,4 +1,6 @@
 import { ActionTable, ColumnTable, OptionAction, OptionSearch } from "@/types/initialConfigAdmin"
+import { QueryParameter } from "@/types/queryParameter"
+import { Role } from "@/types/role"
 
 export const columnRoles: ColumnTable[] = [
     {

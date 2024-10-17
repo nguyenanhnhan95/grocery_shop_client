@@ -1,6 +1,6 @@
 'use client'
 import { useAppDispatch } from "@/lib/redux";
-import { createProductCategoryMenus,  ProductCategory } from "@/redux/slice/common/productCategory";
+import { createProductCategoryMenus } from "@/redux/slice/common/productCategory";
 import { useEffect } from "react";
 import HeaderMenusMB from "./HeaderMenusMB";
 import HeaderMenusPc from "./HeaderMenusPc";
@@ -11,6 +11,7 @@ import HeaderNotification from "./HeaderNotification";
 import HeaderUser from "./HeaderUser";
 import "./styles/header.css";
 import { fetchCurrentUser } from "@/redux/slice/common/currentUser";
+import { ProductCategory } from "@/types/product";
 interface HeaderProps{
     productCategoryMenus:ProductCategory[],
 
@@ -23,7 +24,7 @@ function Header({productCategoryMenus}:HeaderProps) {
     }, [productCategoryMenus, dispatch])
     useEffect(()=>{
         dispatch(fetchCurrentUser())
-    },[fetchCurrentUser,dispatch])
+    },[dispatch])
     return (
             <div className="header">
                 <div className="container-fluid container-header ">

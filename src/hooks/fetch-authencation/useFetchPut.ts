@@ -1,6 +1,8 @@
-import { toastTopRight } from "@/config/toast";
+
 import { useAppDispatch } from "@/lib/redux";
 import { chaneProgressTop } from "@/redux/slice/common/loadingBarTop";
+import { ApiResponseNoResult } from "@/types/apiResponse";
+import { ConstraintErrors } from "@/types/responseErros";
 import axios, { AxiosError } from "axios";
 import { useCallback, useState } from "react";
 
@@ -34,7 +36,7 @@ export const useFetchPut = <T>() => {
             dispatch(chaneProgressTop(100))
             setIsPending(false);
         }
-    }, []);
+    }, [dispatch]);
 
-    return { fetchPut, isPending, code, message };
+    return { fetchPut, isPending, code, message,error };
 };

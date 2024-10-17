@@ -5,6 +5,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import "./../../styles/globals.css"
 import { fetchModeScreen, fetchProductCategories } from "@/utils/fetchData";
 import Header from "@/components/header/Header";
+import React from "react";
 
 
 export const metadata: Metadata = {

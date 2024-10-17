@@ -1,5 +1,6 @@
 'use client'
 
+import { QueryParameter } from "@/types/queryParameter";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface QueryParameterState {

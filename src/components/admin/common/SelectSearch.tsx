@@ -18,8 +18,7 @@ function SelectCustomSearch<T extends { [key: string]: any }, ID>(props: SearchA
         if(code===200){
             setOptions(dataFetch||data)
         }
-    },[code])
-
+    },[code,dataFetch,data])
     const handleSelect = (value:ID) => {
 
         const newQueryParameter: Record<string, ID> = {
@@ -45,7 +44,7 @@ function SelectCustomSearch<T extends { [key: string]: any }, ID>(props: SearchA
                         // },
                     }}
                 >
-                    <MenuItem value="">
+                    <MenuItem value={''}>
                         <em>{title}</em>
                     </MenuItem>
                     {options && options.map((each, index) => (

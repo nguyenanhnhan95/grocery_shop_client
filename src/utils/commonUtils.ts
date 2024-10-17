@@ -1,3 +1,4 @@
+import React from "react";
 import { ALLOW_ARRAY_IMAGES, DOMAIN_CLIENT, DOMAIN_SERVER } from "./commonConstants";
 import { ParamActionUrl } from "./types";
 /**
@@ -68,7 +69,7 @@ export  function debounce<Params extends any[]>(
     func: (...args: Params) => any,
     timeout: number,
 ): (...args: Params) => void {
-    let timer: NodeJS.Timeout
+    let timer: ReturnType<typeof setTimeout>
     return (...args: Params) => {
         clearTimeout(timer)
         timer = setTimeout(() => {

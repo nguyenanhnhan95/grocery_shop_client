@@ -58,7 +58,10 @@ export const COLON = ":";
  * EMPTY_STRING.
  */
 export const EMPTY_STRING = "";
-
+/**
+ * ARRAY_EMPTY.
+ */
+export const ARRAY_EMPTY = [];
 /**
  * COMMA_SPACE.
  */
@@ -300,7 +303,7 @@ export const ROLES = {
 	ROLE_USER: "ROLE_USER",
 	ROLE_MANAGER: "ROLE_MANAGER",
 	ROLE_EMPLOYEE: "ROLE_EMPLOYEE",
-	LIST_ALIAS:["ROLE_ADMIN","ROLE_USER","ROLE_MANAGER","ROLE_EMPLOYEE"]
+	LIST_ALIAS: ["ROLE_ADMIN", "ROLE_USER", "ROLE_MANAGER", "ROLE_EMPLOYEE"]
 }
 export const PROTECTED_ROUTE_ADMIN = [ROLES.ROLE_ADMIN, ROLES.ROLE_EMPLOYEE, ROLES.ROLE_MANAGER];
 export const COOKIE_AUTH_TOKEN = "auth-token";
@@ -352,6 +355,8 @@ export const THIS_FILED_ENTER_SMALL = "Bạn nhập trường này quá ngắn .
 export const THIS_FILE_NOT_FORMAT = "File không đúng định dạng ."
 export const THIS_FILED_MUST_POSITIVE = "Bạn nhập trường này số dương ."
 export const THIS_FILED_GREATER_THAN_THOUSAND = "Bạn nhập trường này trên 1000 ₫ ."
+export const THIS_FILED_NUMBER_TOO_LARGE = "Bạn nhập số quá lớn ."
+export const THIS_FILED_NUMBER_LARGE_THEN = "Bạn nhập số phải lớn "
 export const THIS_FILED_MONEY_TOO_LARGE = "Bạn nhập số tiền quá lớn ."
 export const THIS_ERROR_TECHNICAL = "Đã xảy ra lỗi. Việc này có thể là do lỗi kỹ thuật và chúng tôi đang khắc phục rồi"
 export const THIS_FIELD_DATE_GREATER_EQUAL_DATE_CURRENT = "Phải lớn hơn hoặc bằng ngày hiện tại .";
@@ -366,13 +371,13 @@ export const regex = {
 	string: /^[A-Za-zÀÁÂÃÈÊÌÒÓÔÙĂẰẲẴẸÊỄÌỌÔÙƯỨỲÝđĐâàầặêệễôươ\s]+$/,
 	number: /^\d+\.?\d*$/,
 	email: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
-	phone: /^[0-9\-\+]{9,11}$/,
+	phone: /^[0-9\-+]{9,11}$/,
 	cccd: /^[0-9]{12}$/,
 	wordVi: /[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơưĂĐĨŨƠƯẠỹ ]+/,
 	fullName: /^([\p{Lu}][\p{Ll}]{1,8})(\s([\p{Lu}]|[\p{Lu}][\p{Ll}]{1,10})){0,5}$/u,
 	characterNormal: /[a-z0-9A-Z]+$/,
 	address: /[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơưĂĐĨŨƠƯẠỹ -,/]/,
-	password:/^[^\s]+$/
+	password: /^[^\s]+$/
 }
 /**
  * allowedTypes 
@@ -382,7 +387,8 @@ export const ALLOW_VIDEOS_FILE = "video/mp4,video/x-m4v,video/*"
 export const ALLOW_AUDIOS_FILE = "audio/*"
 export const ALLOW_ALL_FILE = "video/*"
 export const ALLOW_ARRAY_IMAGES = ["image/png", "image/gif", "image/jpeg"];
+export const KEY_IMAGE_ERROR = "filestore/files/image/image-error.jpg"
 /**
  * câpcityFile
  */
-export const SIZE_MAX_FILE=10 * 1024 * 1024   
+export const SIZE_MAX_FILE = 10 * 1024 * 1024   

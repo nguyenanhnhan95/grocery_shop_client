@@ -2,13 +2,16 @@
 
 import SaveAction from "@/components/admin/common/SaveAction"
 import ContentForm from "@/components/admin/system/employee/ContentForm"
-import { InitialEdit, InitialForm } from "@/components/admin/system/employee/initialConfig"
+
 import { getObjectAsFile } from "@/config/S3Config"
 import { useAuthorizePage } from "@/hooks/auth/useAuthorizePage"
 import { useEditAdmin } from "@/hooks/common/useEditAdmin"
 import { useGetDataByIdParam } from "@/hooks/common/useGetDataByIdParam"
 import { useFetchData } from "@/hooks/fetch-authencation/useFetchData"
 import { useFetchPut } from "@/hooks/fetch-authencation/useFetchPut"
+import { District, Province, Ward } from "@/types/adress"
+import { FormErrors } from "@/types/erros"
+import { Employee, EmployeeAddOrEdit, EmployeeDto } from "@/types/user"
 import { FILE_STORE_AWS_PATH } from "@/utils/commonConstants"
 import { convertToJsonFile, createActionURL, validation } from "@/utils/commonUtils"
 import { useParams } from "next/navigation"
@@ -16,26 +19,25 @@ import { useCallback, useEffect, useMemo, useState } from "react"
 
 export default function EditEmployee() {
     const { fetchPut, code: codeSave, isPending: isPendingSave, message: messageSave } = useFetchPut<FormData>();
-    const { fetchData: fetchProvinces, data: provinces, isPending: isPendingProvinces } = useFetchData<Province[]>();
-    const { fetchData: fetchDistricts, data: districts, isPending: isPendingDistricts } = useFetchData<District[]>();
-    const { fetchData: fetchWards, data: wards, isPending: isPendingWards } = useFetchData<Ward[]>();
+    const { fetchData: fetchProvinces, data: provinces} = useFetchData<Province[]>();
+    const { fetchData: fetchDistricts, data: districts} = useFetchData<District[]>();
+    const { fetchData: fetchWards, data: wards } = useFetchData<Ward[]>();
     const [isLoadingAddress, setIsLoadingAdress] = useState<boolean>(false);
     const [isLoadingAvatar, setIsLoadingAvatar] = useState<boolean>(false);
-    const [initialData, setInitialData] = useState<InitialForm | null>(null)
+    const [initialData, setInitialData] = useState<EmployeeAddOrEdit | null>(null)
     useAuthorizePage("employee:edit")
     useEditAdmin({ code: codeSave, message: messageSave })
     const params = useParams<{ id: string; }>()
-    const { isPendingById, initialById, codeById } = useGetDataByIdParam<InitialEdit>('role',params?.id);
+    const { isPendingById, initialById, codeById } = useGetDataByIdParam<Employee>('employee',params?.id);
     const initialFilesNotMulti = useCallback(async (keyValue: string) => {
         if (initialById) {
-            const { avatar, ...prev } = initialById;
             setIsLoadingAvatar(true)
             try {
                 const response = await getObjectAsFile(keyValue);
-                setInitialData({ avatar: [response], ...prev });
+                setInitialData({...initialById , avatar: [response], confirmPassword:null,password:null});
             } catch (err) {
                 console.error(' editEmployee:initialFilesNotMulti :Error fetching file:', err);
-                setInitialData({ avatar: null, ...prev })
+                setInitialData({...initialById , avatar: [],confirmPassword:null,password:null})
             } finally {
                 setIsLoadingAvatar(false)
             }
@@ -44,14 +46,13 @@ export default function EditEmployee() {
 
     useEffect(() => {
         if (initialById) {
-            const { avatar, ...prev } = initialById;
             if (initialById?.avatar && typeof initialById?.avatar === 'string' && initialById?.avatar.includes(FILE_STORE_AWS_PATH.IMAGE)) {
                 initialFilesNotMulti(initialById?.avatar);
             } else {
-                setInitialData({ avatar: null, ...prev })
+                setInitialData({ ...initialById ,avatar: [], confirmPassword:null,password:null})
             }
         }
-    }, [initialById]);
+    }, [initialById,initialFilesNotMulti]);
     useEffect(() => {
         const provinceCode = initialById?.provinces;
         const districtCode = initialById?.districts;
@@ -71,7 +72,7 @@ export default function EditEmployee() {
             }
         };
         fetchAdressEdit();
-    }, [fetchDistricts, fetchWards, initialById, codeById]);
+    }, [fetchDistricts, fetchWards,fetchProvinces, initialById, codeById]);
     const hanldeResetFieldProvinces = useCallback((province: string, setFieldValue: (field: string, value: string | null, shouldValidate?: boolean) => void) => {
         if (province && validation.isNotEmpty(province)) {
             fetchDistricts(createActionURL("address/district").requestParam([{ key: "code", value: province }]))
@@ -86,7 +87,8 @@ export default function EditEmployee() {
         setFieldValue('wards', null)
 
     }, [fetchWards]);
-    const handleSave = useCallback(async (data: InitialForm, setErrors: (errors: any) => void) => {
+    const handleSave = useCallback(async (data: EmployeeDto, setErrors: (errors: FormErrors) => void) => {
+        console.log(data)
         if (isPendingSave && !params?.id) return;
         const { avatar, ...dataToServer } = data;
         const multiPart = new FormData();
@@ -96,7 +98,7 @@ export default function EditEmployee() {
         multiPart.append('employeeEditDto', convertToJsonFile(dataToServer));
         console.log(dataToServer)
         fetchPut(createActionURL("employee").pathVariable(params?.id as string), multiPart, setErrors);
-    }, [fetchPut, isPendingSave])
+    }, [fetchPut, isPendingSave,params?.id])
     const loadingInitialData = useMemo(() => {
         return isLoadingAddress || isPendingById || isLoadingAvatar || initialData === null
     }, [isLoadingAddress, initialData, isPendingById, isLoadingAvatar])

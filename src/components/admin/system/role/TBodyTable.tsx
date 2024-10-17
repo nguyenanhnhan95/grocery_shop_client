@@ -3,6 +3,8 @@ import { useAppSelector } from "@/lib/redux"
 import { RootState } from "@/setting/store"
 import { memo } from "react"
 import { optionActions } from "./initialConfig"
+import { Role } from "@/types/role"
+import { QueryListResult } from "@/types/queryListResult"
 interface PropsTBody {
     list: QueryListResult<Role>,
     url: string

@@ -1,5 +1,5 @@
 'use client';
-import { connectAWSParams } from "@/utils/commonConstants";
+import { ARRAY_EMPTY, connectAWSParams } from "@/utils/commonConstants";
 import {
     S3Client, PutObjectCommand, GetObjectCommand, GetObjectCommandOutput,
 } from "@aws-sdk/client-s3";
@@ -36,7 +36,17 @@ export const getObjectUrlImage = async (keyName: string): Promise<string | undef
     }
     return undefined;
 };
-
+// Function to get object URL as image list
+export const getObjectAsFiles = async (keyNames: string[]): Promise<File[] | []> => {
+    try {
+        console.log(keyNames)
+        const responseFiles = await Promise.all(keyNames.map(getObjectAsFile));
+        return responseFiles;
+    } catch (error) {
+        console.error(error);
+    }
+    return ARRAY_EMPTY;
+};
 // Function to get S3 object as a File
 export const getObjectAsFile = async (keyName: string): Promise<File> => {
     try {

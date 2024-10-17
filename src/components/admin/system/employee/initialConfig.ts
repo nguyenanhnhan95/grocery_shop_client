@@ -1,6 +1,8 @@
-import { ActionTable, ColumnTable, OptionAction, OptionSearch, SearchItem } from "@/types/initialConfigAdmin"
+import { ActionTable, ColumnTable, OptionAction, OptionSearch} from "@/types/initialConfigAdmin"
+import { QueryParameter } from "@/types/queryParameter"
 
 import { ComponentSearchAdmin } from "@/types/search"
+import { Employee, EmployeeAddOrEdit } from "@/types/user"
 
 
 export const ColumnEmployee: ColumnTable[] = [
@@ -98,45 +100,11 @@ export const optionSearch: OptionSearch<Employee> = {
         }
     ]
 }
-export interface InitialForm {
-    id? : number | null,
-    avatar: null | File[]  ,
-    name: string | null,
-    email: string | null,
-    nameLogin: string | null,
-    password: string | null,
-    confirmPassword: string | null,
-    provinces: string | null,
-    districts: string | null,
-    wards: string | null,
-    accountStatus: string | null,
-    phone: string | null,
-    roles: string[] | null,
-    address: string | null,
-    birthOfDate: string | null,
-    idCard: string | null
-}
-export interface InitialEdit {
-    id?:number | null,
-    avatar: null | string  ,
-    name: string | null,
-    email: string | null,
-    nameLogin: string | null,
-    password: string | null,
-    confirmPassword: string | null,
-    provinces: string | null,
-    districts: string | null,
-    wards: string | null,
-    accountStatus: string | null,
-    phone: string | null,
-    roles: string[] | null,
-    address: string | null,
-    birthOfDate: string | null,
-    idCard: string | null
-}
-export const initialForm: InitialForm =
+
+
+export const initialForm: EmployeeAddOrEdit =
 {
-    avatar: null,
+    avatar: [],
     name: '',
     nameLogin: '',
     email: '',
@@ -145,11 +113,11 @@ export const initialForm: InitialForm =
     provinces: '48',
     districts: '',
     wards: '',
-    accountStatus: '',
+    accountStatus: null,
     phone: '',
     roles: [],
     address: '',
-    birthOfDate: '',
+    birthOfDate: null,
     idCard: ''
 }
 export const optionActions: ActionTable[] = [

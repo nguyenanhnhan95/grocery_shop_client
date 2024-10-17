@@ -2,20 +2,23 @@
 
 import SaveAction from "@/components/admin/common/SaveAction"
 import ContentForm from "@/components/admin/system/employee/ContentForm"
-import { InitialForm, initialForm } from "@/components/admin/system/employee/initialConfig"
+import { initialForm } from "@/components/admin/system/employee/initialConfig"
 import { useAuthorizePage } from "@/hooks/auth/useAuthorizePage"
 
 import { useSaveAdmin } from "@/hooks/common/useSaveAdmin"
 import { useFetchData } from "@/hooks/fetch-authencation/useFetchData"
 import { useFetchPost } from "@/hooks/fetch-authencation/useFetchPost"
+import { District, Province, Ward } from "@/types/adress"
+import { FormErrors } from "@/types/erros"
+import { EmployeeDto } from "@/types/user"
 import { convertToJsonFile, createActionURL, validation } from "@/utils/commonUtils"
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo } from "react"
 
 export default function AddEmployee() {
     const { fetchPost, code: codeSave, isPending: isPendingSave, message: messageSave } = useFetchPost<FormData>();
     const { fetchData: fetchProvinces, data: provinces, isPending: isPendingProvinces } = useFetchData<Province[]>();
-    const { fetchData: fetchDistricts, data: districts, isPending: isPendingDistricts } = useFetchData<District[]>();
-    const { fetchData: fetchWards, data: wards, isPending: isPendingWards } = useFetchData<Ward[]>();
+    const { fetchData: fetchDistricts, data: districts} = useFetchData<District[]>();
+    const { fetchData: fetchWards, data: wards } = useFetchData<Ward[]>();
     useAuthorizePage("employee:add")
     useSaveAdmin({ code: codeSave, message: messageSave })
     useEffect(() => {
@@ -25,8 +28,8 @@ export default function AddEmployee() {
         if (initialForm.provinces && validation.isNotEmpty(initialForm.provinces)) {
             fetchDistricts(createActionURL("address/district").requestParam([{ key: "code", value: initialForm.provinces }]))
         }
-    }, [initialForm.provinces, fetchDistricts])
-    const handleSave = useCallback(async (data: InitialForm, setErrors: (errors: any) => void) => {
+    }, [ fetchDistricts])
+    const handleSave = useCallback(async (data: EmployeeDto, setErrors: (errors: FormErrors) => void) => {
         if (isPendingSave) return;
         const { avatar, ...dataToServer } = data;
         const multiPart = new FormData();

@@ -9,6 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import CustomInput from "../composite/form/CustomInput";
 import { createActionURL } from "@/utils/commonUtils";
 import { Button } from "react-bootstrap";
+import { FormErrors } from "@/types/erros";
 
 
 
@@ -23,6 +24,7 @@ const initialValue: LoginRequest = {
 }
 const KEEP_LOGIN = "keepLogin";
 function LoginForm() {
+    const {setCookie, removeCookie} = useCookies(KEEP_LOGIN)
     const [showPassword, setShowPassword] = useState<boolean>(false)
     const [keepLogin, setKeepLogin] = useState<boolean>(false)
     const searchParams = useSearchParams();
@@ -31,10 +33,9 @@ function LoginForm() {
     const router = useRouter();
     const { fetchPost, isPending, code, error } = useFetchPost<LoginRequest>();
     console.log(errorParam)
-    const handleLogin = useCallback(async (loginRequest: LoginRequest, setErrors: (errors: any) => void) => {
+    const handleLogin = useCallback(async (loginRequest: LoginRequest, setErrors: (errors: FormErrors) => void) => {
         fetchPost(createActionURL("auth/login").instant(), { ...loginRequest, flagKeep: keepLogin }, setErrors)
-
-    }, [fetchPost, isPending])
+    }, [fetchPost,keepLogin])
     useEffect(() => {
         if (code === 200) {
             router.push("/")
@@ -45,8 +46,7 @@ function LoginForm() {
             setNotificationError(error.message)
         }
     }, [error])
-    const handleKeepLogin = (currentKeepLogin: boolean) => {
-        const [data, setCookie, removeCookie] = useCookies(KEEP_LOGIN)
+    const handleKeepLogin = (currentKeepLogin: boolean) => {  
         if (currentKeepLogin) {
             setKeepLogin(false);
             removeCookie()

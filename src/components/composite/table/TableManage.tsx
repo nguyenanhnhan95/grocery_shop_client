@@ -3,6 +3,8 @@ import { useFetchSearch } from "@/hooks/fetch-authencation/useFetchSearch";
 import PageManage from "../paging/PageManage";
 import "./styles/tableManage.css"
 import { ColumnTable } from "@/types/initialConfigAdmin";
+import { QueryListResult } from "@/types/queryListResult";
+import React from "react";
 
 
 

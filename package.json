@@ -45,10 +45,10 @@
     "react-toastify": "^10.0.5",
     "react-top-loading-bar": "^2.3.1",
     "rimraf": "^6.0.1",
+    "sharp": "^0.33.5",
     "yup": "^1.4.0"
   },
   "devDependencies": {
-    "@types/node": "^20.16.5",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18",
     "eslint": "^8",

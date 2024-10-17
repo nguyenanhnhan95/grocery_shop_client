@@ -1,11 +1,11 @@
 'use client';
 
-import { InputProps } from "@/types/inputProps";
+import {  InputTextAreaProps } from "@/types/inputProps";
 import { debounce } from "@/utils/commonUtils";
 import { useField, useFormikContext } from "formik";
-import { memo, useCallback, useMemo } from "react";
+import React, { memo, useCallback, useMemo } from "react";
 
-const InputTextArea: React.FC<InputProps> = ({name,...props}) => {
+const InputTextArea: React.FC<InputTextAreaProps> = ({name,...props}) => {
   const { setFieldValue } = useFormikContext();
   const [field] = useField(name);
   const handleChange = useCallback((event: React.ChangeEvent<HTMLTextAreaElement>) => {

@@ -7,6 +7,7 @@ import TBodyTable from "@/components/admin/shop/promotion/TBodyTable";
 import TableManage from "@/components/composite/table/TableManage";
 import { useAppDispatch } from "@/lib/redux";
 import { createQueryParameter } from "@/redux/slice/common/queryParameter";
+import { Promotion } from "@/types/promotion";
 import { useEffect } from "react";
 
 function ManageShopPromotion() {

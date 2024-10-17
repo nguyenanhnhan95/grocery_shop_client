@@ -9,6 +9,7 @@ import LoadingSideBarMenu from "./LoadingSideBarMenu";
 import { usePathname } from "next/navigation";
 import { useFetchData } from "@/hooks/fetch-authencation/useFetchData";
 import { createActionURL } from "@/utils/commonUtils";
+import { MainMenu } from "@/types/menu";
 
 
 function ContentSideBarMenu() {
@@ -16,12 +17,12 @@ function ContentSideBarMenu() {
     const dispatch = useAppDispatch();
     const pathname = usePathname();
     const [menuActive, setMenuActive] = useState<MainMenu|null>(null);
-    const {fetchData,data,code} = useFetchData<MainMenu>()
+    const {fetchData,data,code,isPending} = useFetchData<MainMenu>()
     useEffect(()=>{
-        if(pathname && loadingMenus===false){
+        if(pathname && loadingMenus===false  ){
             fetchData(`${createActionURL("menu/admin-side/path-children").requestParam([{key:'children',value:pathname}])}`)
         }
-    },[fetchData,pathname,loadingMenus])
+    },[fetchData,loadingMenus,pathname])
     useEffect(()=>{
         dispatch(getSidebarMenusAdmin())
     },[dispatch])
@@ -32,12 +33,19 @@ function ContentSideBarMenu() {
             dispatch(transferMenuToContentMain(menu));
         }
     }, [dispatch]);
+    useEffect(() => {
+        if(pathname && ['/admin','/admin/dash-board'].includes(pathname)){
+            dispatch(transferMenuToContentMain(menus[0]));
+        }    
+    }, [pathname,menus,dispatch])
 
     useEffect(() => {
-        setMenuActive(data)
+        if(data){
+            setMenuActive(data)
+        }    
     }, [data])
 
-    if(code!==200){
+    if(code!==200 || isPending ){
       return  <LoadingSideBarMenu/>
     }
     return (
@@ -51,14 +59,14 @@ function ContentSideBarMenu() {
                         </Link>
                     </li>
                 )}
-                {menus && menus.map((parent, index) => (
-                    <Fragment key={index}>
+                {menus && menus.map((parent, indexParent) => (
+                    <Fragment key={indexParent}>
                         {parent.header && (
                             <li className="navigation-header">
                                 <span>{parent.title}</span>
                             </li>
                         )}
-                        {!parent.header && index !== 0 && (
+                        {!parent.header && indexParent !== 0 && (
                             <li className={`nav-item   menu-item-animating ${menuActive?.title === parent.title ? 'open' : ''} ${parent.subMenus.length !== 0 ? 'has-sub ' : ''} `}>
                                 {parent?.href !== null ?
                                     (
@@ -75,10 +83,10 @@ function ContentSideBarMenu() {
                                         </div>
                                     )}
 
-                                {parent.subMenus && parent.subMenus.map((children, zIndex) => (
-                                    <ul className="menu-content" key={zIndex}>
+                                {parent.subMenus && parent.subMenus.map((children:MainMenu, indexChildren:number) => (
+                                    <ul className="menu-content" key={indexChildren}>
                                         <li >
-                                            <Link className={`d-flex align-items-center ${pathname?.startsWith(children.href)?'active':''}`} href={`${children.href}`}
+                                            <Link className={`d-flex align-items-center ${pathname?.startsWith(children.href) ?'active':''}`} href={`${children.href}`}
                                                 onClick={() => handleChangeOpenMenu(children, false)}>
                                                 <i className={children.iconClass} />
                                                 <span className="menu-item text-truncate">{children.title}</span>

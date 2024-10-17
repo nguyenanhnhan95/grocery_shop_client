@@ -1,6 +1,6 @@
 // "use client"
 import overPlayMenuMainSlice from '@/redux/slice/admin/overPlayMenu';
-import { CurrentUserSlice, LOCAL_STORAGE_USER } from '@/redux/slice/common/currentUser';
+import { CurrentUserSlice } from '@/redux/slice/common/currentUser';
 import { loginFormSlice } from '@/redux/slice/login/login';
 import { notificationModalSlice } from '@/redux/slice/common/notificationModal';
 import { combineReducers, configureStore } from '@reduxjs/toolkit'

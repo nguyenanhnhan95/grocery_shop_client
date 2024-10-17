@@ -1,7 +1,6 @@
 import { ErrorMessage, Form, Formik } from "formik"
-import { InitialForm } from "./initialConfig"
 import * as yup from "yup";
-import { ALLOW_ARRAY_IMAGES, LOADING_CONTENT_FORM, PLACE_HOLDER_CURRENT_RESIDENCE, PLACE_HOLDER_EMAIL, regex, SIZE_MAX_FILE, THIS_FIELD_BIRTH_OF_DATE_GREATER_THAN_18, THIS_FIELD_CANNOT_EMPTY, THIS_FIELD_CONFIRM_NOT_MATCH, THIS_FIELD_VALUE_NOT_FORMAT, THIS_FILE_NOT_FORMAT, THIS_FILE_SIZE_TOO_LARGE, THIS_FILED_ENTER_LARGE, THIS_FILED_ENTER_SMALL, THIS_FILED_SELECT_ITEM_CANNOT_EMPTY } from "@/utils/commonConstants";
+import { ALLOW_ARRAY_IMAGES, LOADING_CONTENT_FORM, PLACE_HOLDER_CURRENT_RESIDENCE, PLACE_HOLDER_EMAIL, regex, SIZE_MAX_FILE } from "@/utils/commonConstants";
 import { createActionURL } from "@/utils/commonUtils";
 import { selectMultiValidation, selectValidation, confirmPasswordValidation, dateValidation, fileValidation, stringValidation } from "@/lib/validationForm";
 import UploadImage from "@/components/composite/form/UploadImage";
@@ -13,8 +12,12 @@ import { memo, useEffect } from "react";
 import { useFetchData } from "@/hooks/fetch-authencation/useFetchData";
 import { handleKeyDownNumber } from "@/lib/eventInput";
 import { useButtonSave } from "@/hooks/common/useButtonSave";
+import { EmployeeAddOrEdit, EmployeeDto, StatusAccount } from "@/types/user";
+import { District, Province, Ward } from "@/types/adress";
+import { FormErrors } from "@/types/erros";
+import { Role } from "@/types/role";
 interface propsContentFormEmployee {
-    initialForm: InitialForm,
+    initialForm: EmployeeAddOrEdit,
     loadingInitialData: boolean,
     provinces: Province[] | null,
     districts: District[] | null,
@@ -22,8 +25,8 @@ interface propsContentFormEmployee {
     hanldeResetFieldDistrict: (districts: string, setFieldValue: (field: string, value: string | null, shouldValidate?: boolean) => void) => void,
     hanldeResetFieldProvinces: (districts: string, setFieldValue: (field: string, value: string | null, shouldValidate?: boolean) => void) => void,
     handleSendServer: (
-        data: InitialForm,
-        setErrors: (errors: any) => void
+        data: EmployeeDto,
+        setErrors: (errors: FormErrors) => void
     ) => Promise<void>;
 }
 function ContentForm({ initialForm, provinces, districts, wards, hanldeResetFieldDistrict, hanldeResetFieldProvinces, loadingInitialData, handleSendServer }: propsContentFormEmployee) {
@@ -41,7 +44,7 @@ function ContentForm({ initialForm, provinces, districts, wards, hanldeResetFiel
             ]);
         };
         fetchAllData();
-    }, [fetchStatusAccounts])
+    }, [fetchStatusAccounts,fetchRoles])
     return (
         <>
 
@@ -68,8 +71,8 @@ function ContentForm({ initialForm, provinces, districts, wards, hanldeResetFiel
                         }}
                         validationSchema={yup.object().shape({
                             avatar: fileValidation(SIZE_MAX_FILE, ALLOW_ARRAY_IMAGES, true),
-                            name: stringValidation(6, 70, regex.fullName, false),
-                            nameLogin: stringValidation(6, 70, regex.wordVi, false),
+                            name: stringValidation(4, 70, regex.fullName, false),
+                            nameLogin: stringValidation(4, 70, regex.wordVi, false),
                             roles: selectMultiValidation<Role, number>(roles, 'id', false),
                             accountStatus: selectValidation(statusAccounts, 'id', false),
                             password: stringValidation(6, 50, regex.password, initialForm?.id === null ? false : true),

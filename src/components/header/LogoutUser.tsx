@@ -7,7 +7,7 @@ import { RootState } from "@/setting/store";
 import { MESSAGE_SYSTEM_ERROR } from "@/utils/commonConstants";
 import { createActionURL } from "@/utils/commonUtils";
 import { useRouter } from "next/navigation";
-import { memo, useCallback, useEffect } from "react";
+import React, { memo, useCallback, useEffect } from "react";
 
 interface LogoutUserProps {
     headerUserModalRef: React.RefObject<HTMLDivElement>;
@@ -31,7 +31,7 @@ function LogoutUser({ headerUserModalRef }: LogoutUserProps) {
             }
             router.push("/");
         }
-    }, [code, router, dispatch, handleLogout]);
+    }, [code, router, dispatch, handleLogout,headerUserModalRef]);
 
     useEffect(() => {
         if (error !== null) {

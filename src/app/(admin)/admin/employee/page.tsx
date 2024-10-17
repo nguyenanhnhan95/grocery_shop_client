@@ -8,6 +8,7 @@ import TBodyTable from "@/components/admin/system/employee/TBodyTable";
 import TableManage from "@/components/composite/table/TableManage";
 import { useAppDispatch } from "@/lib/redux";
 import { createQueryParameter } from "@/redux/slice/common/queryParameter";
+import { Employee } from "@/types/user";
 import { useEffect } from "react";
 
 function ManageEmloyee() {

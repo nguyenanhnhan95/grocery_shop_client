@@ -3,7 +3,7 @@ import { PLACE_HOLDER_PASSWORD } from "@/utils/commonConstants";
 import { debounce } from "@/utils/commonUtils";
 import { FormControl, IconButton, InputAdornment,  OutlinedInput } from "@mui/material";
 import { useField, useFormikContext } from "formik";
-import { MouseEvent, useCallback, useMemo, useState } from "react";
+import React, { MouseEvent, useCallback, useMemo, useState } from "react";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { InputProps } from "@/types/inputProps";

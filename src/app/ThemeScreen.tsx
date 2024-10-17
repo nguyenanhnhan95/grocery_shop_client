@@ -1,7 +1,7 @@
 import { themeDark, themeLight } from "@/lib/theme";
 import { SCREEN_MODE } from "@/utils/commonConstants";
 import {  CssBaseline, Theme, ThemeProvider } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function ThemeScreen({ children }: { children: React.ReactNode }) {
     const [modeTheme, setModeTheme] = useState<Theme | null>(null);
@@ -22,4 +22,4 @@ export default function ThemeScreen({ children }: { children: React.ReactNode })
             {children}
         </ThemeProvider>
     );
-};
+}

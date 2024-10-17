@@ -2,6 +2,7 @@
 import { useAppDispatch, useAppSelector } from "@/lib/redux";
 import { chaneProgressTop } from "@/redux/slice/common/loadingBarTop";
 import { RootState } from "@/setting/store";
+import { ApiResponse } from "@/types/apiResponse";
 import { createActionURL } from "@/utils/commonUtils";
 import axios, { AxiosError } from "axios";
 import {  useEffect, useState } from "react";
@@ -18,7 +19,6 @@ export const useFetchSearch = <T >(url:string,initial:T) => {
             setIsPending(true);
             dispatch(chaneProgressTop(20))
             try {
-                console.log()
                 const encodedQuery = encodeURIComponent(JSON.stringify(queryParameter));
                 const response = await axios.get<ApiResponse<T>>(`${createActionURL(url).requestParam([{key:'query',value:encodedQuery}])}`, { withCredentials: true });
                 dispatch(chaneProgressTop(50))
@@ -29,7 +29,6 @@ export const useFetchSearch = <T >(url:string,initial:T) => {
                 setError(null);
             } catch (err) {
                 dispatch(chaneProgressTop(50))
-                setData(initial)
                 console.error(err);
                 setError(err as AxiosError); // Kiểu AxiosError cho lỗi từ axios
             } finally {
@@ -38,7 +37,7 @@ export const useFetchSearch = <T >(url:string,initial:T) => {
             }
         };
         fetchSearch()
-    },[dispatch,queryParameter])
+    },[dispatch,queryParameter,url])
     
 
     return { data, isPending, error, code };

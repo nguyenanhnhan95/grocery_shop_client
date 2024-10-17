@@ -3,7 +3,7 @@ import { useScreenMode } from "@/hooks/common/useScreenMode";
 import { useFetchPatch } from "@/hooks/fetch-authencation/useFetchPatch";
 import {  useAppSelector } from "@/lib/redux";
 import { RootState } from "@/setting/store";
-import { EMPTY_STRING, ICON_CHECK, SCREEN_THEME, SCREEN_THEME_MODE, SCREEN_THEME_NAME, WHITE_SPACE } from "@/utils/commonConstants";
+import { EMPTY_STRING, ICON_CHECK, SCREEN_THEME_MODE, SCREEN_THEME_NAME, WHITE_SPACE } from "@/utils/commonConstants";
 import { createActionURL } from "@/utils/commonUtils";
 import { memo, useCallback, useEffect, useState } from "react";
 

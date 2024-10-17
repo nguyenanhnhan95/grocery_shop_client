@@ -1,19 +1,8 @@
 import { useDebounce } from "@/hooks/common/useDebounce";
-import { InputProps } from "@/types/inputProps";
+import { TextAreaProps } from "@/types/inputProps";
 import { useField, useFormikContext } from "formik";
-import { KeyboardEvent, memo, TextareaHTMLAttributes, useCallback, useEffect, useState } from "react";
-interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement>{
-    id?: string,
-    name: string,
-    type?: string,
-    placeholder?: string,
-    disabled?: boolean,
-    title?: string,
-    autoComplete?: string,
-    className: string,
-    autofocus?:boolean,
-    onKeyDown?: (event: KeyboardEvent<HTMLTextAreaElement>) => void;
-}
+import React, { memo,  useCallback, useEffect, useState } from "react";
+
 const TextArea: React.FC<TextAreaProps> = ({name,...props}) =>{
     const { setFieldValue } = useFormikContext();
   const [field] = useField(name);

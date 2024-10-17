@@ -1,16 +1,12 @@
 'use client'
+import { ApiResponse } from "@/types/apiResponse";
+import { ProductCategory } from "@/types/product";
+import { ACCESS_SYSTEM_FAIL } from "@/utils/commonConstants";
 import { createActionURL } from "@/utils/commonUtils";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
-export interface ProductCategory {
-    id: number;
-    name: string;
-    href: string;
-    description: string | null;
-    parentCategory: ProductCategory | null;
-    children: ProductCategory[];
-}
+
 interface ProductCategoryState {
     list: ProductCategory[];
     loadingList: boolean | null;
@@ -30,27 +26,33 @@ const initialState: ProductCategoryState = {
 
 export const findAllCategoryMenus = createAsyncThunk<ApiResponse<ProductCategory[]>, void>(
     'product-category',
-    async () => {
+    async (_, { rejectWithValue }) => {
         try {
             const response = await axios.get<ApiResponse<ProductCategory[]>>(`${createActionURL('product-category').instant()}`);
-            return response.data;
+            if (response.status === 200) {
+                return response.data;
+            }
+            return rejectWithValue(new AxiosError(ACCESS_SYSTEM_FAIL));
         } catch (error) {
-            throw error;
+            return rejectWithValue(error);
         }
     }
-);
+)
 
 export const findChildrenCategory = createAsyncThunk<ApiResponse<object>, void>(
     'product-category/children',
-    async () => {
+    async (_, { rejectWithValue }) => {
         try {
             const response = await axios.get<ApiResponse<object>>(`${createActionURL('product-category/children').instant()}`);
-            return response.data;
+            if (response.status === 200) {
+                return response.data;
+            }
+            return rejectWithValue(new AxiosError(ACCESS_SYSTEM_FAIL));
         } catch (error) {
-            throw error;
+            return rejectWithValue(error);
         }
     }
-);
+)
 
 
 export const getAllCategoryMenus = createSlice({
@@ -58,7 +60,7 @@ export const getAllCategoryMenus = createSlice({
     initialState,
     reducers: {
         createProductCategoryMenus: (state, action: PayloadAction<ProductCategory[]>) => {
-            state.list = action.payload || [];;
+            state.list = action.payload || [];
         }
     },
     extraReducers: (builder) => {
@@ -88,5 +90,5 @@ export const getAllCategoryMenus = createSlice({
                 state.error = action.error?.message || null;
             });
     }
-});
+})
 export const { createProductCategoryMenus } = getAllCategoryMenus.actions;

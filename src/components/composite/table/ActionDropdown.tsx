@@ -19,16 +19,18 @@ function ActionDropdown(props: ActionDropdownProps) {
     const dispatch = useAppDispatch();
     const handleReload = useCallback(() => {
         dispatch(createQueryParameter(JSON.parse(JSON.stringify(initialQueryParameter))))
-    }, [])
-    const { fetchDelete, isPending, error } = useFetchDelete(`${createActionURL(url).pathVariable(`${id}`)}`, handleReload);
+    }, [dispatch,initialQueryParameter])
+    const { fetchDelete } = useFetchDelete(`${createActionURL(url).pathVariable(`${id}`)}`, handleReload);
     const handleShowModal = useCallback((show: boolean) => {
         setShowModal(show)
     }, [])
     const handleAction = useCallback((action: ActionTable) => {
         switch (action.action) {
             case 'edit':
-                setShowModal(false)
-                route.push(`/admin/${url}/edit/${id}`);
+                if (id) {
+                    setShowModal(false)
+                    route.push(`/admin/${url}/edit/${id}`);
+                }
                 break;
             case 'delete':
                 handleShowModal(true)
@@ -36,14 +38,14 @@ function ActionDropdown(props: ActionDropdownProps) {
             default:
                 return;
         }
-    }, [id, handleShowModal, route])
+    }, [id, handleShowModal, route,url])
     const handleDelete = useCallback(() => {
         fetchDelete()
         handleShowModal(false);
-    }, [id, handleShowModal])
+    }, [ handleShowModal,fetchDelete])
     return (
         <Dropdown>
-            <Dropdown.Toggle  id="dropdown-basic" >
+            <Dropdown.Toggle id="dropdown-basic" >
                 <i className="fa-solid fa-ellipsis-vertical" data-bs-toggle="dropdown" aria-expanded="false" />
             </Dropdown.Toggle>
 

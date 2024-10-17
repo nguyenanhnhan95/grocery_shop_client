@@ -4,7 +4,7 @@ import { updateQueryCriterias } from "@/redux/slice/common/queryParameter";
 import {  OptionSearch } from "@/types/initialConfigAdmin";
 import { debounce } from "@/utils/commonUtils";
 import { Dispatch, memo, SetStateAction, useCallback, useMemo } from "react"
-interface SearchNameProps<T, ID> {
+interface SearchNameProps<T, ID > {
     setSearchFiled: Dispatch<SetStateAction<Record<string, ID>>>,
     handleShowAdvanced: () => void,
     searchItem: Record<string, ID>,
@@ -20,7 +20,7 @@ function SearchName<T, ID>(props: SearchNameProps<T, ID>) {
             [attribute]: value,
         };
         setSearchFiled(newQueryParameter)
-    }, [setSearchFiled, searchItem])
+    }, [setSearchFiled, searchItem, attribute])
     const debouncedHandleEnterData = useMemo(() => debounce(handelEnterData, 500), [handelEnterData]);
     return (
         <div className="row container-content-search-head">

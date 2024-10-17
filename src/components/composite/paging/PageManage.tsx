@@ -4,6 +4,7 @@ import { updateQueryParameter } from "@/redux/slice/common/queryParameter";
 import { RootState } from "@/setting/store";
 import { memo, useCallback, useMemo } from "react";
 import "./styles/pageManage.css"
+import { QueryListResult } from "@/types/queryListResult";
 export interface PageManageProps<T> {
     list: QueryListResult<T>; // list is a single QueryListResult object, not an array
     isPendingList: boolean; // Boolean indicating pending status
@@ -16,12 +17,12 @@ function PageManage<T>(props: PageManageProps<T>) {
         if ( size >= 0 && size !== queryParameter.size && !isPendingList) {
             dispatch(updateQueryParameter({...queryParameter,size:size,page:0}))
         }
-    },[dispatch,queryParameter.size])
+    },[dispatch,queryParameter,isPendingList])
     const handleChoicePage = useCallback((page:number) => {
         if (page >= 0 && page !== queryParameter.page && !isPendingList) {
             dispatch(updateQueryParameter({...queryParameter,page:page}))
         }
-    }, [dispatch,queryParameter.page])
+    }, [dispatch,queryParameter,isPendingList])
     const listPage = useMemo(() => {
         const listPage = [];
         for (let i = 0; i < list.total / queryParameter.size; ++i) {

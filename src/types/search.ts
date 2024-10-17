@@ -1,6 +1,7 @@
 import SearchDataList from "@/components/admin/common/SearchDataList";
 import SearchDate from "@/components/admin/common/SearchDate";
 import SearchName from "@/components/admin/common/SearchName";
+import SearchText from "@/components/admin/common/SearchText";
 import SelectSearch from "@/components/admin/common/SelectSearch";
 import { Dayjs } from "dayjs";
 import { Dispatch, SetStateAction } from "react";
@@ -19,5 +20,6 @@ export const ComponentSearchAdmin={
     date:SearchDate,
     dataList:SearchDataList,
     name:SearchName,
-    select:SelectSearch
+    select:SelectSearch,
+    text:SearchText
 }

@@ -20,12 +20,12 @@ function HeaderUser() {
         if (isPending!==true && srcAvatar === null && user && user?.avatar !== null) {
             fetchUrlImage(user.avatar)
         } 
-    }, [srcAvatar, user])
+    }, [srcAvatar, user,fetchUrlImage,isPending])
     useEffect(() => {
         if (data != null) {
             dispatch(updateSrcAvatar({ srcAvatar: data, error: error }))
         }
-    }, [data])
+    }, [data,dispatch,error])
 
 
     const handleHeaderUserClick = useCallback(() => {
@@ -39,7 +39,7 @@ function HeaderUser() {
             }
         }
 
-    }, [modalRef, isModalVisible]);
+    }, [ isModalVisible,setIsModalVisible]);
     return (
         <li className={`nav-item   header-user  ${loading !== false ? 'loading-information-user':''} `} ref={modalRef} >
             <AvatarUser handleHeaderUserClick={handleHeaderUserClick} />

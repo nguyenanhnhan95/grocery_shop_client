@@ -2,7 +2,7 @@
 
 import { fetchCurrentUser } from "@/redux/slice/common/currentUser";
 import { RootState } from "@/setting/store";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { NOT_AUTHENTICATION } from "@/utils/commonConstants";
 import { useRouter } from "next/navigation";
@@ -27,7 +27,6 @@ export function withAuth<T extends object>(WrappedComponent: React.ComponentType
       // Show notification and redirect if authentication fails
       useEffect(() => {
         if (authenticate === false ) {
-         ;
           const message =  NOT_AUTHENTICATION;
   
           showNotificationModal(message, () => router.push("/"));
@@ -45,7 +44,7 @@ export function withAuth<T extends object>(WrappedComponent: React.ComponentType
   
       // Optionally, you can return null or a different fallback UI while redirecting
       return null;
-    };
+    }
   
     return WithAuth;
   }

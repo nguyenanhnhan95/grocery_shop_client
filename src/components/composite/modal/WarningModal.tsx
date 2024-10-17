@@ -2,6 +2,7 @@
 import { AGREE, VARIANT_OUTLINE_WANING } from "@/utils/commonConstants";
 import { Button, Modal } from "react-bootstrap";
 import "./styles/warningModal.css"
+import { ModalProps } from "@/types/modal";
 function WarningModal(props:ModalProps){
     const { handleShow, show, informationModal  } = props;
     return (

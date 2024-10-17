@@ -5,6 +5,8 @@ import { useAppSelector } from "@/lib/redux"
 import { RootState } from "@/setting/store"
 import { getStatusClassName, getStatusName, optionActions } from "./initialConfig"
 import { memo } from "react"
+import { Employee } from "@/types/user"
+import { QueryListResult } from "@/types/queryListResult"
 interface PropsTBody {
     list: QueryListResult<Employee>,
     url: string

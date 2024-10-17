@@ -19,7 +19,7 @@ function SearchDataList<T , ID>(props: SearchAdminProps<T, ID>) {
         if(code===200){
             setOptions(dataFetch||data)
         }
-    },[code])
+    },[code,dataFetch,data])
     const handleInputChange = useCallback((newInputValue: ID) => {
         const newQueryParameter: Record<string, ID> = {
             ...searchItem.search,
@@ -27,7 +27,7 @@ function SearchDataList<T , ID>(props: SearchAdminProps<T, ID>) {
         };
 
         setSearchFiled(newQueryParameter);
-    }, [setSearchFiled, searchItem]);
+    }, [setSearchFiled, searchItem,attribute]);
 
 
     const debouncedHandleInputChange = useMemo(() => debounce(handleInputChange, 500), [handleInputChange]);

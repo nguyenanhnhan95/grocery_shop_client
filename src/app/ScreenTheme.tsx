@@ -4,23 +4,24 @@
 import { CssBaseline } from "@mui/material";
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import React from "react";
 
 
 interface ScreenThemeProps {
     children: React.ReactNode;
     screenMode: 'light' | 'dark'; // Thêm thuộc tính className tùy chọn
 }
-const lightTheme = createTheme({
-    palette: {
-        mode: 'light',
-        primary: {
-            main: '#1976d2',
-        },
-        secondary: {
-            main: '#dc004e',
-        },
-    },
-});
+// const lightTheme = createTheme({
+//     palette: {
+//         mode: 'light',
+//         primary: {
+//             main: '#1976d2',
+//         },
+//         secondary: {
+//             main: '#dc004e',
+//         },
+//     },
+// });
 
 const darkTheme = createTheme({
     palette: {
@@ -34,7 +35,7 @@ const darkTheme = createTheme({
         },
     },
 });
-export default function ScreenTheme({ children, screenMode = 'light' }: ScreenThemeProps) {
+export default function ScreenTheme({ children }: ScreenThemeProps) {
 
 
 

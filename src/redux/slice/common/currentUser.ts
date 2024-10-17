@@ -2,6 +2,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { ACCESS_SYSTEM_FAIL, LINK_USER, SCREEN_MODE } from "../../../utils/commonConstants";
+import { ApiResponse } from "@/types/apiResponse";
 
 export const LOCAL_STORAGE_USER = "STORE_USER";
 export const SCREEN_THEME = "SCREEN_THEME";

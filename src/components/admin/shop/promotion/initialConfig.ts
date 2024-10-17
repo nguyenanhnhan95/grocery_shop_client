@@ -1,4 +1,6 @@
-import { ActionTable, ColumnTable, OptionAction, OptionSearch, SearchItem } from "@/types/initialConfigAdmin"
+import { ActionTable, ColumnTable, OptionAction, OptionSearch } from "@/types/initialConfigAdmin"
+import { Promotion, PromotionDto } from "@/types/promotion"
+import { QueryParameter } from "@/types/queryParameter"
 
 import { ComponentSearchAdmin } from "@/types/search"
 
@@ -90,17 +92,9 @@ export const optionSearch: OptionSearch<Promotion> = {
         }
     ]
 }
-export interface InitialForm {
-    id? : number | null,
-    name: string | null,
-    code: string | null,
-    description: string | null,
-    discountRate:number,
-    startDate: Date | null,
-    endDate: Date | null,
-}
 
-export const initialForm: InitialForm =
+
+export const initialForm: PromotionDto =
 {
     name: '',
     code: '',

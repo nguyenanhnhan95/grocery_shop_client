@@ -1,8 +1,8 @@
-type ApiResponseNoResult ={
+export type ApiResponseNoResult ={
     code: number;
     message: string;
 }
 
-type ApiResponse<T> = ApiResponseNoResult & {
+export type ApiResponse<T> = ApiResponseNoResult & {
     result: T | null; 
 };

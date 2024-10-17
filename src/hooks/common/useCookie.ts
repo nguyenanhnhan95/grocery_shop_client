@@ -14,5 +14,5 @@ export const useCookies = (key: string) => {
         Cookies.remove(key);
         setData(undefined);
     };
-    return [data, setCookie, removeCookie] as const;
+    return {data, setCookie, removeCookie} ;
 }

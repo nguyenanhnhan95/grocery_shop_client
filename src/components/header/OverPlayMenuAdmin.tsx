@@ -11,7 +11,7 @@ function OverPlayMenuAdmin() {
     const openMenuRef = useRef<HTMLDivElement | null>(null);
     const handleOpenMenuMainOnClick = useCallback((open:boolean) => {
         dispatch(onClickHandleOverPlay(open))
-    },[dispatch,onClickHandleOverPlay])
+    },[dispatch])
     const clickMenuAdminRef = useAppSelector((state:RootState) => state.overPlayMenuMain.clickMenuAdminRef)
     useEffect(() => {
         function handleClickOutside(event:MouseEvent) {

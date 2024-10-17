@@ -1,8 +1,6 @@
-import React, { useState, useCallback, useEffect, useRef, memo } from 'react';
+import React, { useState, useRef, memo } from 'react';
 import { useFormikContext, useField } from 'formik';
-import { getObjectAsFile } from '@/config/S3Config';
-import { ALLOW_IMAGES_File, FILE_STORE_AWS_PATH } from '@/utils/commonConstants';
-import { validation } from '@/utils/commonUtils';
+import { ALLOW_IMAGES_File } from '@/utils/commonConstants';
 import ImageModal from '../modal/ImageModal';
 import "./styles/uploadImg.css"
 interface UploadImgProps {
@@ -26,6 +24,7 @@ const UploadImg: React.FC<UploadImgProps> = ({ ...props }) => {
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
+
         if (files) {
             const newFiles = Array.from(files).filter(file => {
                 // Check for duplicate files

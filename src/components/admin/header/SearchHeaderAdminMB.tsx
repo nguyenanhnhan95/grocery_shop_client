@@ -1,5 +1,5 @@
 'use client'
-import { memo } from "react";
+import React, { memo } from "react";
 
 export interface OverSearchAdminMBProps {
     setOverSearchMB: (value: boolean) => void;

@@ -7,7 +7,7 @@ import { ComponentType, ReactNode,  useEffect } from "react";
 
 export default  function withAuthAdminPage(WrappedComponent: ComponentType<{ children: ReactNode }>) {
     return function AuthenticatedAdminPage({ children }: { children?: ReactNode }) {
-        const { fetchData, code, error, isPending } = useFetchData();
+        const { fetchData, code,  isPending } = useFetchData();
         const router = useRouter();
 
         // Memoized fetch to avoid unnecessary re-fetches

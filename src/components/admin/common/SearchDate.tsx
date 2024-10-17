@@ -17,7 +17,7 @@ function SearchDate(props:SearchAdminProps<unknown,Date>){
                 setSearchFiled(newQueryParameter);
             }
         },
-        [setSearchFiled, searchItem]
+        [setSearchFiled, searchItem, attribute]
     );
 
     return (
@@ -25,6 +25,6 @@ function SearchDate(props:SearchAdminProps<unknown,Date>){
             <CustomDate onChange={(value: Dayjs | null) => handleEnterDate(value)} title={title} />
         </div>
     );
-};
+}
 
 export default memo(SearchDate);

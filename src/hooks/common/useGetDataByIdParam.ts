@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useFetchData } from "../fetch-authencation/useFetchData";
 import { createActionURL } from "@/utils/commonUtils";
-import { useParams } from "next/navigation";
+
 
 
 export const useGetDataByIdParam = <T>(url: string,pathVariable:string|null|undefined) => {
@@ -12,7 +12,7 @@ export const useGetDataByIdParam = <T>(url: string,pathVariable:string|null|unde
         if (pathVariable) {
             fetchById(`${createActionURL(url).pathVariable(pathVariable)}`)
         }
-    }, [fetchById, pathVariable]); 
+    }, [fetchById, pathVariable,url]); 
 
-    return { isPendingById, initialById, codeById };
+    return { isPendingById, initialById, codeById ,url};
 };

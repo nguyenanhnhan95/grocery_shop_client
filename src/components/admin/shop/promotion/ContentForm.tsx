@@ -1,5 +1,4 @@
 import { memo } from "react";
-import { InitialForm } from "./initialConfig";
 import { useButtonSave } from "@/hooks/common/useButtonSave";
 import { ErrorMessage, Form, Formik } from "formik";
 import * as yup from "yup";
@@ -11,12 +10,14 @@ import { handleKeyDownNumber } from "@/lib/eventInput";
 import InputCustomAdornment from "@/components/composite/form/InputAdornment";
 import TextArea from "@/components/composite/form/TextArea";
 import InputDate from "@/components/composite/form/InputDate";
+import {  PromotionDto } from "@/types/promotion";
+import { FormErrors } from "@/types/erros";
 
 interface propsContentFormPromotion {
-    initialForm: InitialForm,
+    initialForm: PromotionDto,
     handleSendServer: (
-        data: InitialForm,
-        setErrors: (errors: any) => void
+        data: PromotionDto,
+        setErrors: (errors: FormErrors) => void
     ) => Promise<void>;
 }
 function ContentForm({ initialForm, handleSendServer }: propsContentFormPromotion) {

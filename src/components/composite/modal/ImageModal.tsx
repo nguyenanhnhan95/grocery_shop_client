@@ -1,4 +1,5 @@
 'use client'
+import { ModalProps } from "@/types/modal";
 import { Modal } from "react-bootstrap";
 
 function ImageModal(props:ModalProps){

@@ -1,8 +1,6 @@
 import { useFetchData } from "@/hooks/fetch-authencation/useFetchData";
-
 import { createActionURL, validation } from "@/utils/commonUtils";
-import React, { memo, useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
-import { InitialForm } from "./initialConfig";
+import React, { memo, useCallback, useEffect,  useState } from "react";
 import { LOADING_CONTENT_FORM, regex, ROLES, THIS_FILE_ENTER_FAIL } from "@/utils/commonConstants";
 import { ErrorMessage, Form, Formik } from "formik";
 import {  selectValidation, stringValidation } from "@/lib/validationForm";
@@ -11,11 +9,13 @@ import SelectForm from "@/components/composite/form/SelectForm";
 import TextArea from "@/components/composite/form/TextArea";
 import GroupCheckBoxPermission from "./GroupCheckBoxPermission";
 import { useButtonSave } from "@/hooks/common/useButtonSave";
+import { Permission, RoleAlias, RoleDto } from "@/types/role";
+import { FormErrors } from "@/types/erros";
 interface propsContentFormRole {
-    initialForm: InitialForm,
+    initialForm: RoleDto,
     handleSendServer: (
-        data: InitialForm,
-        setErrors: (errors: any) => void
+        data: RoleDto,
+        setErrors: (errors: FormErrors) => void
     ) => Promise<void>;
 }
 function ContentForm({ initialForm, handleSendServer }: propsContentFormRole) {
@@ -24,7 +24,7 @@ function ContentForm({ initialForm, handleSendServer }: propsContentFormRole) {
     
     const { fetchData: fetchPermission, data: listPermissions, isPending: isPendingListPermissions } = useFetchData<Permission[]>();
     const { fetchData: fetchRoleAlias, data: listRoleAlias, isPending: isPendingRoleAlias } = useFetchData<RoleAlias[]>();
-    const { fetchData: fetchNameRole, data: listNameRoles, isPending: isPendingNameRoles } = useFetchData<Record<string, string>[]>();
+    const { fetchData: fetchNameRole, data: listNameRoles } = useFetchData<Record<string, string>[]>();
     useEffect(() => {
         if (aliasRole && ROLES.LIST_ALIAS.includes(aliasRole)) {
             fetchNameRole(createActionURL("role/e-role").requestParam([{ key: "name", value: aliasRole }]));
@@ -45,7 +45,7 @@ function ContentForm({ initialForm, handleSendServer }: propsContentFormRole) {
             return true;
         }
         if (Array.isArray(permisson) && Array.isArray(listPermissions)) {
-            return listPermissions.some(each =>
+            return listPermissions.some((each) =>
                 each.scopes.some(scope =>
                     permisson.includes(scope.id)
                 )
@@ -63,10 +63,10 @@ function ContentForm({ initialForm, handleSendServer }: propsContentFormRole) {
                 <Formik
                     enableReinitialize={true}
                     initialValues={{
-                        name: initialForm.name,
-                        alias: initialForm.alias,
+                        name:listNameRoles ? initialForm.name :null,
+                        alias: listRoleAlias ? initialForm.alias :null,
                         description: initialForm.description,
-                        permissions: initialForm.permissions,
+                        permissions: listPermissions ? initialForm.permissions:[],
                     }}
                     validationSchema={yup.object().shape({
                         name: selectValidation(listNameRoles, 'name', false),

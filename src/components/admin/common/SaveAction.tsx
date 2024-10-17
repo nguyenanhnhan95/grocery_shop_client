@@ -6,12 +6,12 @@ import { useRouter } from "next/navigation";
 import { memo, useCallback, useEffect } from "react";
 
 function SaveAction(props: { url: string }) {
-    const { onClickActionId, close } = useAppSelector((state) => state.actionAdmin)
+    const { onClickActionId} = useAppSelector((state) => state.actionAdmin)
     const dispatch = useAppDispatch();
     const router = useRouter();
     const handleClose = useCallback(() => {
         router.push(`/admin/${props.url}`)
-    }, [props.url])
+    }, [props.url,router])
     useEffect(() => {
         dispatch(setFuncClose(handleClose))
     }, [dispatch, handleClose])

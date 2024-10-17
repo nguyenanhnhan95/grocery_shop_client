@@ -13,7 +13,7 @@ export const useSaveAdmin = (props: { code: number | null, message: string | nul
             }
             toastTopRight.toastSuccess(props.message)
         }
-    }, [props.code, props.message])
+    }, [props.code, props.message,funcClose,close])
     useEffect(() => {
         hanldeSave()
     }, [hanldeSave])

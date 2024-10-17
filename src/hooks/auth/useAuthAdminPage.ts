@@ -14,7 +14,7 @@ export const useAuthAdminPage=(requirePage:string)=>{
           await fetchData(createActionURL("auth/authorize-page").requestParam([{ key: 'require-page', value: requirePage }]));
         };
         authorizePage();
-      }, [fetchData]);
+      }, [fetchData,requirePage]);
 
       useEffect(() => {
         if (code !== null && code !== 200) {

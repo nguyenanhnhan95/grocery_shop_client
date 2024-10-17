@@ -2,7 +2,7 @@
 import { useDebounce } from "@/hooks/common/useDebounce";
 import { InputProps } from "@/types/inputProps";
 import { useField, useFormikContext } from "formik";
-import { memo, useCallback, useEffect,  useState } from "react";
+import React, { memo, useCallback, useEffect,  useState } from "react";
 
 const CustomInput: React.FC<InputProps> = ({name,...props}) => {
   const { setFieldValue } = useFormikContext();
@@ -12,14 +12,14 @@ const CustomInput: React.FC<InputProps> = ({name,...props}) => {
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setLocalValue(event.target.value); // Update local value immediately on input change
+      setLocalValue(event.target.value);
     }, []);
   useEffect(() => {
     setFieldValue(field.name, debouncedValue);
   }, [debouncedValue, field.name, setFieldValue]);
   return (
     <div>
-      <input {...field}  value={localValue} {...props} onChange={handleChange} />
+      <input {...field}  value={localValue || ''} {...props} onChange={handleChange} />
     </div>
   );
 };

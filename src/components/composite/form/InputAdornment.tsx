@@ -3,7 +3,7 @@ import { useDebounce } from "@/hooks/common/useDebounce";
 import { InputProps } from "@/types/inputProps";
 import { FormControl, InputAdornment, OutlinedInput } from "@mui/material";
 import { useField, useFormikContext } from "formik";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 interface AdornmentInputProps extends InputProps {
     adornment: string
 }
@@ -23,7 +23,7 @@ const InputCustomAdornment: React.FC<AdornmentInputProps> = (props) => {
         <FormControl variant="outlined">
             <OutlinedInput
                 {...field}
-                value={localValue}
+                value={localValue||''}
                 className={props.className}
                 type={props.type}
                 onChange={handleChange}

@@ -2,14 +2,14 @@
 import oneSlider from "./../../../public/image/one_slider.jpg";
 import twoSlider from "./../../../public/image/two_slider.jpg";
 import threeSlider from "./../../../public/image/two_slider.jpg";
-import { memo, useCallback, useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import {  useCallback, useEffect, useRef, useState } from "react";
 import './styles/homeSlider.css'
+
 function HomeSlider() {
     const [active, setActive] = useState<number>(0);
     const listRef = useRef<any | null>(null);
     const dotsRef = useRef<HTMLLIElement[]>([]);
-    const refreshSlider = useRef<NodeJS.Timeout | null>(null);
+    const refreshSlider = useRef<ReturnType<typeof setTimeout> | null>(null);
     const items = [
         oneSlider,
         twoSlider,
