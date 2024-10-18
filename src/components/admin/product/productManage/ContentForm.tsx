@@ -1,4 +1,4 @@
-'use client';
+
 import dynamic from "next/dynamic";
 import CustomInput from "@/components/composite/form/CustomInput";
 import InputCustomAdornment from "@/components/composite/form/InputAdornment";

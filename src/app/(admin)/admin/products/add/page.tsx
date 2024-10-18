@@ -1,5 +1,4 @@
 'use client';
-export const dynamic = 'force-dynamic';
 import SaveAction from "@/components/admin/common/SaveAction";
 import ContentForm from "@/components/admin/product/productManage/ContentForm";
 import { initialForm } from "@/components/admin/product/productManage/initialConfig";
@@ -13,7 +12,7 @@ import { createActionURL } from "@/utils/commonUtils";
 import { memo, useCallback } from "react";
 
 function  AddProduction() {
-    useAuthorizePage("products:add")
+    // useAuthorizePage("products:add")
     const { addItem, getMultipart } = useMultipart<File|Blob>()
     const { fetchPost, code: codeSave, isPending: isPendingSave, message: messageSave } = useFetchPost<FormData>();
     useSaveAdmin({ code: codeSave, message: messageSave })

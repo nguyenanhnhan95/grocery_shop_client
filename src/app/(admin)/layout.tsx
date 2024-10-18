@@ -1,7 +1,7 @@
 
-import "./../../../styles/globals.css"
-import "./../../../styles/colors.min.css"
-import "./../../../../src/styles/contentAdmin.css"
+import "./../../styles/globals.css"
+import "./../../styles/colors.min.css"
+import "./../../../src/styles/contentAdmin.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 // import "./../../../src/styles/colors.min.css";
