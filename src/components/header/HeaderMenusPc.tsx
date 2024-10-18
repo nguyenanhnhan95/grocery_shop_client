@@ -5,13 +5,13 @@ import { RootState } from "@/setting/store";
 import LogoSky from "./../../../public/image/logo-sky.png"
 import "./styles/headerMenuPC.css"
 import Image from "next/image";
-function HeaderMenusPc() {
-    const {  list } = useAppSelector((state:RootState) => state.productCategoryMenus)
+function HeaderMenusPC() {
+    const { list } = useAppSelector((state: RootState) => state.productCategoryMenus)
 
     return (
         <div className="header-menu-pc">
             <div className="header-logo header-item">
-                <Image src={LogoSky} alt=""  />
+                <Image src={LogoSky} alt="" />
             </div>
             <div className="drop-menu header-item ">
                 <ul className="nav" >
@@ -33,4 +33,4 @@ function HeaderMenusPc() {
         </div>
     )
 }
-export default HeaderMenusPc;
+export default HeaderMenusPC;
