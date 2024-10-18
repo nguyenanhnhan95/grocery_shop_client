@@ -21,9 +21,9 @@ const Admin = dynamic(() => import('@/pages/admin/Admin'), {
   ssr: false, // Không sử dụng server-side rendering cho component này
 });
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const screenMode = await fetchModeScreen();
+  // const screenMode = await fetchModeScreen();
   return (
-    <html lang="vi" dark-theme={screenMode}>
+    <html lang="vi" >
       <body suppressHydrationWarning={true} >
         <Admin>
           {children}
