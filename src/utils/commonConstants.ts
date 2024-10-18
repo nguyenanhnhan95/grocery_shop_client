@@ -295,6 +295,7 @@ export const SCREEN_THEME_MODE = {
 		name: "Tối"
 	}
 }
+export const COOKIE_THEME="mode-screen"
 /**
 * Authorize 
 */

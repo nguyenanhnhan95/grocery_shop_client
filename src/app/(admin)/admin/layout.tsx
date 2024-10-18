@@ -13,6 +13,7 @@ import dynamic from "next/dynamic";
 import LoadingPage from "@/components/loading/LoadingPage";
 import React from "react";
 import { cookies } from "next/headers";
+import { COOKIE_THEME, SCREEN_MODE } from "@/utils/commonConstants";
 export const metadata: Metadata = {
   title: "HỆ THỐNG QUẢN LÝ - Tạp Hóa T&N",
   description: "Cửa hàng tạp hóa online",
@@ -23,8 +24,7 @@ const Admin = dynamic(() => import('@/pages/admin/Admin'), {
 });
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const cookieStore = cookies()
-  const screenMode = cookieStore.has('theme')
-
+  const screenMode=cookieStore.get(COOKIE_THEME)?.value || SCREEN_MODE.light;
   return (
     <html lang="vi" dark-theme={screenMode}>
       <body suppressHydrationWarning={true} >
