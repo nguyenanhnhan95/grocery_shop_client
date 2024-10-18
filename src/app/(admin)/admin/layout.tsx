@@ -1,5 +1,5 @@
 
-import { fetchModeScreen } from "@/utils/fetchData";
+
 
 import "./../../../styles/globals.css"
 import "./../../../styles/colors.min.css"
@@ -12,6 +12,7 @@ import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import LoadingPage from "@/components/loading/LoadingPage";
 import React from "react";
+import { cookies } from "next/headers";
 export const metadata: Metadata = {
   title: "HỆ THỐNG QUẢN LÝ - Tạp Hóa T&N",
   description: "Cửa hàng tạp hóa online",
@@ -21,9 +22,11 @@ const Admin = dynamic(() => import('@/pages/admin/Admin'), {
   ssr: false, // Không sử dụng server-side rendering cho component này
 });
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  // const screenMode = await fetchModeScreen();
+  const cookieStore = cookies()
+  const screenMode = cookieStore.has('theme')
+
   return (
-    <html lang="vi" >
+    <html lang="vi" dark-theme={screenMode}>
       <body suppressHydrationWarning={true} >
         <Admin>
           {children}

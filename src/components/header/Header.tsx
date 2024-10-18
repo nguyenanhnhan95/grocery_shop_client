@@ -1,6 +1,6 @@
 'use client'
 import { useAppDispatch } from "@/lib/redux";
-import { createProductCategoryMenus } from "@/redux/slice/common/productCategory";
+import { createProductCategoryMenus, findAllCategoryMenus } from "@/redux/slice/common/productCategory";
 import { useEffect } from "react";
 import HeaderMenusMB from "@/components/header/HeaderMenusMB";
 import HeaderSearchMB from "./HeaderSearchMB";
@@ -10,18 +10,15 @@ import HeaderNotification from "./HeaderNotification";
 import HeaderUser from "./HeaderUser";
 import "./styles/header.css";
 import { fetchCurrentUser } from "@/redux/slice/common/currentUser";
-import { ProductCategory } from "@/types/product";
 
-interface HeaderProps {
-    productCategoryMenus: ProductCategory[],
 
-}
-function Header({ productCategoryMenus }: HeaderProps) {
+
+function Header() {
     const dispatch = useAppDispatch();
     useEffect(() => {
-        dispatch(createProductCategoryMenus(productCategoryMenus))
+        dispatch(findAllCategoryMenus())
 
-    }, [productCategoryMenus, dispatch])
+    }, [ dispatch])
     useEffect(() => {
         dispatch(fetchCurrentUser())
     }, [dispatch])
