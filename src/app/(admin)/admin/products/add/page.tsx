@@ -2,7 +2,6 @@
 import SaveAction from "@/components/admin/common/SaveAction";
 import ContentForm from "@/components/admin/product/productManage/ContentForm";
 import { initialForm } from "@/components/admin/product/productManage/initialConfig";
-import { useAuthorizePage } from "@/hooks/auth/useAuthorizePage";
 import { useMultipart } from "@/hooks/common/useMultiPart";
 import { useSaveAdmin } from "@/hooks/common/useSaveAdmin";
 import { useFetchPost } from "@/hooks/fetch-authencation/useFetchPost";
