@@ -3,7 +3,6 @@ import { useAppDispatch } from "@/lib/redux";
 import { createProductCategoryMenus } from "@/redux/slice/common/productCategory";
 import { useEffect } from "react";
 import HeaderMenusMB from "@/components/header/HeaderMenusMB";
-import HeaderMenusPC from "@/components/header/HeaderMenusPC";
 import HeaderSearchMB from "./HeaderSearchMB";
 import HeaderSearchPC from "./HeaderSearchPC";
 import HeaderCart from "./HeaderCart";
@@ -31,7 +30,7 @@ function Header({ productCategoryMenus }: HeaderProps) {
             <div className="container-fluid container-header ">
                 <div className="d-flex  header-mb-container navbar-collapse">
                     <HeaderMenusMB />
-                    <HeaderMenusPC />
+
                     <HeaderSearchMB />
                     <ul className="navbar-nav ">
                         <HeaderSearchPC />
