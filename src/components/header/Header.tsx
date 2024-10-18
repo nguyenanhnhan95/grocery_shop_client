@@ -3,7 +3,6 @@ import { useAppDispatch } from "@/lib/redux";
 import { createProductCategoryMenus } from "@/redux/slice/common/productCategory";
 import { useEffect } from "react";
 import HeaderMenusMB from "./HeaderMenusMB";
-import HeaderMenusPC from "./HeaderMenusPC";
 import HeaderSearchMB from "./HeaderSearchMB";
 import HeaderSearchPC from "./HeaderSearchPC";
 import HeaderCart from "./HeaderCart";
@@ -12,6 +11,7 @@ import HeaderUser from "./HeaderUser";
 import "./styles/header.css";
 import { fetchCurrentUser } from "@/redux/slice/common/currentUser";
 import { ProductCategory } from "@/types/product";
+import HeaderMenusPC from "./HeaderMenusPC";
 interface HeaderProps {
     productCategoryMenus: ProductCategory[],
 
