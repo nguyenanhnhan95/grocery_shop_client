@@ -10,7 +10,7 @@ function HeaderMenusPC() {
 
     return (
         <div className="header-menu-pc">
-            <div className="header-logo header-item">
+            {/* <div className="header-logo header-item">
                 <Image src={LogoSky} alt="" />
             </div>
             <div className="drop-menu header-item ">
@@ -29,7 +29,7 @@ function HeaderMenusPC() {
                     ))}
                 </ul>
 
-            </div>
+            </div> */}
         </div>
     )
 }
