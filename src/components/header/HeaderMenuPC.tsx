@@ -1,13 +1,16 @@
 'use client';
-import { useAppSelector } from "@/lib/redux"
-import { RootState } from "@/setting/store"
+
+import { useAppSelector } from "@/lib/redux";
+import { RootState } from "@/setting/store";
 import LogoSky from "./../../../public/image/logo-sky.png"
 import "./styles/headerMenusPC.css"
-import Image from "next/image"
+import Image from "next/image";
 import { memo } from "react";
-function HeaderMenusPc(){
+
+function HeaderMenuPC(){
     const { list } = useAppSelector((state: RootState) => state.productCategoryMenus)
-    return(
+
+    return (
         <div className="header-menu-pc">
             <div className="header-logo header-item">
                 <Image src={LogoSky} alt="" />
@@ -32,4 +35,4 @@ function HeaderMenusPc(){
         </div>
     )
 }
-export default memo(HeaderMenusPc)
+export default memo(HeaderMenuPC);

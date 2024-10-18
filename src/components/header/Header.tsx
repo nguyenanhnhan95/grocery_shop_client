@@ -10,7 +10,7 @@ import HeaderNotification from "./HeaderNotification";
 import HeaderUser from "./HeaderUser";
 import "./styles/header.css";
 import { fetchCurrentUser } from "@/redux/slice/common/currentUser";
-import HeaderMenusPc from "./HeaderMenusPC";
+import HeaderMenuPC from "./HeaderMenuPC";
 
 
 
@@ -31,7 +31,7 @@ function Header() {
             <div className="container-fluid container-header ">
                 <div className="d-flex  header-mb-container navbar-collapse">
                     <HeaderMenusMB />
-                    <HeaderMenusPc/>
+                    <HeaderMenuPC/>
                     <HeaderSearchMB />
                     <ul className="navbar-nav ">
                         <HeaderSearchPC />
