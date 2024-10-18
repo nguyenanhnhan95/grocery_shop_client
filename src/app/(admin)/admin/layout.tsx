@@ -1,6 +1,4 @@
 
-
-
 import "./../../../styles/globals.css"
 import "./../../../styles/colors.min.css"
 import "./../../../../src/styles/contentAdmin.css"
