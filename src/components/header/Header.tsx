@@ -2,7 +2,7 @@
 import { useAppDispatch } from "@/lib/redux";
 import { createProductCategoryMenus } from "@/redux/slice/common/productCategory";
 import { useEffect } from "react";
-import HeaderMenusMB from "./HeaderMenusMB";
+import HeaderMenusMB from "@/components/header/HeaderMenusMB";
 import HeaderSearchMB from "./HeaderSearchMB";
 import HeaderSearchPC from "./HeaderSearchPC";
 import HeaderCart from "./HeaderCart";
