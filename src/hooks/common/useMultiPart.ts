@@ -1,3 +1,4 @@
+'use client';
 export const useMultipart = <T>() => {
     const multiPart = new FormData();
 

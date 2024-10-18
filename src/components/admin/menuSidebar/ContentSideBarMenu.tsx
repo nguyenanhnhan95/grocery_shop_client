@@ -17,7 +17,7 @@ function ContentSideBarMenu() {
     const dispatch = useAppDispatch();
     const pathname = usePathname();
     const [menuActive, setMenuActive] = useState<MainMenu|null>(null);
-    const {fetchData,data,code,isPending} = useFetchData<MainMenu>()
+    const {fetchData,data,code} = useFetchData<MainMenu>()
     useEffect(()=>{
         if(pathname && loadingMenus===false  ){
             fetchData(`${createActionURL("menu/admin-side/path-children").requestParam([{key:'children',value:pathname}])}`)
@@ -45,7 +45,7 @@ function ContentSideBarMenu() {
         }    
     }, [data])
 
-    if(code!==200 || isPending ){
+    if(code!==200  ){
       return  <LoadingSideBarMenu/>
     }
     return (

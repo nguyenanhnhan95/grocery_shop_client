@@ -1,5 +1,5 @@
 'use client';
-export const dynamic = 'force-dynamic';
+
 import SaveAction from "@/components/admin/common/SaveAction";
 import ContentForm from "@/components/admin/product/productManage/ContentForm";
 import { initialForm } from "@/components/admin/product/productManage/initialConfig";

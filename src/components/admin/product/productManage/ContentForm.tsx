@@ -1,4 +1,5 @@
-import CKEditorField from "@/components/composite/form/CKEditorField";
+'use client';
+import dynamic from "next/dynamic";
 import CustomInput from "@/components/composite/form/CustomInput";
 import InputCustomAdornment from "@/components/composite/form/InputAdornment";
 import SelectForm from "@/components/composite/form/SelectForm";
@@ -12,8 +13,10 @@ import { Promotion } from "@/types/promotion";
 import { LOADING_CONTENT_FORM,  VND } from "@/utils/commonConstants";
 import { createActionURL } from "@/utils/commonUtils";
 import { ErrorMessage, FieldArray, Form, Formik } from "formik";
+
 import { memo, useEffect } from "react";
 import * as yup from "yup";
+const CustomEditor = dynamic( () => import( '@/components/composite/form/CKEditorField' ), { ssr: false } );
 interface propsContentFormVariation {
     initialForm: ProductDto,
     handleSendServer: (
@@ -149,7 +152,7 @@ function ContentForm({ initialForm, handleSendServer }: propsContentFormVariatio
                                                 <label htmlFor="description">Mô tả sản phẩm</label>
                                             </div>
                                             <div className="card-body-input">
-                                                <CKEditorField name="description" className="" />
+                                                <CustomEditor name="description" className="" />
                                             </div>
                                         </div>
 

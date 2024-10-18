@@ -1,21 +1,24 @@
 'use client';
+import React, { useRef } from "react";
 import useSizeAndPosition from "@/components/ui/useSizeAndPosition";
 import { Popper } from "@mui/material";
-import React, { useRef } from "react";
 import 'dayjs/locale/vi';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { CustomDatePickerProps } from "@/types/inputProps";
-import {  BG_TRADE, FONT_COLOR_DARK } from "@/utils/commonConstants";
+import {  LocalizationProvider } from "@mui/x-date-pickers";
 
+import { CustomDatePickerProps } from "@/types/inputProps";
+import { BG_TRADE, FONT_COLOR_DARK } from "@/utils/commonConstants";
+import dynamic from "next/dynamic";
+const DatePicker = dynamic(() => import('@mui/x-date-pickers').then(mod => mod.DatePicker), {
+    ssr: false
+});
 const CustomDate: React.FC<CustomDatePickerProps> = (props) => {
     const paperRef = useRef<HTMLDivElement | null>(null);
     const { width } = useSizeAndPosition(paperRef)
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="vi">
-            <DemoContainer components={['DatePicker']}  >
+
                 <DatePicker
 
                     {...props}
@@ -48,8 +51,8 @@ const CustomDate: React.FC<CustomDatePickerProps> = (props) => {
                                 'html[dark-theme="dark"] &.MuiPickersDay-root:not(.Mui-selected)': {
                                     border: 'none',
                                 },
-                                ' &.MuiPickersDay-root:focus':{
-                                    border:`1px solid ${BG_TRADE}`
+                                ' &.MuiPickersDay-root:focus': {
+                                    border: `1px solid ${BG_TRADE}`
                                 }
                             },
                         },
@@ -69,8 +72,8 @@ const CustomDate: React.FC<CustomDatePickerProps> = (props) => {
                     ref={paperRef}
                     dayOfWeekFormatter={(date) => date.format("dd")}
                 />
-            </DemoContainer>
+
         </LocalizationProvider>
     )
 }
-export default CustomDate;
+export default React.memo(CustomDate);
