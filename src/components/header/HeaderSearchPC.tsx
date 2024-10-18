@@ -1,6 +1,6 @@
 'use client';
 import { memo,  useRef } from "react";
-import "./styles/headerSearchPc.css"
+import "./styles/headerSearchPC.css"
 import useClickOutsideModal from "@/hooks/common/useClickOutsideModel";
 function HeaderSearchPC() {
     const { isModalVisible, modalRef,setIsModalVisible } = useClickOutsideModal(false);
