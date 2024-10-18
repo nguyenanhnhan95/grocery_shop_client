@@ -1,7 +1,9 @@
 'use client';
+
 import SaveAction from "@/components/admin/common/SaveAction";
 import ContentForm from "@/components/admin/product/productManage/ContentForm";
 import { initialForm } from "@/components/admin/product/productManage/initialConfig";
+import { useAuthorizePage } from "@/hooks/auth/useAuthorizePage";
 import { useMultipart } from "@/hooks/common/useMultiPart";
 import { useSaveAdmin } from "@/hooks/common/useSaveAdmin";
 import { useFetchPost } from "@/hooks/fetch-authencation/useFetchPost";
@@ -11,7 +13,7 @@ import { createActionURL } from "@/utils/commonUtils";
 import { memo, useCallback } from "react";
 
 function  AddProduction() {
-    // useAuthorizePage("products:add")
+    useAuthorizePage("products:add")
     const { addItem, getMultipart } = useMultipart<File|Blob>()
     const { fetchPost, code: codeSave, isPending: isPendingSave, message: messageSave } = useFetchPost<FormData>();
     useSaveAdmin({ code: codeSave, message: messageSave })
