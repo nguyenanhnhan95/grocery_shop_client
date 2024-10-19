@@ -42,7 +42,7 @@ jobs:
           else
           npm i
           fi
-          npm run build
+          npm run build 
       - name: Run tests
         run: npm test
       - name: Login to Docker Hub
