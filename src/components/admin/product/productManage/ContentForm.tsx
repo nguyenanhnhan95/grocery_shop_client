@@ -10,12 +10,13 @@ import { handleKeyDownNumber } from "@/lib/eventInput";
 import { FormErrors } from "@/types/erros";
 import { ProductCategory, ProductDto, Variation, VariationOption } from "@/types/product";
 import { Promotion } from "@/types/promotion";
-import { LOADING_CONTENT_FORM,  VND } from "@/utils/commonConstants";
+import { ALLOW_ARRAY_IMAGES, LOADING_CONTENT_FORM,  regex,  SIZE_MAX_FILE,  VND } from "@/utils/commonConstants";
 import { createActionURL } from "@/utils/commonUtils";
 import { ErrorMessage, FieldArray, Form, Formik } from "formik";
 
 import { memo, useEffect } from "react";
 import * as yup from "yup";
+import { fileValidation, numberValidation, selectMultiValidation, selectValidation, stringValidation } from "@/lib/validationForm";
 const CustomEditor = dynamic( () => import( '@/components/composite/form/CKEditorField' ), { ssr: false } );
 interface propsContentFormVariation {
     initialForm: ProductDto,
@@ -56,22 +57,22 @@ function ContentForm({ initialForm, handleSendServer }: propsContentFormVariatio
                         productItems: initialForm.productItems
                     }}
                     validationSchema={yup.object().shape({
-                        // images: fileValidation(SIZE_MAX_FILE, ALLOW_ARRAY_IMAGES, false),
-                        // name: stringValidation(4, 100, regex.wordVi, false),
-                        // brand: stringValidation(4, 100, regex.wordVi, false),
-                        // productCategory: selectValidation(productCategories, 'id', false),
-                        // description:stringValidation(4, 150, regex.wordVi, true),
-                        // variation: selectValidation(variations, 'id', false),
-                        // productItems: yup.array().of(
-                        //     yup.object().shape({
-                        //         images: fileValidation(SIZE_MAX_FILE, ALLOW_ARRAY_IMAGES, false),
-                        //         price: numberValidation(1000, 1000000000, false),
-                        //         sku: stringValidation(6, 15, regex.number, false),
-                        //         qtyInStock: numberValidation(0, 10000000, false),
-                        //         promotions: selectMultiValidation<Promotion, number>(promotions, 'id', true),
-                        //         variationOptions: selectMultiValidation<VariationOption,number>(variationOptions, 'id', false),
-                        //     })
-                        // )
+                        images: fileValidation(SIZE_MAX_FILE, ALLOW_ARRAY_IMAGES, false),
+                        name: stringValidation(4, 100, regex.wordVi, false),
+                        brand: stringValidation(4, 100, regex.wordVi, false),
+                        productCategory: selectValidation(productCategories, 'id', false),
+                        description:stringValidation(4, 150, regex.wordVi, true),
+                        variation: selectValidation(variations, 'id', false),
+                        productItems: yup.array().of(
+                            yup.object().shape({
+                                images: fileValidation(SIZE_MAX_FILE, ALLOW_ARRAY_IMAGES, false),
+                                price: numberValidation(1000, 1000000000, false),
+                                sku: stringValidation(6, 15, regex.number, false),
+                                qtyInStock: numberValidation(0, 10000000, false),
+                                promotions: selectMultiValidation<Promotion, number>(promotions, 'id', true),
+                                variationOptions: selectMultiValidation<VariationOption,number>(variationOptions, 'id', false),
+                            })
+                        )
                     })}
                     onSubmit={(data, { setErrors }) =>
                         handleSendServer(data, setErrors)

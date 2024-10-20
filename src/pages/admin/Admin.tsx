@@ -2,6 +2,7 @@
 import StoreProvider from "@/app/StoreProvider";
 import HeaderAdmin from "@/components/admin/header/HeaderAdmin";
 import SidebarMenu from "@/components/admin/menuSidebar/SidebarMenu";
+import BackToTopScroll from "@/components/ui/BackToTopScroll";
 import { useAuthAdminPage } from "@/hooks/auth/useAuthAdminPage";
 import React from "react";
 
@@ -18,6 +19,7 @@ function Admin({ children }: { children: React.ReactNode }) {
                 <div className="main-content">
                     <HeaderAdmin />
                     {children}
+                    <BackToTopScroll />
                 </div>
             </div>
         </StoreProvider>

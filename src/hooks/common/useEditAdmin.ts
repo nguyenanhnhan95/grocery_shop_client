@@ -13,10 +13,11 @@ export const useEditAdmin = ({ code, message }: { code: number | null; message: 
             if (close) {
                 funcClose?.();
                 dispatch(actionSave(false));
+                if (message) {
+                    toastTopRight.toastSuccess(message)
+                }
             }
-            if (message) {
-                toastTopRight.toastSuccess(message)
-            }
+
         } else {
             if (message) {
                 toastTopRight.toastWarning(message)

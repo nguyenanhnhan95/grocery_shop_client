@@ -21,7 +21,7 @@ function BackToTopScroll() {
         };
     }, []);
     return (
-        <button className={`${style.backToTopScroll}  translate-middle badge rounded-pill`}
+        <button className={`${style["back-to-top-scroll"]}  translate-middle badge rounded-pill`}
             style={{ display: showButtonBack === true ? 'block' : 'none' }} onClick={() => scrollUp()}>
             <i className="fa-solid fa-chevron-up"></i>
         </button>

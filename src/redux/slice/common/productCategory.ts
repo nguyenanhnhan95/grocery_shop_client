@@ -69,7 +69,6 @@ export const getAllCategoryMenus = createSlice({
         })
             .addCase(findAllCategoryMenus.fulfilled, (state, action: PayloadAction<ApiResponse<ProductCategory[]>>) => {
                 state.loadingList = false;
-                console.log(action.payload.result)
                 state.list = action.payload.result || [];
             })
             .addCase(findAllCategoryMenus.rejected, (state, action) => {

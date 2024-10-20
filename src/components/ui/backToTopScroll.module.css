@@ -9,7 +9,7 @@
     /* padding: 10px; */
 }
 
-.dark .back-to-top-scroll {
+html[dark-theme='dark'] .back-to-top-scroll {
     background-color: var(--font-color-dark);
 }
 

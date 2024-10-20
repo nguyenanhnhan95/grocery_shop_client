@@ -46,7 +46,7 @@ function EditProduction() {
 
 
     const handleSave = useCallback(async (data: ProductDto, setErrors: (errors: FormErrors) => void) => {
-        if (isPendingSave) return;
+        if (isPendingSave || !params?.id) return;
         const dataToServer = structuredClone(data);
         const { images, ...productDto } = dataToServer;
         const appendFilesToFormData = (key: string, files: File[] | undefined) => {
@@ -66,9 +66,9 @@ function EditProduction() {
         const blob = new Blob([json], {
             type: 'application/json'
         });
-        addItem('productDto', blob)
+        addItem('productEditDto', blob)
         const formData = getMultipart();
-        fetchPut(createActionURL('products').instant(), formData, setErrors);
+        fetchPut(createActionURL('products').pathVariable(params.id), formData, setErrors);
     }, [fetchPut, isPendingSave,addItem,getMultipart])
     return (
         <>

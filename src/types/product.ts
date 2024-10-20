@@ -42,8 +42,8 @@ export type ProductDto = {
     images: File[],
     name: string | null,
     brand: string | null,
-    productCategory: number | null,
     variation: number | null,
+    productCategory: number | null,
     description: string | null,
     productItems: ProductItemDto[] | []
 }
@@ -60,8 +60,8 @@ export type ProductEdit = {
     images: string[],
     name: string | null,
     brand: string | null,
-    productCategory: number | null,
     variation: number | null,
+    productCategory: number | null,
     description: string | null,
     productItems: ProductItemEdit[] | []
 }
